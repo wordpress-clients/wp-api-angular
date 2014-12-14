@@ -1,0 +1,29 @@
+{
+  "name": "wp-api-angularjs",
+  "version": "0.0.1",
+  "description": "WordPress WP-API client for AngularJs",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shprink/wp-api-angularjs"
+  },
+  "keywords": [
+    "wp-api",
+    "angular",
+    "angularjs",
+    "rest",
+    "restfull",
+    "client"
+  ],
+  "author": "shprink",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shprink/wp-api-angularjs/issues"
+  },
+  "homepage": "https://github.com/shprink/wp-api-angularjs",
+  "devDependencies": {
+    "angular": "^1.3.6",
+    "angularjs": "0.0.1",
+    "restangular": "^1.4.0"
+  }
+}

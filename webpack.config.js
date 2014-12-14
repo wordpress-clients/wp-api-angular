@@ -1,13 +1,23 @@
+var path = require('path'),
+    testPath = path.join(__dirname, 'test'),
+    wwwPath = path.join(__dirname, 'www'),
+    HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-    entry: "./test/index.js",
+    entry: path.join(testPath, 'index.js'),
     output: {
-        path: __dirname,
-        filename: "bundle.js"
+        path: wwwPath,
+        filename: 'test.js'
     },
     module: {
         loaders: [{
-            test: /\.css$/,
-            loader: "style!css"
+            test: /[\/]angular\.js$/,
+            loader: 'expose?angular!exports?window.angular'
         }]
-    }
+    },
+    plugins: [new HtmlWebpackPlugin({
+        filename: 'test.html',
+        title: 'wp-api-angularjs',
+        template: path.join(testPath, 'test.html')
+    })]
 };

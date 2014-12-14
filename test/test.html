@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Webpack App</title>
+    </head>
+
+    <body ng-app="wp-api-angularjs.test" ng-controller="MainController">
+        <h2>Posts</h2>
+        <button ng-click="getPosts()">Get list<small>{{::getPostsStatus}}<small></button>
+        <br/>
+        <button ng-click="getPost()">Get one <small>{{::getPostStatus}}<small></button>
+          <br/>
+          <button ng-click="createPost()">Create<small>{{::createPostStatus}}<small></button>
+            <br/>
+            <button ng-click="updatePost()">Update<small>{{::updatePostStatus}}<small></button>
+          <br/>
+          <button ng-click="removePost()">Remove<small>{{::removePostStatus}}<small></button>
+        <hr/>
+        <h2>Posts</h2>
+        <hr/>
+        <script src="{%=o.htmlWebpackPlugin.assets.main%}"></script>
+    </body>
+
+</html>

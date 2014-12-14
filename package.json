@@ -1,34 +1,39 @@
 {
-  "name": "wp-api-angularjs",
-  "version": "0.0.1",
-  "description": "WordPress WP-API client for AngularJs",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/shprink/wp-api-angularjs"
-  },
-  "keywords": [
-    "wp-api",
-    "angular",
-    "angularjs",
-    "rest",
-    "restfull",
-    "client"
-  ],
-  "author": "shprink",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/shprink/wp-api-angularjs/issues"
-  },
-  "homepage": "https://github.com/shprink/wp-api-angularjs",
-  "devDependencies": {
-    "angular": "^1.3.6",
-    "angularjs": "0.0.1",
-    "exports-loader": "^0.6.2",
-    "expose-loader": "^0.6.0",
-    "html-webpack-plugin": "^1.1.0",
-    "path": "^0.4.9",
-    "restangular": "^1.4.0",
-    "underscore": "^1.7.0"
-  }
+    "name": "wp-api-angularjs",
+    "version": "0.0.1",
+    "description": "WordPress WP-API client for AngularJs",
+    "main": "./dist/wp-api-angularjs.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/shprink/wp-api-angularjs"
+    },
+    "keywords": [
+        "wp-api",
+        "angular",
+        "angularjs",
+        "rest",
+        "restfull",
+        "client"
+    ],
+    "author": "shprink",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/shprink/wp-api-angularjs/issues"
+    },
+    "homepage": "https://github.com/shprink/wp-api-angularjs",
+    "devDependencies": {
+        "angular": "^1.3.6",
+        "angularjs": "0.0.1",
+        "exports-loader": "^0.6.2",
+        "expose-loader": "^0.6.0",
+        "gulp": "^3.8.10",
+        "gulp-util": "^3.0.1",
+        "html-webpack-plugin": "^1.1.0",
+        "ng-annotate-webpack-plugin": "^0.1.2",
+        "path": "^0.4.9",
+        "restangular": "^1.4.0",
+        "underscore": "^1.7.0",
+        "util": "^0.10.3",
+        "webpack": "^1.4.13"
+    }
 }

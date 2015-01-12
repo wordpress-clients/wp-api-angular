@@ -1,3 +1,10 @@
+/**
+ * wp-api-angularjs - WordPress WP-API client for AngularJs
+ * @version v1.0.0-rc1
+ * @author shprink <contact@julienrenaux.fr>
+ * @link https://github.com/shprink/wp-api-angularjs
+ * @license MIT
+ */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -44,7 +51,6 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/** @jsx React.DOM */
 	module.exports = angular.module('wp-api-angularjs', [
 	    __webpack_require__(1).name,
 	    __webpack_require__(2).name

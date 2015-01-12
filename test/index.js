@@ -3,7 +3,7 @@ require('expose?_!underscore');
 require('restangular');
 
 module.exports = angular.module('wp-api-angularjs.test', [
-        require('../lib/index.js').name, // import the lib
+        require('../dist/wp-api-angularjs.js').name, // import the lib
         require('./MainController').name
     ])
     .config(function(WpApiProvider) {

@@ -16,6 +16,16 @@ wp-api-angularjs is based on Restangular therefore you can use any of the [Resta
 });
 ```
 
+wp-api-angularjs always returns promises:
+
+```
+$wpApiPosts.$get(id).then(function(post) {
+        // OK
+    }).catch(function() {
+        // KO
+    });
+```
+
 ### Posts ```$wpApiPosts```
 
 ```

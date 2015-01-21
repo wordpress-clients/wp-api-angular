@@ -3,6 +3,19 @@ wp-api-angularjs
 
 wp-api-angularjs is under development and will only cover GET methods of the [WP-API](https://github.com/WP-API/WP-API) master branch.
 
+## Install
+
+```
+# This plugin depends on restangular and underscore
+npm install restangular underscore --save-dev
+```
+
+Add the library to your dependencies
+
+```
+angular.module('myApp', ['wp-api-angularjs']);
+```
+
 ## Services
 
 ### WpApiProvider

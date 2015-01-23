@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    path = require('path'),
     gutil = require("gulp-util"),
     header = require('gulp-header'),
     webpack = require('gulp-webpack'),
@@ -19,9 +20,9 @@ var banner = ['/**',
 ].join('\n');
 
 gulp.task('default', ['build']);
-gulp.task('build', ['build:dev', 'build:prod']);
+gulp.task('build', ['build:dev', 'build:dev.bundle', 'build:prod', 'build:prod.bundle']);
 
-gulp.task("build:dev", function(callback) {
+gulp.task("build:dev", function (callback) {
     return gulp.src(webpackDevConfig.entry)
         .pipe(webpack(webpackDevConfig))
         .pipe(header(banner, {
@@ -30,7 +31,29 @@ gulp.task("build:dev", function(callback) {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task("build:prod", function(callback) {
+gulp.task("build:dev.bundle", function (callback) {
+    webpackDevConfig.entry = path.join(__dirname, 'lib', 'index.bundle.js');
+    webpackDevConfig.output.filename = pkg.name + '.bundle.js';
+    return gulp.src(webpackDevConfig.entry)
+        .pipe(webpack(webpackDevConfig))
+        .pipe(header(banner, {
+            pkg: pkg
+        }))
+        .pipe(gulp.dest('dist/'));
+});
+
+gulp.task("build:prod", function (callback) {
+    return gulp.src(webpackProdConfig.entry)
+        .pipe(webpack(webpackProdConfig))
+        .pipe(header(banner, {
+            pkg: pkg
+        }))
+        .pipe(gulp.dest('dist/'));
+});
+
+gulp.task("build:prod.bundle", function (callback) {
+    webpackProdConfig.entry = path.join(__dirname, 'lib', 'index.bundle.js');
+    webpackProdConfig.output.filename = pkg.name + '.bundle.min.js';
     return gulp.src(webpackProdConfig.entry)
         .pipe(webpack(webpackProdConfig))
         .pipe(header(banner, {

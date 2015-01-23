@@ -5,12 +5,7 @@ wp-api-angularjs is under development and will only cover GET methods of the [WP
 
 ## Install
 
-```
-# This plugin depends on restangular and underscore
-npm install restangular underscore --save-dev
-```
-
-Add the library to your dependencies
+include the bundled version ```wp-api-angularjs.bundle.js``` (Contains underscore and Restangular) and add the library to your dependencies:
 
 ```
 angular.module('myApp', ['wp-api-angularjs']);
@@ -42,7 +37,14 @@ $wpApiPosts.$get(id).then(function(post) {
 ### Posts ```$wpApiPosts```
 
 ```
+// Get latests posts
 $wpApiPosts.$getList();
+
+// Get latests uncategorized posts
+$wpApiPosts.$getList({
+    'category_name': 'uncategorized'
+});
+
 $wpApiPosts.$get(id);
 
 # DOES NOT WORK FOR NOW

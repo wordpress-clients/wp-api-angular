@@ -5,10 +5,10 @@ var path = require('path'),
     ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
 module.exports = {
-    entry: path.join(libPath, 'index.js'),
+    // entry: path.join(libPath, 'index.js'),
     output: {
         path: distPath,
-        filename: 'wp-api-angularjs.min.js'
+        // filename: 'wp-api-angularjs.min.js'
     },
     plugins: [
         new ngAnnotatePlugin({

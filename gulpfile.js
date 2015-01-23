@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     webpack = require('gulp-webpack'),
     extend = require('util')._extend,
     pkg = require('./package.json'),
+    clone = require('clone'),
     // webpack = require("webpack"),
     webpackDevConfig = require("./webpack.build:dev"),
     webpackProdConfig = require("./webpack.build:prod");
@@ -23,8 +24,11 @@ gulp.task('default', ['build']);
 gulp.task('build', ['build:dev', 'build:dev.bundle', 'build:prod', 'build:prod.bundle']);
 
 gulp.task("build:dev", function (callback) {
-    return gulp.src(webpackDevConfig.entry)
-        .pipe(webpack(webpackDevConfig))
+    var webpackConfig = clone(webpackDevConfig);
+    webpackConfig.entry = path.join(__dirname, 'lib', 'index.js');
+    webpackConfig.output.filename = pkg.name + '.js';
+    return gulp.src(webpackConfig.entry)
+        .pipe(webpack(webpackConfig))
         .pipe(header(banner, {
             pkg: pkg
         }))
@@ -32,10 +36,11 @@ gulp.task("build:dev", function (callback) {
 });
 
 gulp.task("build:dev.bundle", function (callback) {
-    webpackDevConfig.entry = path.join(__dirname, 'lib', 'index.bundle.js');
-    webpackDevConfig.output.filename = pkg.name + '.bundle.js';
-    return gulp.src(webpackDevConfig.entry)
-        .pipe(webpack(webpackDevConfig))
+    var webpackConfig = clone(webpackDevConfig);
+    webpackConfig.entry = path.join(__dirname, 'lib', 'index.bundle.js');
+    webpackConfig.output.filename = pkg.name + '.bundle.js';
+    return gulp.src(webpackConfig.entry)
+        .pipe(webpack(webpackConfig))
         .pipe(header(banner, {
             pkg: pkg
         }))
@@ -43,8 +48,11 @@ gulp.task("build:dev.bundle", function (callback) {
 });
 
 gulp.task("build:prod", function (callback) {
-    return gulp.src(webpackProdConfig.entry)
-        .pipe(webpack(webpackProdConfig))
+    var webpackConfig = clone(webpackProdConfig);
+    webpackConfig.entry = path.join(__dirname, 'lib', 'index.js');
+    webpackConfig.output.filename = pkg.name + '.min.js';
+    return gulp.src(webpackConfig.entry)
+        .pipe(webpack(webpackConfig))
         .pipe(header(banner, {
             pkg: pkg
         }))
@@ -52,10 +60,11 @@ gulp.task("build:prod", function (callback) {
 });
 
 gulp.task("build:prod.bundle", function (callback) {
-    webpackProdConfig.entry = path.join(__dirname, 'lib', 'index.bundle.js');
-    webpackProdConfig.output.filename = pkg.name + '.bundle.min.js';
-    return gulp.src(webpackProdConfig.entry)
-        .pipe(webpack(webpackProdConfig))
+    var webpackConfig = clone(webpackProdConfig);
+    webpackConfig.entry = path.join(__dirname, 'lib', 'index.bundle.js');
+    webpackConfig.output.filename = pkg.name + '.bundle.min.js';
+    return gulp.src(webpackConfig.entry)
+        .pipe(webpack(webpackConfig))
         .pipe(header(banner, {
             pkg: pkg
         }))

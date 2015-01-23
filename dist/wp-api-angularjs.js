@@ -1,6 +1,6 @@
 /**
  * wp-api-angularjs - WordPress WP-API client for AngularJs
- * @version v1.0.0-rc1
+ * @version v1.0.0-rc2
  * @author shprink <contact@julienrenaux.fr>
  * @link https://github.com/shprink/wp-api-angularjs
  * @license MIT
@@ -89,9 +89,11 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var helper = __webpack_require__(7);
+
 	module.exports = angular
 	    .module('wp-api-angularjs.services.posts', ['restangular'])
-	    .factory('$wpApiPosts', ["Restangular", function(Restangular) {
+	    .factory('$wpApiPosts', ["Restangular", function (Restangular) {
 	        var posts = Restangular.service('posts');
 
 	        posts.$getList = getList;
@@ -100,8 +102,8 @@
 
 	        return posts;
 
-	        function getList() {
-	            return posts.getList();
+	        function getList(filters) {
+	            return posts.getList(helper.filterize(filters));
 	        }
 
 	        function get(id, query) {
@@ -210,6 +212,21 @@
 	            return taxonomies.one(taxonomy).one('terms', id).get();
 	        }
 	    }]);
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	    filterize: function (filters) {
+	        filters = filters || {}
+	        var query = {};
+	        for (var i in filters) {
+	            query['filter[' + i + ']'] = filters[i];
+	        };
+	        return query;
+	    }
+	}
 
 /***/ }
 /******/ ])

@@ -3,6 +3,14 @@ wp-api-angularjs
 
 wp-api-angularjs is under development and will only cover GET methods of the [WP-API](https://github.com/WP-API/WP-API) master branch.
 
+## Install
+
+include the bundled version ```wp-api-angularjs.bundle.js``` (Contains underscore and Restangular) and add the library to your dependencies:
+
+```
+angular.module('myApp', ['wp-api-angularjs']);
+```
+
 ## Services
 
 ### WpApiProvider
@@ -16,10 +24,27 @@ wp-api-angularjs is based on Restangular therefore you can use any of the [Resta
 });
 ```
 
+wp-api-angularjs always returns promises:
+
+```
+$wpApiPosts.$get(id).then(function(post) {
+        // OK
+    }).catch(function() {
+        // KO
+    });
+```
+
 ### Posts ```$wpApiPosts```
 
 ```
+// Get latests posts
 $wpApiPosts.$getList();
+
+// Get latests uncategorized posts
+$wpApiPosts.$getList({
+    'category_name': 'uncategorized'
+});
+
 $wpApiPosts.$get(id);
 
 # DOES NOT WORK FOR NOW

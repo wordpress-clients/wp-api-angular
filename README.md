@@ -40,9 +40,14 @@ $wpApiPosts.$get(id).then(function(post) {
 // Get latests posts
 $wpApiPosts.$getList();
 
-// Get latests uncategorized posts
+// Get filtered posts
 $wpApiPosts.$getList({
-    'category_name': 'uncategorized'
+    "page" : 2,
+    "filter[category_name]": "uncategorized",
+    "filter[posts_per_page]": 5,
+    "filter[orderby]": "date",
+    "filter[order]": "desc",
+    "filter[post_status]": "publish"
 });
 
 $wpApiPosts.$get(id);

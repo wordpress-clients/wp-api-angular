@@ -1,6 +1,6 @@
 /**
  * wp-api-angularjs - WordPress WP-API client for AngularJs
- * @version v1.0.0-rc2
+ * @version v1.0.0-rc3
  * @author shprink <contact@julienrenaux.fr>
  * @link https://github.com/shprink/wp-api-angularjs
  * @license MIT
@@ -51,7 +51,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(3);
+	__webpack_require__(7);
 	__webpack_require__(9);
 
 	module.exports = angular.module('wp-api-angularjs', [
@@ -82,21 +82,143 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = angular.module('wp-api-angularjs.services', [
+	    __webpack_require__(3).name,
+	    __webpack_require__(4).name,
 	    __webpack_require__(5).name,
-	    __webpack_require__(6).name,
-	    __webpack_require__(7).name,
-	    __webpack_require__(8).name
+	    __webpack_require__(6).name
 	]);
 
 /***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["_"] = __webpack_require__(4);
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+	module.exports = angular
+	    .module('wp-api-angularjs.services.posts', ['restangular'])
+	    .factory('$wpApiPosts', ["Restangular", function(Restangular) {
+	        var posts = Restangular.service('posts');
+
+	        posts.$getList = getList;
+	        posts.$get = get;
+	        posts.$create = create;
+
+	        return posts;
+
+	        function getList(query) {
+	            return posts.getList(query);
+	        }
+
+	        function get(id, query) {
+	            return posts.one(id).get(query);
+	        }
+
+	        function create(object) {
+	            return posts.post(object);
+	        }
+	    }]);
 
 /***/ },
 /* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = angular
+	    .module('wp-api-angularjs.services.media', ['restangular'])
+	    .factory('$wpApiMedia', ["Restangular", function(Restangular) {
+	        var media = Restangular.service('media');
+
+	        media.$getList = getList;
+	        media.$get = get;
+	        media.$create = create;
+
+	        return media;
+
+	        function getList(query) {
+	            return media.getList(query);
+	        }
+
+	        function get(id, query) {
+	            return media.one(id).get(query);
+	        }
+
+	        function create(object) {
+	            return media.post(object);
+	        }
+	    }]);
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = angular
+	    .module('wp-api-angularjs.services.users', ['restangular'])
+	    .factory('$wpApiUsers', ["Restangular", function(Restangular) {
+	        var users = Restangular.service('users');
+
+	        users.$getList = getList;
+	        users.$get = get;
+	        users.$getMe = getMe;
+	        users.$create = create;
+
+	        return users;
+
+	        function getList(query) {
+	            return users.getList(query);
+	        }
+
+	        function get(id, query) {
+	            return users.one(id).get(query);
+	        }
+
+	        function getMe() {
+	            return get('me');
+	        }
+
+	        function create(object) {
+	            return users.post(object);
+	        }
+	    }]);
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = angular
+	    .module('wp-api-angularjs.services.taxonomies', ['restangular'])
+	    .factory('$wpApiTaxonomies', ["Restangular", function(Restangular) {
+	        var taxonomies = Restangular.service('taxonomies');
+
+	        taxonomies.$getList = getList;
+	        taxonomies.$get = get;
+	        taxonomies.$getTermList = getTerms;
+	        taxonomies.$getTerm = getTerm;
+
+	        return taxonomies;
+
+	        function getList(query) {
+	            return taxonomies.getList(query);
+	        }
+
+	        function get(taxonomy, query) {
+	            return taxonomies.one(taxonomy).get(query);
+	        }
+
+	        function getTerms(taxonomy) {
+	            return taxonomies.one(taxonomy).getList('terms');
+	        }
+
+	        function getTerm(taxonomy, id) {
+	            return taxonomies.one(taxonomy).one('terms', id).get();
+	        }
+	    }]);
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["_"] = __webpack_require__(8);
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.7.0
@@ -1515,128 +1637,6 @@
 	  }
 	}.call(this));
 
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = angular
-	    .module('wp-api-angularjs.services.posts', ['restangular'])
-	    .factory('$wpApiPosts', ["Restangular", function(Restangular) {
-	        var posts = Restangular.service('posts');
-
-	        posts.$getList = getList;
-	        posts.$get = get;
-	        posts.$create = create;
-
-	        return posts;
-
-	        function getList(query) {
-	            return posts.getList(query);
-	        }
-
-	        function get(id, query) {
-	            return posts.one(id).get(query);
-	        }
-
-	        function create(object) {
-	            return posts.post(object);
-	        }
-	    }]);
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = angular
-	    .module('wp-api-angularjs.services.media', ['restangular'])
-	    .factory('$wpApiMedia', ["Restangular", function(Restangular) {
-	        var media = Restangular.service('media');
-
-	        media.$getList = getList;
-	        media.$get = get;
-	        media.$create = create;
-
-	        return media;
-
-	        function getList(query) {
-	            return media.getList(query);
-	        }
-
-	        function get(id, query) {
-	            return media.one(id).get(query);
-	        }
-
-	        function create(object) {
-	            return media.post(object);
-	        }
-	    }]);
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = angular
-	    .module('wp-api-angularjs.services.users', ['restangular'])
-	    .factory('$wpApiUsers', ["Restangular", function(Restangular) {
-	        var users = Restangular.service('users');
-
-	        users.$getList = getList;
-	        users.$get = get;
-	        users.$getMe = getMe;
-	        users.$create = create;
-
-	        return users;
-
-	        function getList(query) {
-	            return users.getList(query);
-	        }
-
-	        function get(id, query) {
-	            return users.one(id).get(query);
-	        }
-
-	        function getMe() {
-	            return get('me');
-	        }
-
-	        function create(object) {
-	            return users.post(object);
-	        }
-	    }]);
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = angular
-	    .module('wp-api-angularjs.services.taxonomies', ['restangular'])
-	    .factory('$wpApiTaxonomies', ["Restangular", function(Restangular) {
-	        var taxonomies = Restangular.service('taxonomies');
-
-	        taxonomies.$getList = getList;
-	        taxonomies.$get = get;
-	        taxonomies.$getTermList = getTerms;
-	        taxonomies.$getTerm = getTerm;
-
-	        return taxonomies;
-
-	        function getList(query) {
-	            return taxonomies.getList(query);
-	        }
-
-	        function get(taxonomy, query) {
-	            return taxonomies.one(taxonomy).get(query);
-	        }
-
-	        function getTerms(taxonomy) {
-	            return taxonomies.one(taxonomy).getList('terms');
-	        }
-
-	        function getTerm(taxonomy, id) {
-	            return taxonomies.one(taxonomy).one('terms', id).get();
-	        }
-	    }]);
 
 /***/ },
 /* 9 */

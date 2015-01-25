@@ -89,11 +89,9 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var helper = __webpack_require__(7);
-
 	module.exports = angular
 	    .module('wp-api-angularjs.services.posts', ['restangular'])
-	    .factory('$wpApiPosts', ["Restangular", function (Restangular) {
+	    .factory('$wpApiPosts', ["Restangular", function(Restangular) {
 	        var posts = Restangular.service('posts');
 
 	        posts.$getList = getList;
@@ -102,12 +100,11 @@
 
 	        return posts;
 
-	        function getList(filters) {
-	            return posts.getList(helper.filterize(filters));
+	        function getList(query) {
+	            return posts.getList(query);
 	        }
 
 	        function get(id, query) {
-	            var query = query || {};
 	            return posts.one(id).get(query);
 	        }
 
@@ -131,12 +128,11 @@
 
 	        return media;
 
-	        function getList() {
-	            return media.getList();
+	        function getList(query) {
+	            return media.getList(query);
 	        }
 
 	        function get(id, query) {
-	            var query = query || {};
 	            return media.one(id).get(query);
 	        }
 
@@ -161,12 +157,11 @@
 
 	        return users;
 
-	        function getList() {
-	            return users.getList();
+	        function getList(query) {
+	            return users.getList(query);
 	        }
 
 	        function get(id, query) {
-	            var query = query || {};
 	            return users.one(id).get(query);
 	        }
 
@@ -195,12 +190,11 @@
 
 	        return taxonomies;
 
-	        function getList() {
-	            return taxonomies.getList();
+	        function getList(query) {
+	            return taxonomies.getList(query);
 	        }
 
 	        function get(taxonomy, query) {
-	            var query = query || {};
 	            return taxonomies.one(taxonomy).get(query);
 	        }
 
@@ -212,21 +206,6 @@
 	            return taxonomies.one(taxonomy).one('terms', id).get();
 	        }
 	    }]);
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-	    filterize: function (filters) {
-	        filters = filters || {}
-	        var query = {};
-	        for (var i in filters) {
-	            query['filter[' + i + ']'] = filters[i];
-	        };
-	        return query;
-	    }
-	}
 
 /***/ }
 /******/ ])

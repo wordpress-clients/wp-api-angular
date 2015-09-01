@@ -9,7 +9,10 @@
     <body ng-app="test" ng-strict-di ng-controller="MainController as main">
 
         <h2>Posts</h2>
-
+        {{main.posts | json : spacing}}
+        <hr/>
+        <h2>Pages</h2>
+        {{main.pages | json : spacing}}
         <hr/>
 
         <script src="{%=o.htmlWebpackPlugin.assets.main%}"></script>

@@ -1,5 +1,5 @@
 export default function(WpApiProvider) {
     'ngInject';
 
-    WpApiProvider.setBaseUrl('http://sandbox.julienrenaux.fr/wp-json')
+    WpApiProvider.setBaseUrl('http://shprinkone.julienrenaux.fr/wp-json')
 }

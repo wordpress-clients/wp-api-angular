@@ -193,9 +193,9 @@
 	         *
 	         * @description
 	         * Get post list
-	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be serialized with the paramSerializer and appended as GET parameters.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
-	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers to send to the server. If the return value of a function is null, the header will not be sent. Functions accept a config object as an argument.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
 	         * @example
 	         * $wpApiPosts.getList({
 	         *  page: 1,
@@ -208,49 +208,227 @@
 	        value: function getList(params, data, headers) {
 	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/posts', params, data, headers);
 	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#get
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * Get a specific post by its ID
+	         *
+	         * @param {int} postId  The post id
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
 	    }, {
 	        key: 'get',
 	        value: function get(postId, params, data, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPosts:get', {
+	                postId: postId
+	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/posts/' + postId, params, data, headers);
 	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#getMetaList
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Get a specific post metas
+	         *
+	         * @param {int} postId  The post id
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
 	    }, {
 	        key: 'getMetaList',
 	        value: function getMetaList(postId, params, data, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPosts:getMetaList', {
+	                postId: postId
+	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/posts/' + postId + '/meta', params, data, headers);
 	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#getMeta
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Get a specific post meta by its ID
+	         *
+	         * @param {int} postId  The post id
+	         * @param {int} metaId  The meta id
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
 	    }, {
 	        key: 'getMeta',
 	        value: function getMeta(postId, metaId, params, data, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPosts:getMeta', {
+	                postId: postId,
+	                metaId: metaId
+	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/posts/' + postId + '/meta/' + metaId, params, data, headers);
 	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#getRevisionList
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Get a specific post revisions
+	         *
+	         * @param {int} postId  The post id
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
 	    }, {
 	        key: 'getRevisionList',
 	        value: function getRevisionList(postId, params, data, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPosts:getRevisionList', {
+	                postId: postId
+	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/posts/' + postId + '/revisions', params, data, headers);
 	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#getRevision
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Get a specific post revision its ID
+	         *
+	         * @param {int} postId  The post id
+	         * @param {int} getRevision  The revision id
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
 	    }, {
 	        key: 'getRevision',
 	        value: function getRevision(postId, revisionId, params, data, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPosts:getRevision', {
+	                postId: postId,
+	                revisionId: revisionId
+	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/posts/' + postId + '/revisions/' + revisionId, params, data, headers);
 	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#getCategoryList
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * Get a specific post category list
+	         *
+	         * @param {int} postId  The post id
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
 	    }, {
 	        key: 'getCategoryList',
 	        value: function getCategoryList(postId, params, data, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPosts:getCategoryList', {
+	                postId: postId
+	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/posts/' + postId + '/terms/category', params, data, headers);
 	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#getCategory
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * Get a specific post category its ID
+	         *
+	         * @param {int} postId  The post id
+	         * @param {int} categoryId  The category id
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
 	    }, {
 	        key: 'getCategory',
 	        value: function getCategory(postId, categoryId, params, data, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPosts:getCategory', {
+	                postId: postId,
+	                categoryId: categoryId
+	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/posts/' + postId + '/terms/category/' + categoryId, params, data, headers);
 	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#getTagList
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * Get a specific post tag list
+	         *
+	         * @param {int} postId  The post id
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
 	    }, {
 	        key: 'getTagList',
 	        value: function getTagList(postId, params, data, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPosts:getTagList', {
+	                postId: postId
+	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/posts/' + postId + '/terms/tag', params, data, headers);
 	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#getTag
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * Get a specific post tag its ID
+	          * @param {int} postId  The post id
+	         * @param {int} tagId  The tag id
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
 	    }, {
 	        key: 'getTag',
 	        value: function getTag(postId, tagId, params, data, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPosts:getTag', {
+	                postId: postId,
+	                tagId: tagId
+	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/posts/' + postId + '/terms/tag/' + tagId, params, data, headers);
 	        }
 	    }]);
@@ -313,6 +491,14 @@
 	                params: params,
 	                data: data,
 	                headers: headers
+	            });
+	        }
+	    }, {
+	        key: 'requiredInput',
+	        value: function requiredInput(functionName, inputs) {
+	            angular.forEach(inputs, function (value, name) {
+	                if (typeof value !== 'undefined') return;
+	                throw new Error('Parameter ' + name + ' from function ' + functionName + ' is required');
 	            });
 	        }
 	    }]);

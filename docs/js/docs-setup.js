@@ -19,7 +19,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Posts entity",
-      "keywords": "$http $wpapiposts accept api appended argument asc config data entity filter function functions getlist header headers http list map message null object objects optional parameters params paramserializer per_page post posts promise public representing request return send serialized server service strings wp-api-angularjs wpapi"
+      "keywords": "$http $wpapiposts api appended asc category categoryid data entity filter function functions getcategory getcategorylist getlist getmeta getmetalist getrevision getrevisionlist gettag gettaglist headers http list map message meta metaid metas objects optional parameters params per_page post postid posts promise public representing request return revision revisions service specific strings tag tagid wp-api-angularjs wpapi"
     },
     {
       "section": "api",

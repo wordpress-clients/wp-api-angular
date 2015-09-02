@@ -1,17 +1,16 @@
-require('angular');
-require('../dist/wp-api-angularjs.bundle.js');
+import 'angular';
+import WpApi from '../dist/wp-api-angularjs.js';
+import Config from './config.js';
+import Controller from './controller.js';
 
-module.exports = angular.module('wp-api-angularjs.test', [
-        'wp-api-angularjs', // import the lib
-        require('./MainController').name
-    ])
-    .config(function (WpApiProvider) {
-        var RestangularProvider = WpApiProvider.getRestangularProvider();
-        RestangularProvider.setBaseUrl('http://shprinkone.julienrenaux.fr/wp-json');
-        RestangularProvider.setRestangularFields({
-            id: "ID"
-        });
-    })
-    .run(function ($log) {
-        $log.info('test running');
-    });
+let mod = angular.module('test', [
+    'wp-api-angularjs'
+]);
+
+mod.config(Config);
+mod.controller('MainController', Controller);
+mod.run(($log) => {
+    $log.info('test running');
+});
+
+export default mod = mod.name;

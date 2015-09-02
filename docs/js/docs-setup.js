@@ -121,7 +121,7 @@ NG_DOCS={
     "navTemplate": false,
     "navContent": "",
     "navTemplateData": {},
-    "titleLink": "/",
+    "titleLink": "/wp-api-angularjs",
     "loadDefaults": {
       "angular": true,
       "angularAnimate": true,

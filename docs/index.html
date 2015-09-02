@@ -24,29 +24,29 @@
           headEl = document.getElementsByTagName('head')[0],
           sync = true;
 
-      addTag('base', {href: baseUrl});
+      addTag('base', {href: 'http://shprink.github.io/wp-api-angularjs/docs'});
       addTag('link', {rel: 'stylesheet', href: 'css/bootstrap.min.css', type: 'text/css'});
       addTag('link', {rel: 'stylesheet', href: 'css/font-awesome.css', type: 'text/css'});
       addTag('link', {rel: 'stylesheet', href: 'css/prettify.css', type: 'text/css'});
       addTag('link', {rel: 'stylesheet', href: 'css/docs.css', type: 'text/css'});
       addTag('link', {rel: 'stylesheet', href: 'css/animations.css', type: 'text/css'});
 
-      
 
-      
+
+
         addTag('script', {src: 'js/angular.min.js'}, sync);
-      
+
         addTag('script', {src: 'js/angular-animate.min.js'}, sync);
-      
+
         addTag('script', {src: 'js/marked.js'}, sync);
-      
-      
+
+
       addTag('script', {src: 'js/angular-bootstrap.js'}, sync);
       addTag('script', {src: 'js/angular-bootstrap-prettify.js'}, sync);
       addTag('script', {src: 'js/docs-setup.js'}, sync);
       addTag('script', {src: 'js/docs.js'}, sync);
       addTag('script', {src: 'js/prettify.js'}, sync);
-      
+
       function addTag(name, attributes, sync) {
         var el = document.createElement(name),
             attrName;
@@ -79,16 +79,16 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          
-          
+
+
             <a  href="/"  class="brand">wp-api-angularjs</a>
-          
+
           <ul class="nav">
             <li ng-repeat="(url, name) in sections" ng-class="{active: isActivePath(url)}">
               <a ng-href="{{url}}"><i class="icon-book icon-white"></i> {{name}}</a>
             </li>
           </ul>
-          
+
         </div>
       </div>
     </div>
@@ -121,10 +121,10 @@
     <div class="row">
       <div class="span3">
         <form class="form-search" ng-submit="submitForm()">
-          
+
           <input type="text" ng-model="search" placeholder="search the docs"
                  tabindex="1" accesskey="s" class="search-query">
-          
+
           <div class="spacer"></div>
 
           <ul class="nav nav-list well" ng-show="pages.length">

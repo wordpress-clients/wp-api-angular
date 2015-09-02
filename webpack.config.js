@@ -36,7 +36,7 @@ module.exports = {
         ngdocs: {
             html5Mode: false,
             title: pkg.name,
-            titleLink: '/'
+            titleLink: '/wp-api-angularjs'
         }
     })]
 };

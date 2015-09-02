@@ -4,17 +4,37 @@
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
         <title>Test wp-api-angularjs</title>
+        <style>
+            .error {
+                background-color: red;
+            }
+
+            .success {
+                background-color: green;
+            }
+        </style>
     </head>
 
     <body ng-app="test" ng-strict-di ng-controller="MainController as main">
 
         <h2>Posts</h2>
-        {{main.posts | json : spacing}}
-        <hr/>
+        <div ng-repeat="(name, result) in main.posts" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
         <h2>Pages</h2>
-        {{main.pages | json : spacing}}
-        <hr/>
-
+        <div ng-repeat="(name, result) in main.pages" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
+        <h2>Media</h2>
+        <div ng-repeat="(name, result) in main.media" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
+        <h2>Types</h2>
+        <div ng-repeat="(name, result) in main.types" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
+        <h2>Statuses</h2>
+        <div ng-repeat="(name, result) in main.statuses" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
+        <h2>Taxonomies</h2>
+        <div ng-repeat="(name, result) in main.taxonomies" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
+        <h2>Terms</h2>
+        <div ng-repeat="(name, result) in main.terms" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
+        <h2>Users</h2>
+        <div ng-repeat="(name, result) in main.users" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
+        <h2>Comments</h2>
+        <div ng-repeat="(name, result) in main.comments" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
         <script src="{%=o.htmlWebpackPlugin.assets.main%}"></script>
     </body>
 

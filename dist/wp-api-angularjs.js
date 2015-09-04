@@ -1237,7 +1237,7 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
 	         * @example
-	         * $wpApiTerms.getList({
+	         * $wpApiTerms.getCategoryList({
 	         *  page: 1,
 	         *  per_page: 10,
 	         *  search: '',
@@ -1263,7 +1263,7 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
 	         * @example
-	         * $wpApiTerms.getList({
+	         * $wpApiTerms.getTagList({
 	         *  page: 1,
 	         *  per_page: 10,
 	         *  search: '',

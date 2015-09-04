@@ -6,7 +6,7 @@ var path = require('path'),
     pkg = require('./package.json'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
 
-    console.log(JSdoc)
+console.log(JSdoc)
 
 module.exports = {
     entry: path.join(testPath, 'index.js'),
@@ -18,6 +18,9 @@ module.exports = {
         loaders: [{
             test: /[\/]angular\.js$/,
             loader: 'expose?angular!exports?window.angular'
+        }, {
+            test: /\.json$/,
+            loader: "json"
         }, {
             test: /\.js$/,
             exclude: /(node_modules|bower_components)/,

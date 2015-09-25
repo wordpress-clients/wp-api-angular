@@ -1,9 +1,75 @@
 {
     "baseUrl": "http://sandbox.YourDomain.com/wp-json",
+    "authType": "basic",
     "oauth1": {
-        "enabled": false,
-        "ID": "4",
-        "Key": "sDc51JgH2mFu",
-        "Secret": "LnUdIsyhPFnURkatekRIAUfYV7nmP4iF3AVxkS5PRHPXxgOW"
+        "request": "http://sandbox.YourDomain.com/oauth1/request",
+        "authorize": "http://sandbox.YourDomain.com/oauth1/authorize",
+        "access": "http://sandbox.YourDomain.com/oauth1/access",
+        "Key": "yourKey",
+        "callback": "http://sandbox.YourDomain.com/whatever",
+        "Secret": "yourSecret"
+    },
+    "basic": {
+        "login": "login",
+        "password": "password"
+    },
+    "postsMethods": {
+        "getList": [{
+            "per_page": 1
+        }],
+        "get": [2016],
+        "getMetaList": [2016],
+        "getMeta": [2016, 46575],
+        "getRevisionList": [2016],
+        "getRevision": [2016, 2026],
+        "getCategoryList": [2016],
+        "getCategory": [2016, 86],
+        "getTagList": [2016],
+        "getTag": [2016, 87]
+    },
+    "pagesMethods": {
+        "getList": [{
+            "per_page": 1
+        }],
+        "get": [535],
+        "getMetaList": [535],
+        "getMeta": [535, 1],
+        "getRevisionList": [535],
+        "getRevision": [535, 2035]
+    },
+    "mediaMethods": {
+        "getList": [{
+            "per_page": 1
+        }],
+        "get": [2032]
+    },
+    "typesMethods": {
+        "getList": [{
+            "per_page": 1
+        }],
+        "get": ["attachment"]
+    },
+    "statusesMethods": {
+        "getList": [],
+        "get": ["publish"]
+    },
+    "taxonomiesMethods": {
+        "getList": [],
+        "get": ["category"]
+    },
+    "termsMethods": {
+        "getCategoryList": [],
+        "getCategory": [86],
+        "getTagList": [],
+        "getTag": [59]
+    },
+    "usersMethods": {
+        "getList": [],
+        "get": [1],
+        "me": []
+    },
+    "commentsMethods": {
+        "getList": [],
+        "get": [686]
     }
 }

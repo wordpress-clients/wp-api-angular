@@ -47,6 +47,7 @@
     "webpack-dev-server": "~1.10.0"
   },
   "dependencies": {
-    "angular": "^1.4.5"
+    "angular": "^1.4.5",
+    "js-base64": "^2.1.9"
   }
 }

@@ -91,7 +91,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "wp-api-angularjs service",
-      "keywords": "api base function getbaseurl public service url webserver wp-api-angularjs wpapi"
+      "keywords": "api base function getbaseurl getdefaulthttpproperties http inejct properties public request service url webserver wp-api-angularjs wpapi"
     },
     {
       "section": "api",

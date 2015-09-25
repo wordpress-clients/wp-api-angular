@@ -1,6 +1,6 @@
 {
   "name": "wp-api-angularjs",
-  "version": "2.0.0-alpha1",
+  "version": "2.0.0-alpha2",
   "description": "WordPress WP-API v2 client for AngularJs",
   "main": "dist/wp-api-angularjs.js",
   "scripts": {
@@ -47,6 +47,7 @@
     "webpack-dev-server": "~1.10.0"
   },
   "dependencies": {
-    "angular": "^1.4.5"
+    "angular": "^1.4.5",
+    "js-base64": "^2.1.9"
   }
 }

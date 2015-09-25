@@ -1,7 +1,7 @@
 {
   "name": "wp-api-angularjs",
-  "version": "1.0.0",
-  "description": "WordPress WP-API client for AngularJs",
+  "version": "2.0.0-alpha1",
+  "description": "WordPress WP-API v2 client for AngularJs",
   "main": "dist/wp-api-angularjs.js",
   "scripts": {
     "devserver": "webpack-dev-server --port 8080 --json --progress",

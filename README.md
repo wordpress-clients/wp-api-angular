@@ -1,99 +1,52 @@
 wp-api-angularjs
 ================
 
-wp-api-angularjs is under development and will only cover GET methods of the [WP-API](https://github.com/WP-API/WP-API) master branch.
+AngularJS services to consume [WP-API v2](http://v2.wp-api.org/)
 
-## Install
+## Documentation
 
-include the bundled version ```wp-api-angularjs.bundle.js``` (Contains underscore and Restangular) and add the library to your dependencies:
+<http://shprink.github.io/wp-api-angularjs/>
 
-```
-angular.module('myApp', ['wp-api-angularjs']);
-```
+## oAuth1
 
-## Services
+<http://v2.wp-api.org/guide/authentication/>
 
-### WpApiProvider
+### Install OAuth1 plugin
 
-wp-api-angularjs is based on Restangular therefore you can use any of the [Restangular Provider methods](https://github.com/mgonto/restangular/tree/1.4.0#configuring-in-the-config)
+Export <https://github.com/WP-API/OAuth1> zip and upload it into your WP instance.
 
-```
-.config(function(WpApiProvider) {
-    var RestangularProvider = WpApiProvider.getRestangularProvider();
-    RestangularProvider.setBaseUrl('/api/v1');
-});
-```
-
-wp-api-angularjs always returns promises:
+### Install WP-CLI
 
 ```
-$wpApiPosts.$get(id).then(function(post) {
-        // OK
-    }).catch(function() {
-        // KO
-    });
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+sudo mv wp-cli.phar /usr/local/bin/wp
 ```
 
-### Posts ```$wpApiPosts```
+More info: <http://wp-cli.org/>
+
+### Create a consumer:
 
 ```
-// Get latests posts
-$wpApiPosts.$getList();
+$ wp oauth1 add
 
-// Get filtered posts
-$wpApiPosts.$getList({
-    "page" : 2,
-    "filter[category_name]": "uncategorized",
-    "filter[posts_per_page]": 5,
-    "filter[orderby]": "date",
-    "filter[order]": "desc",
-    "filter[post_status]": "publish"
-});
-
-$wpApiPosts.$get(id);
-
-# DOES NOT WORK FOR NOW
-$wpApiPosts.$create();
-```
-
-### Media ```$wpApiMedia```
-
-```
-$wpApiMedia.$getList();
-$wpApiMedia.$get(id);
-
-# DOES NOT WORK FOR NOW
-$wpApiMedia.$create();
-```
-
-### Users ```$wpApiUsers```
-
-Requires [authentication](http://wp-api.org/guides/authentication.html)
-
-```
-$wpApiUsers.$getList();
-$wpApiUsers.$get(id);
-$wpApiUsers.$getMe();
-
-# DOES NOT WORK FOR NOW
-$wpApiMedia.$create();
-```
-
-### Taxonomies ```$wpApiTaxonomies```
-
-```
-$wpApiTaxonomies.$getList();
-$wpApiTaxonomies.$get(taxonomy);
-$wpApiTaxonomies.$getTermList(taxonomy);
-$wpApiTaxonomies.$getTerm(taxonomy, id);
+ID: 4
+Key: sDc51JgH2mFu
+Secret: LnUdIsyhPFnURkatekRIAUfYV7nmP4iF3AVxkS5PRHPXxgOW
 ```
 
 ## Contribute
 
 ```
-sudo npm install webpack webpack-dev-server -g
 npm install
-webpack-dev-server
+cp config.dist.json config.json
+
+# Open two terminals
+# and run watch to build on the lib files changes
+npm run watch
+
+# in the other terminal run following to build the test page and the doc
+npm run devserver
 ```
 
-Open ```http://localhost:8080/test.html```
+Open ```http://localhost:8080```

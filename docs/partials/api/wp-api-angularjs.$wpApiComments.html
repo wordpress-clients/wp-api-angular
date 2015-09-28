@@ -29,23 +29,25 @@
 </div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapicomments-getlist-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers to send to the server. If the return value of a function is null, the header will not be sent. Functions accept a config object as an argument.</p>
 </div></td></tr></tbody></table><h5 id="methods_getlist_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapicomments-getlist-page"><p>Promise</p>
 </div></td></tr></table><h4 id="methods_getlist_example">Example</h4>
-<div class="example"><div class="wp-api-angularjs-wpapicomments-getlist-page"><p>$wpApiComments.getList({
-page: 1,
-per_page: 10,
-search: &#39;&#39;,
-author_email: &#39;&#39;,
-karma: &#39;&#39;,
-parent: 9,
-post: 5,
-post_author: &#39;&#39;,
-post_slug: &#39;&#39;,
-post_parent: &#39;&#39;,
-post_status: &#39;&#39;,
-post_type: &#39;page&#39;,
-status: &#39;approve&#39;,
-type: &#39;comment&#39;,
-user: 9
-});</p>
+<div class="example"><div class="wp-api-angularjs-wpapicomments-getlist-page"><pre class="prettyprint linenums">
+$wpApiComments.getList({
+ page: 1,
+ per_page: 10,
+ search: '',
+ author_email: '',
+ karma: '',
+ parent: 9,
+ post: 5,
+ post_author: '',
+ post_slug: '',
+ post_parent: '',
+ post_status: '',
+ post_type: 'page',
+ status: 'approve',
+ type: 'comment',
+ user: 9
+});
+</pre>
 </div></div>
 </div>
 </li>

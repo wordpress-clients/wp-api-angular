@@ -1,17 +1,8 @@
 {
     "baseUrl": "http://sandbox.YourDomain.com/wp-json",
-    "authType": "basic",
-    "oauth1": {
-        "request": "http://sandbox.YourDomain.com/oauth1/request",
-        "authorize": "http://sandbox.YourDomain.com/oauth1/authorize",
-        "access": "http://sandbox.YourDomain.com/oauth1/access",
-        "Key": "yourKey",
-        "callback": "http://sandbox.YourDomain.com/whatever",
-        "Secret": "yourSecret"
-    },
     "basic": {
-        "login": "login",
-        "password": "password"
+        "login": null,
+        "password": null
     },
     "postsMethods": {
         "getList": [{

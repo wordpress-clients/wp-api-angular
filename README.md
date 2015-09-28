@@ -7,32 +7,34 @@ AngularJS services to consume [WP-API v2](http://v2.wp-api.org/)
 
 <http://shprink.github.io/wp-api-angularjs/>
 
-## oAuth1
+## Authentication
 
-<http://v2.wp-api.org/guide/authentication/>
+This library only supports basic auth. OAuth1 not being suitable for JS clients (it would mean exposing key and password out of the open)
 
-### Install OAuth1 plugin
+### Basic auth
 
-Export <https://github.com/WP-API/OAuth1> zip and upload it into your WP instance.
+Basic auth is only secured to use if used during the app run time and used with a secured connection to your Blog (via SSL).
 
-### Install WP-CLI
+#### During run time
 
-```
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-chmod +x wp-cli.phar
-sudo mv wp-cli.phar /usr/local/bin/wp
-```
+Make sure your WP-API runs with an SSL certificate (https) otherwise this will expose your credentials at every request.
 
-More info: <http://wp-cli.org/>
-
-### Create a consumer:
+Display a form for users to connect and use the following code to register credentials:
 
 ```
-$ wp oauth1 add
+.controller(function(WpApi){
+    WpApi.setBasicCredentials(<login>, <password>);
+});
+```
 
-ID: 4
-Key: sDc51JgH2mFu
-Secret: LnUdIsyhPFnURkatekRIAUfYV7nmP4iF3AVxkS5PRHPXxgOW
+#### During configuration
+
+You can also set basic credentials during the configuration but use this should only be used for testing as it embed credentials in the application code.
+
+```
+.config(function(WpApiProvider){
+    WpApiProvider.setBasicCredentials(<login>, <password>);
+});
 ```
 
 ## Contribute

@@ -4,14 +4,12 @@ export default function(WpApiProvider) {
     'ngInject';
     WpApiProvider.setBaseUrl(config.baseUrl);
 
-    WpApiProvider.setAuthenticationType(config.authType);
-    // oauth1
-    WpApiProvider.setOauth1Description({
-        request: config.oauth1.request
-    })
-    WpApiProvider.setOauth1Credentials(config.oauth1.key, config.oauth1.Secret, config.oauth1.callback);
     // basic
-    WpApiProvider.setBasicCredentials(config.basic.login, config.basic.password);
+    // Use this should only be used for testing as it embed credentials in the application code.
+    // Please check the README.md file
+    if (config.basic.login && config.basic.password) {
+        WpApiProvider.setBasicCredentials(config.basic.login, config.basic.password);
+    }
 
     WpApiProvider.setDefaultHttpProperties({
         timeout: 20000

@@ -170,7 +170,9 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers to send to the server. If the return value of a function is null, the header will not be sent. Functions accept a config object as an argument.
 	         * @example
+	         * <pre>
 	         * $wpApiStatuses.getList({});
+	         * </pre>
 	         * @returns {Object} Promise
 	         */
 	        value: function getList() {
@@ -322,14 +324,8 @@
 	    'ngInject';
 	
 	    var baseUrl = undefined,
-	        oauth1Description = undefined,
 	        authType = null,
-	        httpProperties = {},
-	        oauth1 = {
-	        key: '',
-	        signature: '',
-	        callback: ''
-	    };
+	        httpProperties = {};
 	
 	    var namespace = '/wp/v2';
 	
@@ -350,9 +346,6 @@
 	    return {
 	        $get: $get,
 	        setBaseUrl: setBaseUrl,
-	        setAuthenticationType: setAuthenticationType,
-	        setOauth1Description: setOauth1Description,
-	        setOauth1Credentials: setOauth1Credentials,
 	        setBasicCredentials: setBasicCredentials,
 	        // $http configuration
 	        addInterceptor: addInterceptor,
@@ -375,45 +368,80 @@
 	        return this;
 	    }
 	
-	    function setAuthenticationType() {
-	        var type = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	    /**
+	     * @ngdoc function
+	     * @name wp-api-angularjs.WpApiProvider#setBasicCredentials
+	     * @access public
+	     * @methodOf wp-api-angularjs.WpApiProvider
+	     *
+	     * @description
+	     * Set the basic auth credentials during configuration. This is not recommended as it exposes credential out of the open.
+	     * Please use WpApi.setBasicCredentials instead, with user input (this lib do not provides the form needed)
+	     * @param {string} login    login
+	     * @param {string} password password
+	     */
 	
-	        if (authType) {
-	            throw new Error('Authentication as been already set, you cannot change it anymore');
-	        }
-	        if (['oauth1', 'basic'].indexOf(type) < 0) {
-	            throw new Error('Authentication can be either basic or oauth1');
-	        }
-	        authType = type;
-	        return this;
-	    }
-	
-	    // THIS IS TEMPORARY TILL WP_API TEAM PUT THE DESCRIPTION OBJECT BACK IN v2
-	    function setOauth1Description() {
-	        var list = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
-	        oauth1Description = list;
-	        return this;
-	    }
-	
-	    function setOauth1Credentials(key, signature, callback) {
-	        oauth1.key = key;
-	        oauth1.signature = signature;
-	        oauth1.callback = callback;
-	        return this;
-	    }
-	
+	    /**
+	     * @ngdoc function
+	     * @name wp-api-angularjs.WpApi#setBasicCredentials
+	     * @access public
+	     * @methodOf wp-api-angularjs.WpApi
+	     *
+	     * @description
+	     * Set the basic auth credentials during runtime. Make sure your WP-API runs with an SSL certificate (https) otherwise this will expose your credentials at every request. Display a form for users to connect and use the following code to register credentials.
+	     * @param {string} login    login
+	     * @param {string} password password
+	     */
 	    function setBasicCredentials(login, password) {
 	        var encodedCredentials = _jsBase642['default'].Base64.encode(login + ':' + password);
 	        $httpProvider.defaults.headers.common['Authorization'] = 'Basic ' + encodedCredentials;
 	        return this;
 	    }
 	
+	    /**
+	     * @ngdoc function
+	     * @name wp-api-angularjs.WpApiProvider#addInterceptor
+	     * @access public
+	     * @methodOf wp-api-angularjs.WpApiProvider
+	     *
+	     * @description
+	     * Allow you to modify requests, responses or errors
+	     * https://docs.angularjs.org/api/ng/service/$http#interceptors
+	     * @example
+	     * <pre>
+	     * WpApiProvider.addInterceptor(() => {
+	     *     return {
+	     *         response: (response) => {
+	     *             // DO something with the response here
+	     *             return response;
+	     *         }
+	     *     }
+	     * });
+	     * </pre>
+	     * @param {function} func   the interceptor definition
+	     */
 	    function addInterceptor(func) {
 	        $httpProvider.interceptors.push(func);
 	        return this;
 	    }
 	
+	    /**
+	     * @ngdoc function
+	     * @name wp-api-angularjs.WpApiProvider#setDefaultHttpProperties
+	     * @access public
+	     * @methodOf wp-api-angularjs.WpApiProvider
+	     *
+	     * @description
+	     * Allow you to overwrite http defaults
+	     * https://docs.angularjs.org/api/ng/service/$http#setting-http-headers
+	     * @example
+	     * <pre>
+	     * WpApiProvider.setDefaultHttpProperties({
+	     *     timeout: 20000
+	     * });
+	     * </pre>
+	     * @param {object} properties   the properties to overwrite
+	     */
 	    function setDefaultHttpProperties() {
 	        var properties = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	
@@ -426,7 +454,7 @@
 	
 	        return {
 	            getBaseUrl: getBaseUrl,
-	            sendOauth1Request: sendOauth1Request,
+	            setBasicCredentials: setBasicCredentials,
 	            getDefaultHttpProperties: getDefaultHttpProperties
 	        };
 	
@@ -454,17 +482,6 @@
 	         */
 	        function getDefaultHttpProperties() {
 	            return httpProperties;
-	        }
-	
-	        function sendOauth1Request() {
-	            return $http({
-	                method: 'POST',
-	                url: oauth1Description.request,
-	                headers: {
-	                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-	                    'Authorization': 'OAuth realm="wp-api-angularjs",oauth_consumer_key="' + oauth1.key + '",oauth_signature_method="HMAC-SHA1",oauth_callback="' + oauth1.callback + '",oauth_signature="' + oauth1.signature + '",oauth_timestamp="' + new Date().getTime() * 1000 + '",oauth_nonce="' + Math.random().toString(36).substring(7) + '"'
-	                }
-	            });
 	        }
 	    }
 	
@@ -2549,12 +2566,14 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
 	         * @example
+	         * <pre>
 	         * $wpApiPosts.getList({
 	         *  page: 1,
 	         *  per_page: 10,
 	         *  "filter[orderby]": "date"
 	         *  "filter[orderby]": "asc"
 	         * });
+	         * </pre>
 	         * @returns {Object} Promise
 	         */
 	        value: function getList(params, data, headers) {
@@ -2850,12 +2869,14 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers to send to the server. If the return value of a function is null, the header will not be sent. Functions accept a config object as an argument.
 	         * @example
+	         * <pre>
 	         * $wpApiPages.getList({
 	         *  page: 1,
 	         *  per_page: 10,
 	         *  "filter[orderby]": "date"
 	         *  "filter[orderby]": "asc"
 	         * });
+	         * </pre>
 	         * @returns {Object} Promise
 	         */
 	        value: function getList() {
@@ -3056,12 +3077,14 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers to send to the server. If the return value of a function is null, the header will not be sent. Functions accept a config object as an argument.
 	         * @example
+	         * <pre>
 	         * $wpApiMedia.getList({
 	         *  page: 1,
 	         *  per_page: 10,
 	         *  "filter[orderby]": "date"
 	         *  "filter[orderby]": "asc"
 	         * });
+	         * </pre>
 	         * @returns {Object} Promise
 	         */
 	        value: function getList() {
@@ -3162,9 +3185,11 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers to send to the server. If the return value of a function is null, the header will not be sent. Functions accept a config object as an argument.
 	         * @example
+	         * <pre>
 	         * $wpApiTypes.getList({
 	         *  post_type: "attachment"
 	         * });
+	         * </pre>
 	         * @returns {Object} Promise
 	         */
 	        value: function getList() {
@@ -3265,9 +3290,11 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers to send to the server. If the return value of a function is null, the header will not be sent. Functions accept a config object as an argument.
 	         * @example
+	         * <pre>
 	         * $wpApiTaxonomies.getList({
 	         *  post_type: "attachment"
 	         * });
+	         * </pre>
 	         * @returns {Object} Promise
 	         */
 	        value: function getList() {
@@ -3368,6 +3395,7 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
 	         * @example
+	         * <pre>
 	         * $wpApiTerms.getCategoryList({
 	         *  page: 1,
 	         *  per_page: 10,
@@ -3376,6 +3404,7 @@
 	         *  orderby: '',
 	         *  parent: '',
 	         * });
+	         * </pre>
 	         * @returns {Object} Promise
 	         */
 	        value: function getCategoryList(params, data, headers) {
@@ -3394,6 +3423,7 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
 	         * @example
+	         * <pre>
 	         * $wpApiTerms.getTagList({
 	         *  page: 1,
 	         *  per_page: 10,
@@ -3401,6 +3431,7 @@
 	         *  order: '',
 	         *  orderby: ''
 	         * });
+	         * </pre>
 	         * @returns {Object} Promise
 	         */
 	    }, {
@@ -3523,6 +3554,7 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
 	         * @example
+	         * <pre>
 	         * $wpApiUsers.getList({
 	         *  page: 1,
 	         *  per_page: 10,
@@ -3531,6 +3563,7 @@
 	         *  orderby: '',
 	         *  context: ''
 	         * });
+	         * </pre>
 	         * @returns {Object} Promise
 	         */
 	        value: function getList(params, data, headers) {
@@ -3647,6 +3680,7 @@
 	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
 	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers to send to the server. If the return value of a function is null, the header will not be sent. Functions accept a config object as an argument.
 	         * @example
+	         * <pre>
 	         * $wpApiComments.getList({
 	         *  page: 1,
 	         *  per_page: 10,
@@ -3664,6 +3698,7 @@
 	         *  type: 'comment',
 	         *  user: 9
 	         * });
+	         * </pre>
 	         * @returns {Object} Promise
 	         */
 	        value: function getList() {

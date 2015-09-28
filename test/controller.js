@@ -27,8 +27,6 @@ export default function(
     vm.users = {};
     vm.comments = {};
 
-    WpApi.sendOauth1Request();
-
     /*
      * POSTS
      */

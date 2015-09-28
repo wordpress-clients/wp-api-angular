@@ -1,0 +1,66 @@
+{
+    "baseUrl": "http://sandbox.YourDomain.com/wp-json",
+    "basic": {
+        "login": null,
+        "password": null
+    },
+    "postsMethods": {
+        "getList": [{
+            "per_page": 1
+        }],
+        "get": [2016],
+        "getMetaList": [2016],
+        "getMeta": [2016, 46575],
+        "getRevisionList": [2016],
+        "getRevision": [2016, 2026],
+        "getCategoryList": [2016],
+        "getCategory": [2016, 86],
+        "getTagList": [2016],
+        "getTag": [2016, 87]
+    },
+    "pagesMethods": {
+        "getList": [{
+            "per_page": 1
+        }],
+        "get": [535],
+        "getMetaList": [535],
+        "getMeta": [535, 1],
+        "getRevisionList": [535],
+        "getRevision": [535, 2035]
+    },
+    "mediaMethods": {
+        "getList": [{
+            "per_page": 1
+        }],
+        "get": [2032]
+    },
+    "typesMethods": {
+        "getList": [{
+            "per_page": 1
+        }],
+        "get": ["attachment"]
+    },
+    "statusesMethods": {
+        "getList": [],
+        "get": ["publish"]
+    },
+    "taxonomiesMethods": {
+        "getList": [],
+        "get": ["category"]
+    },
+    "termsMethods": {
+        "getCategoryList": [],
+        "getCategory": [86],
+        "getTagList": [],
+        "getTag": [59]
+    },
+    "usersMethods": {
+        "getList": [],
+        "get": [1],
+        "me": []
+    },
+    "commentsMethods": {
+        "getList": [],
+        "get": [686]
+    }
+}

@@ -64,7 +64,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Posts entity",
-      "keywords": "$http $wpapiterms api appended category data entity function functions getcategory getcategorylist getlist gettag gettaglist headers http list map message objects optional order orderby parameters params parent per_page posts promise public representing request return search service specific strings tag term termid wp-api-angularjs wpapi"
+      "keywords": "$http $wpapiterms api appended category data entity function functions getcategory getcategorylist gettag gettaglist headers http list map message objects optional order orderby parameters params parent per_page posts promise public representing request return search service specific strings tag term termid wp-api-angularjs wpapi"
     },
     {
       "section": "api",
@@ -91,7 +91,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "wp-api-angularjs service",
-      "keywords": "api base function getbaseurl public service url webserver wp-api-angularjs wpapi"
+      "keywords": "api base basic certificate code connect credentials display expose form function getbaseurl getdefaulthttpproperties http inejct login password properties public register request runs runtime service set setbasiccredentials ssl url users webserver wp-api wp-api-angularjs wpapi"
     },
     {
       "section": "api",
@@ -100,7 +100,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "wp-api-angularjs provider",
-      "keywords": "api base function newbaseurl provider public service set setbaseurl url webserver webservice wp-api-angularjs wpapiprovider"
+      "keywords": "addinterceptor allow angularjs api base basic configuration credential credentials defaults definition errors exposes form func function http https input interceptor interceptors lib login modify needed newbaseurl open org overwrite password properties provider public recommended requests response responses return service set setbaseurl setbasiccredentials setdefaulthttpproperties setting-http-headers timeout url user webserver webservice wp-api-angularjs wpapi wpapiprovider"
     }
   ],
   "apis": {

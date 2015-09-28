@@ -7,10 +7,48 @@
 <div class="description"><div class="wp-api-angularjs-wpapiprovider-page"><p>wp-api-angularjs provider</p>
 </div></div>
 <div class="member method"><h2 id="methods">Methods</h2>
-<ul class="methods"><li><h3 id="methods_setbaseurl">setBaseUrl(newBaseUrl)</h3>
+<ul class="methods"><li><h3 id="methods_addinterceptor">addInterceptor(func)</h3>
+<div class="addinterceptor"><div class="wp-api-angularjs-wpapiprovider-addinterceptor-page"><p>Allow you to modify requests, responses or errors
+<a href="https://docs.angularjs.org/api/ng/service/$http#interceptors">https://docs.angularjs.org/api/ng/service/$http#interceptors</a></p>
+</div><h5 id="methods_addinterceptor_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>func</td><td><a href="" class="label type-hint type-hint-function">function</a></td><td><div class="wp-api-angularjs-wpapiprovider-addinterceptor-page"><p>the interceptor definition</p>
+</div></td></tr></tbody></table><h4 id="methods_addinterceptor_example">Example</h4>
+<div class="example"><div class="wp-api-angularjs-wpapiprovider-addinterceptor-page"><pre class="prettyprint linenums">
+WpApiProvider.addInterceptor(() =&gt; {
+    return {
+        response: (response) =&gt; {
+            // DO something with the response here
+            return response;
+        }
+    }
+});
+</pre>
+</div></div>
+</div>
+</li>
+<li><h3 id="methods_setbaseurl">setBaseUrl(newBaseUrl)</h3>
 <div class="setbaseurl"><div class="wp-api-angularjs-wpapiprovider-setbaseurl-page"><p>Set the webserver base url</p>
 </div><h5 id="methods_setbaseurl_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>newBaseUrl</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="wp-api-angularjs-wpapiprovider-setbaseurl-page"><p>the url to the webservice</p>
 </div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_setbasiccredentials">setBasicCredentials(login, password)</h3>
+<div class="setbasiccredentials"><div class="wp-api-angularjs-wpapiprovider-setbasiccredentials-page"><p>Set the basic auth credentials during configuration. This is not recommended as it exposes credential out of the open.
+Please use WpApi.setBasicCredentials instead, with user input (this lib do not provides the form needed)</p>
+</div><h5 id="methods_setbasiccredentials_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>login</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="wp-api-angularjs-wpapiprovider-setbasiccredentials-page"><p>login</p>
+</div></td></tr><tr><td>password</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="wp-api-angularjs-wpapiprovider-setbasiccredentials-page"><p>password</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_setdefaulthttpproperties">setDefaultHttpProperties(properties)</h3>
+<div class="setdefaulthttpproperties"><div class="wp-api-angularjs-wpapiprovider-setdefaulthttpproperties-page"><p>Allow you to overwrite http defaults
+<a href="https://docs.angularjs.org/api/ng/service/$http#setting-http-headers">https://docs.angularjs.org/api/ng/service/$http#setting-http-headers</a></p>
+</div><h5 id="methods_setdefaulthttpproperties_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>properties</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiprovider-setdefaulthttpproperties-page"><p>the properties to overwrite</p>
+</div></td></tr></tbody></table><h4 id="methods_setdefaulthttpproperties_example">Example</h4>
+<div class="example"><div class="wp-api-angularjs-wpapiprovider-setdefaulthttpproperties-page"><pre class="prettyprint linenums">
+WpApiProvider.setDefaultHttpProperties({
+    timeout: 20000
+});
+</pre>
+</div></div>
+</div>
 </li>
 </ul>
 </div>

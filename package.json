@@ -1,7 +1,7 @@
 {
   "name": "wp-api-angularjs",
-  "version": "1.0.0",
-  "description": "WordPress WP-API client for AngularJs",
+  "version": "2.0.0-alpha2",
+  "description": "WordPress WP-API v2 client for AngularJs",
   "main": "dist/wp-api-angularjs.js",
   "scripts": {
     "devserver": "webpack-dev-server --port 8080 --json --progress",
@@ -38,6 +38,8 @@
     "expose-loader": "^0.6.0",
     "gulp": "^3.9.0",
     "gulp-ngdocs": "^0.2.13",
+    "html-webpack-plugin": "^1.6.1",
+    "json-loader": "^0.5.2",
     "ng-annotate-loader": "~0.0.6",
     "path": "^0.4.9",
     "util": "^0.10.3",
@@ -45,6 +47,7 @@
     "webpack-dev-server": "~1.10.0"
   },
   "dependencies": {
-    "angular": "^1.4.5"
+    "angular": "^1.4.5",
+    "js-base64": "^2.1.9"
   }
 }

@@ -6,8 +6,6 @@ var path = require('path'),
     pkg = require('./package.json'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
 
-console.log(JSdoc)
-
 module.exports = {
     entry: path.join(testPath, 'index.js'),
     output: {
@@ -29,7 +27,7 @@ module.exports = {
     },
     plugins: [new HtmlWebpackPlugin({
         filename: 'index.html',
-        title: 'wp-api-angularjs',
+        pkg: pkg,
         template: path.join(testPath, 'index.html')
     }), new JSdoc({
         glob: [

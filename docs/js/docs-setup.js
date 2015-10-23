@@ -10,7 +10,16 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Comments entity",
-      "keywords": "$http $wpapicomments accept api appended approve argument author_email comment commentid comments config data entity function functions getlist header headers http karma list map message null object objects optional parameters params paramserializer parent per_page post post_author post_parent post_slug post_status post_type promise public representing request return search send serialized server service specific status strings type user wp-api-angularjs"
+      "keywords": "$injector $wpapicomments accept api appended approve argument author_email comment commentid comments config data entity function functions getlist header headers http karma list map message null object objects optional parameters params paramserializer parent per_page post post_author post_parent post_slug post_status post_type promise public representing request return search send serialized server service specific status strings type user wp-api-angularjs"
+    },
+    {
+      "section": "api",
+      "id": "wp-api-angularjs.$wpApiCustom",
+      "shortName": "wp-api-angularjs.$wpApiCustom",
+      "type": "service",
+      "moduleName": "wp-api-angularjs",
+      "shortDescription": "Custom entity",
+      "keywords": "$injector $wpapicustom api cars custom entities entity entityname fetch function getinstance getlist instance list methods public service var wp-api-angularjs"
     },
     {
       "section": "api",
@@ -19,7 +28,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "media entity",
-      "keywords": "$http $wpapimedia accept api appended argument asc config data entity filter function functions getlist header headers http list map media mediaid message null object objects optional parameters params paramserializer per_page promise public representing request return send serialized server service specific strings wp-api-angularjs"
+      "keywords": "$injector $wpapimedia accept api appended argument asc config data entity filter function functions getlist header headers http list map media mediaid message null object objects optional parameters params paramserializer per_page promise public representing request return send serialized server service specific strings wp-api-angularjs"
     },
     {
       "section": "api",
@@ -28,7 +37,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Pages entity",
-      "keywords": "$http $wpapipages accept api appended argument asc config data entity filter function functions getlist getmeta getmetalist getrevision getrevisionlist header headers http list map message meta metaid metas null object objects optional pageid parameters params paramserializer per_page promise public representing request return revision revisions send serialized server service specific strings wp-api-angularjs"
+      "keywords": "$injector $wpapipages accept api appended argument asc config data entity filter function functions getlist getmeta getmetalist getrevision getrevisionlist header headers http list map message meta metaid metas null object objects optional pageid parameters params paramserializer per_page promise public representing request return revision revisions send serialized server service specific strings wp-api-angularjs"
     },
     {
       "section": "api",
@@ -37,7 +46,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Posts entity",
-      "keywords": "$http $wpapiposts api appended asc category categoryid data entity filter function functions getcategory getcategorylist getlist getmeta getmetalist getrevision getrevisionlist gettag gettaglist headers http list map message meta metaid metas objects optional parameters params per_page post postid posts promise public representing request return revision revisions service specific strings tag tagid wp-api-angularjs wpapi"
+      "keywords": "$injector $wpapiposts api appended asc category categoryid data entity filter function functions getcategory getcategorylist getlist getmeta getmetalist getrevision getrevisionlist gettag gettaglist headers http list map message meta metaid metas objects optional parameters params per_page post postid posts promise public representing request return revision revisions service specific strings tag tagid wp-api-angularjs"
     },
     {
       "section": "api",
@@ -46,7 +55,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "statuses entity",
-      "keywords": "$http $wpapistatuses accept api appended argument config data entity function functions getlist header headers http list map message null object objects optional parameters params paramserializer promise public representing request return send serialized server service specific statuses statusesname strings wp-api-angularjs"
+      "keywords": "$injector $wpapistatuses accept api appended argument config data entity function functions getlist header headers http list map message null object objects optional parameters params paramserializer promise public representing request return send serialized server service specific statuses statusesname strings wp-api-angularjs"
     },
     {
       "section": "api",
@@ -55,7 +64,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "taxonomies entity",
-      "keywords": "$http $wpapitaxonomies accept api appended argument attachment config data entity function functions getlist header headers http list map message null object objects optional parameters params paramserializer post_type promise public representing request return send serialized server service specific strings taxonomies taxonomiestype wp-api-angularjs"
+      "keywords": "$injector $wpapitaxonomies accept api appended argument attachment config data entity function functions getlist header headers http list map message null object objects optional parameters params paramserializer post_type promise public representing request return send serialized server service specific strings taxonomies taxonomiestype wp-api-angularjs"
     },
     {
       "section": "api",
@@ -64,7 +73,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Posts entity",
-      "keywords": "$http $wpapiterms api appended category data entity function functions getcategory getcategorylist gettag gettaglist headers http list map message objects optional order orderby parameters params parent per_page posts promise public representing request return search service specific strings tag term termid wp-api-angularjs wpapi"
+      "keywords": "$injector $wpapiterms api appended category data entity function functions getcategory getcategorylist gettag gettaglist headers http list map message objects optional order orderby parameters params parent per_page posts promise public representing request return search service specific strings tag term termid wp-api-angularjs"
     },
     {
       "section": "api",
@@ -73,7 +82,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "postType entity post|page|attachment",
-      "keywords": "$http $wpapitypes accept api appended argument attachment config data entity function functions getlist header headers http list map message null object objects optional parameters params paramserializer post post_type posttype promise public representing request return send serialized server service specific strings type wp-api-angularjs"
+      "keywords": "$injector $wpapitypes accept api appended argument attachment config data entity function functions getlist header headers http list map message null object objects optional parameters params paramserializer post post_type posttype promise public representing request return send serialized server service specific strings type wp-api-angularjs"
     },
     {
       "section": "api",
@@ -82,7 +91,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Users entity",
-      "keywords": "$http $wpapiusers api appended context data entity function functions getlist headers http list map message object objects optional order orderby parameters params per_page promise public representing request return search service specific strings user userid users wp-api-angularjs wpapi"
+      "keywords": "$injector $wpapiusers api appended context data entity function functions getlist headers http list map message object objects optional order orderby parameters params per_page promise public representing request return search service specific strings user userid users wp-api-angularjs"
     },
     {
       "section": "api",

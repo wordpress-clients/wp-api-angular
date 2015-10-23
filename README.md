@@ -7,6 +7,30 @@ AngularJS services to consume [WP-API v2](http://v2.wp-api.org/)
 
 <http://shprink.github.io/wp-api-angularjs/>
 
+## Installation
+
+### npm
+
+```
+npm install wp-api-angularjs
+```
+
+then import the dist file
+
+```
+# ES5
+require('wp-api-angularjs');
+
+# or ES6
+import 'wp-api-angularjs';
+```
+
+### Bower
+
+```
+bower install shprink/wp-api-angularjs
+```
+
 ## Authentication
 
 This library only supports basic auth. OAuth1 not being suitable for JS clients (it would mean exposing key and password out of the open)

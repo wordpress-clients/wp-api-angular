@@ -1,6 +1,6 @@
 {
     "name": "wp-api-angularjs",
-    "version": "2.0.0-alpha3",
+    "version": "2.0.0-rc1",
     "description": "WordPress WP-API v2 client for AngularJs",
     "main": [
         "dist/wp-api-angularjs.js"

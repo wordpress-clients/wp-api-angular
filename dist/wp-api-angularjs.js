@@ -1,3 +1,13 @@
+/*!
+ * wp-api-angularjs
+ *  ---
+ * WordPress WP-API v2 client for AngularJs
+ * @version: v2.0.0-rc1
+ * @author: shprink <contact@julienrenaux.fr>
+ * @link: https://github.com/shprink/wp-api-angularjs
+ * @license: MIT
+ * 
+ */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -55,27 +65,27 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _providerJs = __webpack_require__(/*! ./provider.js */ 3);
+	var _providerJs = __webpack_require__(/*! ./provider.js */ 1);
 	
 	var _providerJs2 = _interopRequireDefault(_providerJs);
 	
-	var _postsServiceJs = __webpack_require__(/*! ./posts.service.js */ 9);
+	var _postsServiceJs = __webpack_require__(/*! ./posts.service.js */ 7);
 	
 	var _postsServiceJs2 = _interopRequireDefault(_postsServiceJs);
 	
-	var _pagesServiceJs = __webpack_require__(/*! ./pages.service.js */ 10);
+	var _pagesServiceJs = __webpack_require__(/*! ./pages.service.js */ 9);
 	
 	var _pagesServiceJs2 = _interopRequireDefault(_pagesServiceJs);
 	
-	var _mediaServiceJs = __webpack_require__(/*! ./media.service.js */ 11);
+	var _mediaServiceJs = __webpack_require__(/*! ./media.service.js */ 10);
 	
 	var _mediaServiceJs2 = _interopRequireDefault(_mediaServiceJs);
 	
-	var _typesServiceJs = __webpack_require__(/*! ./types.service.js */ 12);
+	var _typesServiceJs = __webpack_require__(/*! ./types.service.js */ 11);
 	
 	var _typesServiceJs2 = _interopRequireDefault(_typesServiceJs);
 	
-	var _statusesServiceJs = __webpack_require__(/*! ./statuses.service.js */ 1);
+	var _statusesServiceJs = __webpack_require__(/*! ./statuses.service.js */ 12);
 	
 	var _statusesServiceJs2 = _interopRequireDefault(_statusesServiceJs);
 	
@@ -95,6 +105,10 @@
 	
 	var _commentsServiceJs2 = _interopRequireDefault(_commentsServiceJs);
 	
+	var _customServiceJs = __webpack_require__(/*! ./custom.service.js */ 17);
+	
+	var _customServiceJs2 = _interopRequireDefault(_customServiceJs);
+	
 	var mod = angular.module('wp-api-angularjs', []);
 	
 	mod.provider('WpApi', _providerJs2['default']);
@@ -107,190 +121,13 @@
 	mod.service('$wpApiTerms', _termsServiceJs2['default']);
 	mod.service('$wpApiUsers', _usersServiceJs2['default']);
 	mod.service('$wpApiComments', _commentsServiceJs2['default']);
+	mod.service('$wpApiCustom', _customServiceJs2['default']);
 	
 	exports['default'] = mod = mod.name;
 	module.exports = exports['default'];
 
 /***/ },
 /* 1 */
-/*!*********************************!*\
-  !*** ./lib/statuses.service.js ***!
-  \*********************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @ngdoc service
-	 * @name wp-api-angularjs.$wpApiStatuses
-	 * @description
-	 * statuses entity
-	 * @requires  wp-api-angularjs:WpApi
-	 * @requires  $http
-	 */
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 2);
-	
-	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
-	
-	var _default = (function (_Parent) {
-	    _inherits(_default, _Parent);
-	
-	    function _default() {
-	        _classCallCheck(this, _default);
-	
-	        _get(Object.getPrototypeOf(_default.prototype), 'constructor', this).apply(this, arguments);
-	    }
-	
-	    _createClass(_default, [{
-	        key: 'getList',
-	
-	        /**
-	         * @ngdoc function
-	         * @name wp-api-angularjs.$wpApiStatuses#getList
-	         * @access public
-	         * @methodOf wp-api-angularjs.$wpApiStatuses
-	         *
-	         * @description
-	         * Get statuses list
-	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be serialized with the paramSerializer and appended as GET parameters.
-	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
-	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers to send to the server. If the return value of a function is null, the header will not be sent. Functions accept a config object as an argument.
-	         * @example
-	         * <pre>
-	         * $wpApiStatuses.getList({});
-	         * </pre>
-	         * @returns {Object} Promise
-	         */
-	        value: function getList() {
-	            var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	            var data = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	            var headers = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-	
-	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/statuses', params, data, headers);
-	        }
-	
-	        /**
-	         * @ngdoc function
-	         * @name wp-api-angularjs.$wpApiStatuses#get
-	         * @access public
-	         * @methodOf wp-api-angularjs.$wpApiStatuses
-	         *
-	         * @description
-	         * Get a specific statuses by its ID
-	         *
-	         * @param {string} statusesName  The statuses name
-	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
-	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
-	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
-	         * @returns {Object} Promise
-	         */
-	    }, {
-	        key: 'get',
-	        value: function get(statusesName, params, data, headers) {
-	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiStatuses:get', {
-	                statusesName: statusesName
-	            });
-	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/statuses/' + statusesName, params, data, headers);
-	        }
-	    }]);
-
-	    return _default;
-	})(_parentServiceJs2['default']);
-
-	exports['default'] = _default;
-	module.exports = exports['default'];
-
-/***/ },
-/* 2 */
-/*!*******************************!*\
-  !*** ./lib/parent.service.js ***!
-  \*******************************/
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var _default = (function () {
-	    function _default(WpApi, $http) {
-	        'ngInject';
-	
-	        _classCallCheck(this, _default);
-	
-	        this.baseUrl = WpApi.getBaseUrl();
-	        this.defaultHttpProperties = WpApi.getDefaultHttpProperties();
-	        this.$http = $http;
-	    }
-	    _default.$inject = ["WpApi", "$http"];
-	
-	    _createClass(_default, [{
-	        key: 'getList',
-	        value: function getList(suffix) {
-	            var params = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	            var data = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-	            var headers = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-	
-	            return this.$http(angular.merge({}, this.defaultHttpProperties, {
-	                method: 'GET',
-	                url: this.baseUrl + suffix,
-	                params: params,
-	                data: data,
-	                headers: headers
-	            }));
-	        }
-	    }, {
-	        key: 'get',
-	        value: function get(suffix) {
-	            var params = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	            var data = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-	            var headers = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-	
-	            return this.$http(angular.merge({}, this.defaultHttpProperties, {
-	                method: 'GET',
-	                url: this.baseUrl + suffix,
-	                params: params,
-	                data: data,
-	                headers: headers
-	            }));
-	        }
-	    }, {
-	        key: 'requiredInput',
-	        value: function requiredInput(functionName, inputs) {
-	            angular.forEach(inputs, function (value, name) {
-	                if (typeof value !== 'undefined') return;
-	                throw new Error('Parameter ' + name + ' from function ' + functionName + ' is required');
-	            });
-	        }
-	    }]);
-
-	    return _default;
-	})();
-
-	exports['default'] = _default;
-	module.exports = exports['default'];
-
-/***/ },
-/* 3 */
 /*!*************************!*\
   !*** ./lib/provider.js ***!
   \*************************/
@@ -316,7 +153,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _jsBase64 = __webpack_require__(/*! js-base64 */ 4);
+	var _jsBase64 = __webpack_require__(/*! js-base64 */ 2);
 	
 	var _jsBase642 = _interopRequireDefault(_jsBase64);
 	
@@ -494,7 +331,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 4 */
+/* 2 */
 /*!*******************************!*\
   !*** ./~/js-base64/base64.js ***!
   \*******************************/
@@ -519,7 +356,7 @@
 	    var buffer;
 	    if (typeof module !== 'undefined' && module.exports) {
 	        try {
-	            buffer = __webpack_require__(/*! buffer */ 5).Buffer;
+	            buffer = __webpack_require__(/*! buffer */ 3).Buffer;
 	        } catch (err) {}
 	    }
 	    // constants
@@ -697,22 +534,23 @@
 
 
 /***/ },
-/* 5 */
-/*!*******************************************************!*\
-  !*** (webpack)/~/node-libs-browser/~/buffer/index.js ***!
-  \*******************************************************/
+/* 3 */
+/*!***************************!*\
+  !*** ./~/buffer/index.js ***!
+  \***************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {/*!
+	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
 	 * The buffer module from node.js, for the browser.
 	 *
 	 * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
 	 * @license  MIT
 	 */
+	/* eslint-disable no-proto */
 	
-	var base64 = __webpack_require__(/*! base64-js */ 6)
-	var ieee754 = __webpack_require__(/*! ieee754 */ 7)
-	var isArray = __webpack_require__(/*! is-array */ 8)
+	var base64 = __webpack_require__(/*! base64-js */ 4)
+	var ieee754 = __webpack_require__(/*! ieee754 */ 5)
+	var isArray = __webpack_require__(/*! is-array */ 6)
 	
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -748,7 +586,11 @@
 	 * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
 	 * get the Object implementation, which is slower but behaves correctly.
 	 */
-	Buffer.TYPED_ARRAY_SUPPORT = (function () {
+	Buffer.TYPED_ARRAY_SUPPORT = global.TYPED_ARRAY_SUPPORT !== undefined
+	  ? global.TYPED_ARRAY_SUPPORT
+	  : typedArraySupport()
+	
+	function typedArraySupport () {
 	  function Bar () {}
 	  try {
 	    var arr = new Uint8Array(1)
@@ -761,7 +603,7 @@
 	  } catch (e) {
 	    return false
 	  }
-	})()
+	}
 	
 	function kMaxLength () {
 	  return Buffer.TYPED_ARRAY_SUPPORT
@@ -917,10 +759,16 @@
 	  return that
 	}
 	
+	if (Buffer.TYPED_ARRAY_SUPPORT) {
+	  Buffer.prototype.__proto__ = Uint8Array.prototype
+	  Buffer.__proto__ = Uint8Array
+	}
+	
 	function allocate (that, length) {
 	  if (Buffer.TYPED_ARRAY_SUPPORT) {
 	    // Return an augmented `Uint8Array` instance, for best performance
 	    that = Buffer._augment(new Uint8Array(length))
+	    that.__proto__ = Buffer.prototype
 	  } else {
 	    // Fallback: Return an object instance of the Buffer class
 	    that.length = length
@@ -1709,7 +1557,7 @@
 	  offset = offset | 0
 	  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
 	  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
-	  this[offset] = value
+	  this[offset] = (value & 0xff)
 	  return offset + 1
 	}
 	
@@ -1726,7 +1574,7 @@
 	  offset = offset | 0
 	  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
 	  if (Buffer.TYPED_ARRAY_SUPPORT) {
-	    this[offset] = value
+	    this[offset] = (value & 0xff)
 	    this[offset + 1] = (value >>> 8)
 	  } else {
 	    objectWriteUInt16(this, value, offset, true)
@@ -1740,7 +1588,7 @@
 	  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
 	  if (Buffer.TYPED_ARRAY_SUPPORT) {
 	    this[offset] = (value >>> 8)
-	    this[offset + 1] = value
+	    this[offset + 1] = (value & 0xff)
 	  } else {
 	    objectWriteUInt16(this, value, offset, false)
 	  }
@@ -1762,7 +1610,7 @@
 	    this[offset + 3] = (value >>> 24)
 	    this[offset + 2] = (value >>> 16)
 	    this[offset + 1] = (value >>> 8)
-	    this[offset] = value
+	    this[offset] = (value & 0xff)
 	  } else {
 	    objectWriteUInt32(this, value, offset, true)
 	  }
@@ -1777,7 +1625,7 @@
 	    this[offset] = (value >>> 24)
 	    this[offset + 1] = (value >>> 16)
 	    this[offset + 2] = (value >>> 8)
-	    this[offset + 3] = value
+	    this[offset + 3] = (value & 0xff)
 	  } else {
 	    objectWriteUInt32(this, value, offset, false)
 	  }
@@ -1830,7 +1678,7 @@
 	  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
 	  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
 	  if (value < 0) value = 0xff + value + 1
-	  this[offset] = value
+	  this[offset] = (value & 0xff)
 	  return offset + 1
 	}
 	
@@ -1839,7 +1687,7 @@
 	  offset = offset | 0
 	  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
 	  if (Buffer.TYPED_ARRAY_SUPPORT) {
-	    this[offset] = value
+	    this[offset] = (value & 0xff)
 	    this[offset + 1] = (value >>> 8)
 	  } else {
 	    objectWriteUInt16(this, value, offset, true)
@@ -1853,7 +1701,7 @@
 	  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
 	  if (Buffer.TYPED_ARRAY_SUPPORT) {
 	    this[offset] = (value >>> 8)
-	    this[offset + 1] = value
+	    this[offset + 1] = (value & 0xff)
 	  } else {
 	    objectWriteUInt16(this, value, offset, false)
 	  }
@@ -1865,7 +1713,7 @@
 	  offset = offset | 0
 	  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
 	  if (Buffer.TYPED_ARRAY_SUPPORT) {
-	    this[offset] = value
+	    this[offset] = (value & 0xff)
 	    this[offset + 1] = (value >>> 8)
 	    this[offset + 2] = (value >>> 16)
 	    this[offset + 3] = (value >>> 24)
@@ -1884,7 +1732,7 @@
 	    this[offset] = (value >>> 24)
 	    this[offset + 1] = (value >>> 16)
 	    this[offset + 2] = (value >>> 8)
-	    this[offset + 3] = value
+	    this[offset + 3] = (value & 0xff)
 	  } else {
 	    objectWriteUInt32(this, value, offset, false)
 	  }
@@ -2237,13 +2085,13 @@
 	  return i
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/buffer/index.js */ 5).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/buffer/index.js */ 3).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 6 */
-/*!*********************************************************************!*\
-  !*** (webpack)/~/node-libs-browser/~/buffer/~/base64-js/lib/b64.js ***!
-  \*********************************************************************/
+/* 4 */
+/*!********************************!*\
+  !*** ./~/base64-js/lib/b64.js ***!
+  \********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -2373,10 +2221,10 @@
 
 
 /***/ },
-/* 7 */
-/*!*****************************************************************!*\
-  !*** (webpack)/~/node-libs-browser/~/buffer/~/ieee754/index.js ***!
-  \*****************************************************************/
+/* 5 */
+/*!****************************!*\
+  !*** ./~/ieee754/index.js ***!
+  \****************************/
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -2466,10 +2314,10 @@
 
 
 /***/ },
-/* 8 */
-/*!******************************************************************!*\
-  !*** (webpack)/~/node-libs-browser/~/buffer/~/is-array/index.js ***!
-  \******************************************************************/
+/* 6 */
+/*!*****************************!*\
+  !*** ./~/is-array/index.js ***!
+  \*****************************/
 /***/ function(module, exports) {
 
 	
@@ -2508,7 +2356,7 @@
 
 
 /***/ },
-/* 9 */
+/* 7 */
 /*!******************************!*\
   !*** ./lib/posts.service.js ***!
   \******************************/
@@ -2519,8 +2367,7 @@
 	 * @name wp-api-angularjs.$wpApiPosts
 	 * @description
 	 * Posts entity
-	 * @requires  wp-api-angularjs.WpApi
-	 * @requires  $http
+	 * @requires  $injector
 	 */
 	'use strict';
 	
@@ -2538,7 +2385,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 2);
+	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 8);
 	
 	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
 	
@@ -2803,15 +2650,90 @@
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/posts/' + postId + '/terms/tag/' + tagId, params, data, headers);
 	        }
 	    }]);
-
+	
 	    return _default;
 	})(_parentServiceJs2['default']);
-
+	
 	exports['default'] = _default;
 	module.exports = exports['default'];
 
 /***/ },
-/* 10 */
+/* 8 */
+/*!*******************************!*\
+  !*** ./lib/parent.service.js ***!
+  \*******************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var _default = (function () {
+	    function _default($injector) {
+	        'ngInject';
+	
+	        _classCallCheck(this, _default);
+	
+	        this.baseUrl = $injector.get('WpApi').getBaseUrl();
+	        this.defaultHttpProperties = $injector.get('WpApi').getDefaultHttpProperties();
+	        this.$http = $injector.get('$http');
+	    }
+	    _default.$inject = ["$injector"];
+	
+	    _createClass(_default, [{
+	        key: 'getList',
+	        value: function getList(suffix) {
+	            var params = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	            var data = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	            var headers = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	
+	            return this.$http(angular.merge({}, this.defaultHttpProperties, {
+	                method: 'GET',
+	                url: this.baseUrl + suffix,
+	                params: params,
+	                data: data,
+	                headers: headers
+	            }));
+	        }
+	    }, {
+	        key: 'get',
+	        value: function get(suffix) {
+	            var params = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	            var data = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	            var headers = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	
+	            return this.$http(angular.merge({}, this.defaultHttpProperties, {
+	                method: 'GET',
+	                url: this.baseUrl + suffix,
+	                params: params,
+	                data: data,
+	                headers: headers
+	            }));
+	        }
+	    }, {
+	        key: 'requiredInput',
+	        value: function requiredInput(functionName, inputs) {
+	            angular.forEach(inputs, function (value, name) {
+	                if (typeof value !== 'undefined') return;
+	                throw new Error('Parameter ' + name + ' from function ' + functionName + ' is required');
+	            });
+	        }
+	    }]);
+	
+	    return _default;
+	})();
+	
+	exports['default'] = _default;
+	module.exports = exports['default'];
+
+/***/ },
+/* 9 */
 /*!******************************!*\
   !*** ./lib/pages.service.js ***!
   \******************************/
@@ -2822,8 +2744,7 @@
 	 * @name wp-api-angularjs.$wpApiPages
 	 * @description
 	 * Pages entity
-	 * @requires  wp-api-angularjs:WpApi
-	 * @requires  $http
+	 * @requires  $injector
 	 */
 	'use strict';
 	
@@ -2841,7 +2762,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 2);
+	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 8);
 	
 	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
 	
@@ -3011,15 +2932,15 @@
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/pages/' + pageId + '/revisions/' + revisionId, params, data, headers);
 	        }
 	    }]);
-
+	
 	    return _default;
 	})(_parentServiceJs2['default']);
-
+	
 	exports['default'] = _default;
 	module.exports = exports['default'];
 
 /***/ },
-/* 11 */
+/* 10 */
 /*!******************************!*\
   !*** ./lib/media.service.js ***!
   \******************************/
@@ -3030,8 +2951,7 @@
 	 * @name wp-api-angularjs.$wpApiMedia
 	 * @description
 	 * media entity
-	 * @requires  wp-api-angularjs:WpApi
-	 * @requires  $http
+	 * @requires  $injector
 	 */
 	'use strict';
 	
@@ -3049,7 +2969,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 2);
+	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 8);
 	
 	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
 	
@@ -3119,15 +3039,15 @@
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/media/' + mediaId, params, data, headers);
 	        }
 	    }]);
-
+	
 	    return _default;
 	})(_parentServiceJs2['default']);
-
+	
 	exports['default'] = _default;
 	module.exports = exports['default'];
 
 /***/ },
-/* 12 */
+/* 11 */
 /*!******************************!*\
   !*** ./lib/types.service.js ***!
   \******************************/
@@ -3138,8 +3058,7 @@
 	 * @name wp-api-angularjs.$wpApiTypes
 	 * @description
 	 * postType entity post|page|attachment
-	 * @requires  wp-api-angularjs:WpApi
-	 * @requires  $http
+	 * @requires  $injector
 	 */
 	'use strict';
 	
@@ -3157,7 +3076,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 2);
+	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 8);
 	
 	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
 	
@@ -3224,27 +3143,26 @@
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/types/' + postType, params, data, headers);
 	        }
 	    }]);
-
+	
 	    return _default;
 	})(_parentServiceJs2['default']);
-
+	
 	exports['default'] = _default;
 	module.exports = exports['default'];
 
 /***/ },
-/* 13 */
-/*!***********************************!*\
-  !*** ./lib/taxonomies.service.js ***!
-  \***********************************/
+/* 12 */
+/*!*********************************!*\
+  !*** ./lib/statuses.service.js ***!
+  \*********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * @ngdoc service
-	 * @name wp-api-angularjs.$wpApiTaxonomies
+	 * @name wp-api-angularjs.$wpApiStatuses
 	 * @description
-	 * taxonomies entity
-	 * @requires  wp-api-angularjs:WpApi
-	 * @requires  $http
+	 * statuses entity
+	 * @requires  $injector
 	 */
 	'use strict';
 	
@@ -3262,7 +3180,109 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 2);
+	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 8);
+	
+	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
+	
+	var _default = (function (_Parent) {
+	    _inherits(_default, _Parent);
+	
+	    function _default() {
+	        _classCallCheck(this, _default);
+	
+	        _get(Object.getPrototypeOf(_default.prototype), 'constructor', this).apply(this, arguments);
+	    }
+	
+	    _createClass(_default, [{
+	        key: 'getList',
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiStatuses#getList
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiStatuses
+	         *
+	         * @description
+	         * Get statuses list
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be serialized with the paramSerializer and appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers to send to the server. If the return value of a function is null, the header will not be sent. Functions accept a config object as an argument.
+	         * @example
+	         * <pre>
+	         * $wpApiStatuses.getList({});
+	         * </pre>
+	         * @returns {Object} Promise
+	         */
+	        value: function getList() {
+	            var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	            var data = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	            var headers = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	
+	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/statuses', params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiStatuses#get
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiStatuses
+	         *
+	         * @description
+	         * Get a specific statuses by its ID
+	         *
+	         * @param {string} statusesName  The statuses name
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'get',
+	        value: function get(statusesName, params, data, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiStatuses:get', {
+	                statusesName: statusesName
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/statuses/' + statusesName, params, data, headers);
+	        }
+	    }]);
+	
+	    return _default;
+	})(_parentServiceJs2['default']);
+	
+	exports['default'] = _default;
+	module.exports = exports['default'];
+
+/***/ },
+/* 13 */
+/*!***********************************!*\
+  !*** ./lib/taxonomies.service.js ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @ngdoc service
+	 * @name wp-api-angularjs.$wpApiTaxonomies
+	 * @description
+	 * taxonomies entity
+	 * @requires  $injector
+	 */
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 8);
 	
 	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
 	
@@ -3329,10 +3349,10 @@
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/taxonomies/' + taxonomiesType, params, data, headers);
 	        }
 	    }]);
-
+	
 	    return _default;
 	})(_parentServiceJs2['default']);
-
+	
 	exports['default'] = _default;
 	module.exports = exports['default'];
 
@@ -3348,8 +3368,7 @@
 	 * @name wp-api-angularjs.$wpApiTerms
 	 * @description
 	 * Posts entity
-	 * @requires  wp-api-angularjs.WpApi
-	 * @requires  $http
+	 * @requires  $injector
 	 */
 	'use strict';
 	
@@ -3367,7 +3386,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 2);
+	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 8);
 	
 	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
 	
@@ -3488,10 +3507,10 @@
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/terms/tag/' + termId, params, data, headers);
 	        }
 	    }]);
-
+	
 	    return _default;
 	})(_parentServiceJs2['default']);
-
+	
 	exports['default'] = _default;
 	module.exports = exports['default'];
 
@@ -3507,8 +3526,7 @@
 	 * @name wp-api-angularjs.$wpApiUsers
 	 * @description
 	 * Users entity
-	 * @requires  wp-api-angularjs.WpApi
-	 * @requires  $http
+	 * @requires  $injector
 	 */
 	'use strict';
 	
@@ -3526,7 +3544,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 2);
+	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 8);
 	
 	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
 	
@@ -3614,10 +3632,10 @@
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/users/me', params, data, headers);
 	        }
 	    }]);
-
+	
 	    return _default;
 	})(_parentServiceJs2['default']);
-
+	
 	exports['default'] = _default;
 	module.exports = exports['default'];
 
@@ -3633,8 +3651,7 @@
 	 * @name wp-api-angularjs.$wpApiComments
 	 * @description
 	 * Comments entity
-	 * @requires  wp-api-angularjs:WpApi
-	 * @requires  $http
+	 * @requires  $injector
 	 */
 	'use strict';
 	
@@ -3652,7 +3669,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 2);
+	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 8);
 	
 	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
 	
@@ -3733,11 +3750,127 @@
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/comments/' + commentId, params, data, headers);
 	        }
 	    }]);
-
+	
 	    return _default;
 	})(_parentServiceJs2['default']);
-
+	
 	exports['default'] = _default;
+	module.exports = exports['default'];
+
+/***/ },
+/* 17 */
+/*!*******************************!*\
+  !*** ./lib/custom.service.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @ngdoc service
+	 * @name wp-api-angularjs.$wpApiCustom
+	 * @description
+	 * Custom entity
+	 * @requires  $injector
+	 */
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	
+	var _get = function get(_x5, _x6, _x7) { var _again = true; _function: while (_again) { var object = _x5, property = _x6, receiver = _x7; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x5 = parent; _x6 = property; _x7 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var _parentServiceJs = __webpack_require__(/*! ./parent.service.js */ 8);
+	
+	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
+	
+	var _default = (function () {
+	    function _default($injector) {
+	        'ngInject';
+	
+	        _classCallCheck(this, _default);
+	
+	        this.$injector = $injector;
+	    }
+	    _default.$inject = ["$injector"];
+	
+	    /**
+	     * @ngdoc function
+	     * @name wp-api-angularjs.$wpApiCustom#getInstance
+	     * @access public
+	     * @methodOf wp-api-angularjs.$wpApiCustom
+	     *
+	     * @description
+	     * Get page list
+	     * @param {string} entityName   The name of the entity to fetch
+	     * @example
+	     * <pre>
+	     * var cars = $wpApiCustom.getInstance('cars');
+	     * cars.getList();
+	     * cars.get(666);
+	     * </pre>
+	     * @returns {Object} Entity instance. You can use get and getList methods the same way as other entities
+	     */
+	
+	    _createClass(_default, [{
+	        key: 'getInstance',
+	        value: function getInstance() {
+	            var entityName = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	
+	            if (!entityName) {
+	                throw new Error('getInstance needs an entity name');
+	            }
+	            return new Custom(this.$injector, entityName);
+	        }
+	    }]);
+	
+	    return _default;
+	})();
+	
+	exports['default'] = _default;
+	
+	var Custom = (function (_Parent) {
+	    _inherits(Custom, _Parent);
+	
+	    function Custom($injector, entityName) {
+	        'ngInject';
+	
+	        _classCallCheck(this, Custom);
+	
+	        _get(Object.getPrototypeOf(Custom.prototype), 'constructor', this).call(this, $injector);
+	        this.entityName = entityName;
+	    }
+	    Custom.$inject = ["$injector", "entityName"];
+	
+	    _createClass(Custom, [{
+	        key: 'getList',
+	        value: function getList() {
+	            var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	            var data = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	            var headers = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	
+	            return _get(Object.getPrototypeOf(Custom.prototype), 'getList', this).call(this, '/' + this.entityName, params, data, headers);
+	        }
+	    }, {
+	        key: 'get',
+	        value: function get(customId, params, data, headers) {
+	            _get(Object.getPrototypeOf(Custom.prototype), 'requiredInput', this).call(this, '$wpApiCustom:get', {
+	                customId: customId
+	            });
+	            return _get(Object.getPrototypeOf(Custom.prototype), 'get', this).call(this, '/' + this.entityName + '/' + customId, params, data, headers);
+	        }
+	    }]);
+	
+	    return Custom;
+	})(_parentServiceJs2['default']);
+	
 	module.exports = exports['default'];
 
 /***/ }

@@ -11,6 +11,7 @@ export default function(
     $wpApiTerms,
     $wpApiUsers,
     $wpApiComments,
+    $wpApiCustom,
     WpApi
 ) {
 
@@ -26,6 +27,7 @@ export default function(
     vm.terms = {};
     vm.users = {};
     vm.comments = {};
+    vm.custom = {};
 
     /*
      * POSTS
@@ -109,5 +111,18 @@ export default function(
         $wpApiComments[name].apply($wpApiComments, parameters)
             .then(() => vm.comments[name] = 'OK')
             .catch(() => vm.comments[name] = 'FAILED');
+    });
+
+    /*
+     * Custom
+     */
+    angular.forEach(config.customMethods, (methods, entityName) => {
+        let customInstance = $wpApiCustom.getInstance(entityName);
+        vm.custom[entityName] = {};
+        angular.forEach(methods, (parameters, name) => {
+            customInstance[name].apply(customInstance, parameters)
+                .then(() => vm.custom[entityName][name] = 'OK')
+                .catch(() => vm.custom[entityName][name] = 'FAILED');
+        });
     });
 }

@@ -7,7 +7,7 @@ export default function(WpApiProvider) {
     // basic
     // Use this should only be used for testing as it embed credentials in the application code.
     // Please check the README.md file
-    if (config.basic.login && config.basic.password) {
+    if (config.basic.enabled && config.basic.login && config.basic.password) {
         WpApiProvider.setBasicCredentials(config.basic.login, config.basic.password);
     }
 

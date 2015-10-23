@@ -35,6 +35,11 @@
         <div ng-repeat="(name, result) in main.users" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
         <h2>Comments</h2>
         <div ng-repeat="(name, result) in main.comments" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
+        <h2>Custom</h2>
+        <div ng-repeat="(entityName, result2) in main.custom">
+            {{entityName}}
+            <div ng-repeat="(name, result) in result2" ng-class="{'success': result === 'OK', 'error': result === 'FAILED'}">{{name}}</div>
+        </div>
         {% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
         <script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
         {% } %}

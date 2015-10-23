@@ -1,8 +1,17 @@
 {
     "baseUrl": "http://sandbox.YourDomain.com/wp-json",
     "basic": {
+        "enabled": false,
         "login": null,
         "password": null
+    },
+    "customMethods": {
+        "entityName": {
+            "getList": [{
+                "per_page": 1
+            }],
+            "get": [295]
+        }
     },
     "postsMethods": {
         "getList": [{

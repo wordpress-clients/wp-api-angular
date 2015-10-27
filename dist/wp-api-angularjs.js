@@ -3400,7 +3400,62 @@
 	    }
 	
 	    _createClass(_default, [{
-	        key: 'getCategoryList',
+	        key: 'getCustomList',
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiTerms#getCustomList
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiTerms
+	         *
+	         * @description
+	         * Get category list
+	         * @param {string} taxonomiesType  (category|post_tag|anythingYouWant)
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @example
+	         * <pre>
+	         * $wpApiTerms.getCustomList('anything', {
+	         *  page: 1,
+	         *  per_page: 10,
+	         *  search: '',
+	         *  order: '',
+	         *  orderby: '',
+	         *  parent: '',
+	         * });
+	         * </pre>
+	         * @returns {Object} Promise
+	         */
+	        value: function getCustomList(taxonomiesType, params, data, headers) {
+	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/terms/' + taxonomiesType, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiTerms#getCustom
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiTerms
+	         *
+	         * @description
+	         * Get a specific tag by its ID
+	         *
+	         * @param {string} taxonomiesType  (category|post_tag|anythingYouWant)
+	         * @param {int} termId  The term id
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'getCustom',
+	        value: function getCustom(taxonomiesType, termId, params, data, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiTerms:getCustom', {
+	                taxonomiesType: taxonomiesType,
+	                termId: termId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/terms/' + taxonomiesType + '/' + termId, params, data, headers);
+	        }
 	
 	        /**
 	         * @ngdoc function
@@ -3426,6 +3481,8 @@
 	         * </pre>
 	         * @returns {Object} Promise
 	         */
+	    }, {
+	        key: 'getCategoryList',
 	        value: function getCategoryList(params, data, headers) {
 	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/terms/category', params, data, headers);
 	        }

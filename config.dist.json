@@ -61,7 +61,9 @@
         "getCategoryList": [],
         "getCategory": [86],
         "getTagList": [],
-        "getTag": [59]
+        "getTag": [59],
+        "getCustomList": ["audience"],
+        "getCustom": ["audience", 6]
     },
     "usersMethods": {
         "getList": [],

@@ -40,6 +40,37 @@ $wpApiTerms.getCategoryList({
 </div></div>
 </div>
 </li>
+<li><h3 id="methods_getcustom">getCustom(taxonomiesType, termId, params, data, headers)</h3>
+<div class="getcustom"><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>Get a specific tag by its ID</p>
+</div><h5 id="methods_getcustom_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>taxonomiesType</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>(category|post_tag|anythingYouWant)</p>
+</div></td></tr><tr><td>termId</td><td><a href="" class="label type-hint type-hint-int">int</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>The term id</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_getcustom_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_getcustomlist">getCustomList(taxonomiesType, params, data, headers)</h3>
+<div class="getcustomlist"><div class="wp-api-angularjs-wpapiterms-getcustomlist-page"><p>Get category list</p>
+</div><h5 id="methods_getcustomlist_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>taxonomiesType</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustomlist-page"><p>(category|post_tag|anythingYouWant)</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustomlist-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustomlist-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustomlist-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_getcustomlist_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustomlist-page"><p>Promise</p>
+</div></td></tr></table><h4 id="methods_getcustomlist_example">Example</h4>
+<div class="example"><div class="wp-api-angularjs-wpapiterms-getcustomlist-page"><pre class="prettyprint linenums">
+$wpApiTerms.getCustomList('anything', {
+ page: 1,
+ per_page: 10,
+ search: '',
+ order: '',
+ orderby: '',
+ parent: '',
+});
+</pre>
+</div></div>
+</div>
+</li>
 <li><h3 id="methods_gettag">getTag(termId, params, data, headers)</h3>
 <div class="gettag"><div class="wp-api-angularjs-wpapiterms-gettag-page"><p>Get a specific tag by its ID</p>
 </div><h5 id="methods_gettag_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>termId</td><td><a href="" class="label type-hint type-hint-int">int</a></td><td><div class="wp-api-angularjs-wpapiterms-gettag-page"><p>The term id</p>

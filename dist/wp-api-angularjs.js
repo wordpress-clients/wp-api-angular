@@ -2,7 +2,7 @@
  * wp-api-angularjs
  *  ---
  * WordPress WP-API v2 client for AngularJs
- * @version: v2.0.0-rc1
+ * @version: v2.0.0-rc2
  * @author: shprink <contact@julienrenaux.fr>
  * @link: https://github.com/shprink/wp-api-angularjs
  * @license: MIT

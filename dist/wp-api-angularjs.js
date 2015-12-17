@@ -3484,7 +3484,7 @@
 	    }, {
 	        key: 'getCategoryList',
 	        value: function getCategoryList(params, data, headers) {
-	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/terms/category', params, data, headers);
+	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/categories', params, data, headers);
 	        }
 	
 	        /**
@@ -3513,7 +3513,7 @@
 	    }, {
 	        key: 'getTagList',
 	        value: function getTagList(params, data, headers) {
-	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/terms/tag', params, data, headers);
+	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, 'tags', params, data, headers);
 	        }
 	
 	        /**
@@ -3537,7 +3537,7 @@
 	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiTerms:get', {
 	                termId: termId
 	            });
-	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/terms/category/' + termId, params, data, headers);
+	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/categories/' + termId, params, data, headers);
 	        }
 	
 	        /**
@@ -3561,7 +3561,7 @@
 	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiTerms:get', {
 	                termId: termId
 	            });
-	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/terms/tag/' + termId, params, data, headers);
+	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/tags/' + termId, params, data, headers);
 	        }
 	    }]);
 	

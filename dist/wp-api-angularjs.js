@@ -2,7 +2,7 @@
  * wp-api-angularjs
  *  ---
  * WordPress WP-API v2 client for AngularJs
- * @version: v2.0.0-rc2
+ * @version: v2.0.0-rc3
  * @author: shprink <contact@julienrenaux.fr>
  * @link: https://github.com/shprink/wp-api-angularjs
  * @license: MIT
@@ -3428,7 +3428,7 @@
 	         * @returns {Object} Promise
 	         */
 	        value: function getCustomList(taxonomiesType, params, data, headers) {
-	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/terms/' + taxonomiesType, params, data, headers);
+	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/' + taxonomiesType, params, data, headers);
 	        }
 	
 	        /**
@@ -3454,7 +3454,7 @@
 	                taxonomiesType: taxonomiesType,
 	                termId: termId
 	            });
-	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/terms/' + taxonomiesType + '/' + termId, params, data, headers);
+	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/' + taxonomiesType + '/' + termId, params, data, headers);
 	        }
 	
 	        /**
@@ -3513,7 +3513,7 @@
 	    }, {
 	        key: 'getTagList',
 	        value: function getTagList(params, data, headers) {
-	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, 'tags', params, data, headers);
+	            return _get(Object.getPrototypeOf(_default.prototype), 'getList', this).call(this, '/tags', params, data, headers);
 	        }
 	
 	        /**

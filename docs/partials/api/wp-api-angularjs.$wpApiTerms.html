@@ -11,7 +11,60 @@
 </li>
 </ul>
 <div class="member method"><h2 id="methods">Methods</h2>
-<ul class="methods"><li><h3 id="methods_getcategory">getCategory(termId, params, data, headers)</h3>
+<ul class="methods"><li><h3 id="methods_createcategory">createCategory(data, params, headers)</h3>
+<div class="createcategory"><div class="wp-api-angularjs-wpapiterms-createcategory-page"><p>[REQUIRES AUTH] Create a category</p>
+</div><h5 id="methods_createcategory_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-createcategory-page"><p>Required: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-createcategory-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-createcategory-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_createcategory_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapiterms-createcategory-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_createcustom">createCustom(taxonomiesType, data, params, headers)</h3>
+<div class="createcustom"><div class="wp-api-angularjs-wpapiterms-createcustom-page"><p>[REQUIRES AUTH] Create a term</p>
+</div><h5 id="methods_createcustom_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>taxonomiesType</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="wp-api-angularjs-wpapiterms-createcustom-page"><p>(category|post_tag|anythingYouWant)</p>
+</div></td></tr><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-createcustom-page"><p>Required: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-createcustom-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-createcustom-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_createcustom_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapiterms-createcustom-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_createtag">createTag(data, params, headers)</h3>
+<div class="createtag"><div class="wp-api-angularjs-wpapiterms-createtag-page"><p>[REQUIRES AUTH] Create a tag</p>
+</div><h5 id="methods_createtag_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-createtag-page"><p>Required: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-createtag-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-createtag-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_createtag_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapiterms-createtag-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_deletecategory">deleteCategory(termId, data, params, headers)</h3>
+<div class="deletecategory"><div class="wp-api-angularjs-wpapiterms-deletecategory-page"><p>[REQUIRES AUTH] Delete a specific category by its ID</p>
+</div><h5 id="methods_deletecategory_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>termId</td><td><a href="" class="label type-hint type-hint-int">int</a></td><td><div class="wp-api-angularjs-wpapiterms-deletecategory-page"><p>The term id</p>
+</div></td></tr><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletecategory-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletecategory-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletecategory-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_deletecategory_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletecategory-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_deletecustom">deleteCustom(taxonomiesType, termId, data, params, headers)</h3>
+<div class="deletecustom"><div class="wp-api-angularjs-wpapiterms-deletecustom-page"><p>[REQUIRES AUTH] Delete a specific term by its ID</p>
+</div><h5 id="methods_deletecustom_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>taxonomiesType</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="wp-api-angularjs-wpapiterms-deletecustom-page"><p>(category|post_tag|anythingYouWant)</p>
+</div></td></tr><tr><td>termId</td><td><a href="" class="label type-hint type-hint-int">int</a></td><td><div class="wp-api-angularjs-wpapiterms-deletecustom-page"><p>The term id</p>
+</div></td></tr><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletecustom-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletecustom-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletecustom-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_deletecustom_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletecustom-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_deletetag">deleteTag(termId, data, params, headers)</h3>
+<div class="deletetag"><div class="wp-api-angularjs-wpapiterms-deletetag-page"><p>[REQUIRES AUTH] Delete a specific tag by its ID</p>
+</div><h5 id="methods_deletetag_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>termId</td><td><a href="" class="label type-hint type-hint-int">int</a></td><td><div class="wp-api-angularjs-wpapiterms-deletetag-page"><p>The term id</p>
+</div></td></tr><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletetag-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletetag-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletetag-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_deletetag_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapiterms-deletetag-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_getcategory">getCategory(termId, params, data, headers)</h3>
 <div class="getcategory"><div class="wp-api-angularjs-wpapiterms-getcategory-page"><p>Get a specific category by its ID</p>
 </div><h5 id="methods_getcategory_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>termId</td><td><a href="" class="label type-hint type-hint-int">int</a></td><td><div class="wp-api-angularjs-wpapiterms-getcategory-page"><p>The term id</p>
 </div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-getcategory-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
@@ -41,7 +94,7 @@ $wpApiTerms.getCategoryList({
 </div>
 </li>
 <li><h3 id="methods_getcustom">getCustom(taxonomiesType, termId, params, data, headers)</h3>
-<div class="getcustom"><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>Get a specific tag by its ID</p>
+<div class="getcustom"><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>Get a specific term by its ID</p>
 </div><h5 id="methods_getcustom_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>taxonomiesType</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>(category|post_tag|anythingYouWant)</p>
 </div></td></tr><tr><td>termId</td><td><a href="" class="label type-hint type-hint-int">int</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>The term id</p>
 </div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-getcustom-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
@@ -98,6 +151,34 @@ $wpApiTerms.getTagList({
 </pre>
 </div></div>
 </div>
+</li>
+<li><h3 id="methods_updatecategory">updateCategory(termId, data, params, headers)</h3>
+<div class="updatecategory"><div class="wp-api-angularjs-wpapiterms-updatecategory-page"><p>[REQUIRES AUTH] Update a specific category by its ID</p>
+</div><h5 id="methods_updatecategory_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>termId</td><td><a href="" class="label type-hint type-hint-int">int</a></td><td><div class="wp-api-angularjs-wpapiterms-updatecategory-page"><p>The term id</p>
+</div></td></tr><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatecategory-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatecategory-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatecategory-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_updatecategory_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatecategory-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_updatecustom">updateCustom(taxonomiesType, termId, data, params, headers)</h3>
+<div class="updatecustom"><div class="wp-api-angularjs-wpapiterms-updatecustom-page"><p>[REQUIRES AUTH] Update a specific term by its ID</p>
+</div><h5 id="methods_updatecustom_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>taxonomiesType</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="wp-api-angularjs-wpapiterms-updatecustom-page"><p>(category|post_tag|anythingYouWant)</p>
+</div></td></tr><tr><td>termId</td><td><a href="" class="label type-hint type-hint-int">int</a></td><td><div class="wp-api-angularjs-wpapiterms-updatecustom-page"><p>The term id</p>
+</div></td></tr><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatecustom-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatecustom-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatecustom-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_updatecustom_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatecustom-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_updatetag">updateTag(termId, data, params, headers)</h3>
+<div class="updatetag"><div class="wp-api-angularjs-wpapiterms-updatetag-page"><p>[REQUIRES AUTH] Update a specific tag by its ID</p>
+</div><h5 id="methods_updatetag_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>termId</td><td><a href="" class="label type-hint type-hint-int">int</a></td><td><div class="wp-api-angularjs-wpapiterms-updatetag-page"><p>The term id</p>
+</div></td></tr><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatetag-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatetag-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatetag-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_updatetag_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapiterms-updatetag-page"><p>Promise</p>
+</div></td></tr></table></div>
 </li>
 </ul>
 </div>

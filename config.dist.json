@@ -10,7 +10,14 @@
             "getList": [{
                 "per_page": 1
             }],
-            "get": [295]
+            "get": [295],
+            "create": [{
+              "title": "Custom Post Title"
+            }],
+            "update": [295, {
+              "title": "New Custom Post Title"
+            }],
+            "delete": []
         }
     },
     "postsMethods": {
@@ -18,6 +25,13 @@
             "per_page": 1
         }],
         "get": [2016],
+        "create": [{
+          "title": "Post Title"
+        }],
+        "update": [2016, {
+          "title": "New Post Title"
+        }],
+        "delete": [],
         "getMetaList": [2016],
         "getMeta": [2016, 46575],
         "getRevisionList": [2016],
@@ -32,6 +46,13 @@
             "per_page": 1
         }],
         "get": [535],
+        "create": [{
+          "title": "Page Title"
+        }],
+        "update": [535, {
+          "title": "New Page Title"
+        }],
+        "delete": [],
         "getMetaList": [535],
         "getMeta": [535, 1],
         "getRevisionList": [535],
@@ -41,7 +62,14 @@
         "getList": [{
             "per_page": 1
         }],
-        "get": [2032]
+        "get": [2032],
+        "create": [{
+          "title": "Media Title"
+        }],
+        "update": [2032, {
+          "title": "New Media Title"
+        }],
+        "delete": []
     },
     "typesMethods": {
         "getList": [{
@@ -60,18 +88,55 @@
     "termsMethods": {
         "getCategoryList": [],
         "getCategory": [86],
+        "createCategory": [{
+          "name": "Category Name"
+        }],
+        "updateCategory": [86, {
+          "name": "New Category Name"
+        }],
+        "deleteCategory": [],
         "getTagList": [],
         "getTag": [59],
+        "createTag": [{
+          "name": "Tag Name"
+        }],
+        "updateTag": [59, {
+          "name": "New Tag Name"
+        }],
+        "deleteTag": [],
         "getCustomList": ["audience"],
-        "getCustom": ["audience", 6]
+        "getCustom": ["audience", 6],
+        "createCustom": ["audience", {
+          "name": "Term Name"
+        }],
+        "updateCustom": ["audience", 6, {
+          "name": "New Term Name"
+        }],
+        "deleteCustom": ["audience"]
     },
     "usersMethods": {
         "getList": [],
         "get": [1],
+        "create": [{
+          "username": "adminuser",
+          "email": "admin@domain.com",
+          "password": "wordpress"
+        }],
+        "update": [1, {
+          "email": "newadmin@domain.com"
+        }],
+        "delete": [],
         "me": []
     },
     "commentsMethods": {
         "getList": [],
-        "get": [686]
+        "get": [686],
+        "create": [{
+          "comment": "Hello, World!"
+        }],
+        "update": [686, {
+          "comment": "Foo Bar"
+        }],
+        "delete": []
     }
 }

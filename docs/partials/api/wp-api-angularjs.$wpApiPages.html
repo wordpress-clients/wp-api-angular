@@ -11,7 +11,23 @@
 </li>
 </ul>
 <div class="member method"><h2 id="methods">Methods</h2>
-<ul class="methods"><li><h3 id="methods_get">get(pageId, params, data, headers)</h3>
+<ul class="methods"><li><h3 id="methods_create">create(data, params, headers)</h3>
+<div class="create"><div class="wp-api-angularjs-wpapipages-create-page"><p>[REQUIRES AUTH] Create a page</p>
+</div><h5 id="methods_create_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-create-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-create-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-create-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_create_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapipages-create-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_delete">delete(data, params, headers)</h3>
+<div class="delete"><div class="wp-api-angularjs-wpapipages-delete-page"><p>[REQUIRES AUTH] Delete a specific page by its ID</p>
+</div><h5 id="methods_delete_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-delete-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-delete-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-delete-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_delete_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapipages-delete-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_get">get(pageId, params, data, headers)</h3>
 <div class="get"><div class="wp-api-angularjs-wpapipages-get-page"><p>Get a specific page by its ID</p>
 </div><h5 id="methods_get_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>pageId</td><td><a href="" class="label type-hint type-hint-int">int</a></td><td><div class="wp-api-angularjs-wpapipages-get-page"><p>The page id</p>
 </div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-get-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
@@ -74,6 +90,14 @@ $wpApiPages.getList({
 </div></td></tr><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-getrevisionlist-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
 </div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-getrevisionlist-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
 </div></td></tr></tbody></table><h5 id="methods_getrevisionlist_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapipages-getrevisionlist-page"><p>Promise</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_update">update(data, params, headers)</h3>
+<div class="update"><div class="wp-api-angularjs-wpapipages-update-page"><p>[REQUIRES AUTH] Update a specific page by its ID</p>
+</div><h5 id="methods_update_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>data</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-update-page"><p>Optional: {string|Object} – Data to be sent as the request message data.</p>
+</div></td></tr><tr><td>params</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-update-page"><p>Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.</p>
+</div></td></tr><tr><td>headers</td><td><a href="" class="label type-hint type-hint-object">object</a></td><td><div class="wp-api-angularjs-wpapipages-update-page"><p>Optional: {Object} – Map of strings or functions which return strings representing HTTP headers</p>
+</div></td></tr></tbody></table><h5 id="methods_update_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="wp-api-angularjs-wpapipages-update-page"><p>Promise</p>
 </div></td></tr></table></div>
 </li>
 </ul>

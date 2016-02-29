@@ -10,7 +10,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Comments entity",
-      "keywords": "$injector $wpapicomments accept api appended approve argument author_email comment commentid comments config data entity function functions getlist header headers http karma list map message null object objects optional parameters params paramserializer parent per_page post post_author post_parent post_slug post_status post_type promise public representing request return search send serialized server service specific status strings type user wp-api-angularjs"
+      "keywords": "$injector $wpapicomments accept api appended approve argument author_email comment comment_author comment_parent comment_slug comment_status comment_type commentid comments config create data delete entity function functions getlist header headers http karma list map message null object objects optional parameters params paramserializer parent per_page promise public representing request return search send serialized server service specific status strings type update user wp-api-angularjs"
     },
     {
       "section": "api",
@@ -28,7 +28,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "media entity",
-      "keywords": "$injector $wpapimedia accept api appended argument asc config data entity filter function functions getlist header headers http list map media mediaid message null object objects optional parameters params paramserializer per_page promise public representing request return send serialized server service specific strings wp-api-angularjs"
+      "keywords": "$injector $wpapimedia accept api appended argument asc config create data delete entity filter function functions getlist header headers http list map media mediaid message null object objects optional parameters params paramserializer per_page promise public representing request return send serialized server service specific strings update wp-api-angularjs"
     },
     {
       "section": "api",
@@ -37,7 +37,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Pages entity",
-      "keywords": "$injector $wpapipages accept api appended argument asc config data entity filter function functions getlist getmeta getmetalist getrevision getrevisionlist header headers http list map message meta metaid metas null object objects optional pageid parameters params paramserializer per_page promise public representing request return revision revisions send serialized server service specific strings wp-api-angularjs"
+      "keywords": "$injector $wpapipages accept api appended argument asc config create data delete entity filter function functions getlist getmeta getmetalist getrevision getrevisionlist header headers http list map message meta metaid metas null object objects optional pageid parameters params paramserializer per_page promise public representing request return revision revisions send serialized server service specific strings update wp-api-angularjs"
     },
     {
       "section": "api",
@@ -46,7 +46,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Posts entity",
-      "keywords": "$injector $wpapiposts api appended asc category categoryid data entity filter function functions getcategory getcategorylist getlist getmeta getmetalist getrevision getrevisionlist gettag gettaglist headers http list map message meta metaid metas objects optional parameters params per_page post postid posts promise public representing request return revision revisions service specific strings tag tagid wp-api-angularjs"
+      "keywords": "$injector $wpapiposts api appended asc category categoryid create data delete entity filter function functions getcategory getcategorylist getlist getmeta getmetalist getrevision getrevisionlist gettag gettaglist headers http list map message meta metaid metas objects optional parameters params per_post post postid posts promise public representing request return revision revisions service specific strings tag tagid update wp-api-angularjs"
     },
     {
       "section": "api",
@@ -73,7 +73,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Posts entity",
-      "keywords": "$injector $wpapiterms api appended category data entity function functions getcategory getcategorylist getcustom getcustomlist gettag gettaglist headers http list map message objects optional order orderby parameters params parent per_page posts promise public representing request return search service specific strings tag taxonomiestype term termid wp-api-angularjs"
+      "keywords": "$injector $wpapiterms api appended category create createcategory createcustom createtag data delete deletecategory deletecustom deletetag entity function functions getcategory getcategorylist getcustom getcustomlist gettag gettaglist headers http list map message objects optional order orderby parameters params parent per_page posts promise public representing request required return search service specific strings tag taxonomiestype term termid update updatecategory updatecustom updatetag wp-api-angularjs"
     },
     {
       "section": "api",
@@ -91,7 +91,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "wp-api-angularjs",
       "shortDescription": "Users entity",
-      "keywords": "$injector $wpapiusers api appended context data entity function functions getlist headers http list map message object objects optional order orderby parameters params per_page promise public representing request return search service specific strings user userid users wp-api-angularjs"
+      "keywords": "$injector $wpapiusers api appended context create data delete entity function functions getlist headers http list map message object objects optional order orderby parameters params per_page promise public representing request required return search service specific strings update user userid users wp-api-angularjs"
     },
     {
       "section": "api",

@@ -160,6 +160,7 @@
 	exports['default'] = ["$httpProvider", function ($httpProvider) {
 	    'ngInject';
 	
+	    $get.$inject = ["$http"];
 	    var baseUrl = undefined,
 	        authType = null,
 	        httpProperties = {};
@@ -179,7 +180,6 @@
 	        };
 	    });
 	
-	    $get.$inject = ["$http"];
 	    return {
 	        $get: $get,
 	        setBaseUrl: setBaseUrl,
@@ -535,9 +535,9 @@
 
 /***/ },
 /* 3 */
-/*!***************************!*\
-  !*** ./~/buffer/index.js ***!
-  \***************************/
+/*!*******************************************************!*\
+  !*** (webpack)/~/node-libs-browser/~/buffer/index.js ***!
+  \*******************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -548,9 +548,11 @@
 	 */
 	/* eslint-disable no-proto */
 	
+	'use strict'
+	
 	var base64 = __webpack_require__(/*! base64-js */ 4)
 	var ieee754 = __webpack_require__(/*! ieee754 */ 5)
-	var isArray = __webpack_require__(/*! is-array */ 6)
+	var isArray = __webpack_require__(/*! isarray */ 6)
 	
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -630,8 +632,10 @@
 	    return new Buffer(arg)
 	  }
 	
-	  this.length = 0
-	  this.parent = undefined
+	  if (!Buffer.TYPED_ARRAY_SUPPORT) {
+	    this.length = 0
+	    this.parent = undefined
+	  }
 	
 	  // Common case.
 	  if (typeof arg === 'number') {
@@ -762,6 +766,10 @@
 	if (Buffer.TYPED_ARRAY_SUPPORT) {
 	  Buffer.prototype.__proto__ = Uint8Array.prototype
 	  Buffer.__proto__ = Uint8Array
+	} else {
+	  // pre-set for values that may exist in the future
+	  Buffer.prototype.length = undefined
+	  Buffer.prototype.parent = undefined
 	}
 	
 	function allocate (that, length) {
@@ -911,10 +919,6 @@
 	  }
 	}
 	Buffer.byteLength = byteLength
-	
-	// pre-set for values that may exist in the future
-	Buffer.prototype.length = undefined
-	Buffer.prototype.parent = undefined
 	
 	function slowToString (encoding, start, end) {
 	  var loweredCase = false
@@ -2007,7 +2011,7 @@
 	      }
 	
 	      // valid surrogate pair
-	      codePoint = leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00 | 0x10000
+	      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
 	    } else if (leadSurrogate) {
 	      // valid bmp char, but last char was a lead
 	      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
@@ -2085,13 +2089,13 @@
 	  return i
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/buffer/index.js */ 3).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! (webpack)/~/node-libs-browser/~/buffer/index.js */ 3).Buffer, (function() { return this; }())))
 
 /***/ },
 /* 4 */
-/*!********************************!*\
-  !*** ./~/base64-js/lib/b64.js ***!
-  \********************************/
+/*!*********************************************************************!*\
+  !*** (webpack)/~/node-libs-browser/~/buffer/~/base64-js/lib/b64.js ***!
+  \*********************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -2222,9 +2226,9 @@
 
 /***/ },
 /* 5 */
-/*!****************************!*\
-  !*** ./~/ieee754/index.js ***!
-  \****************************/
+/*!*****************************************************************!*\
+  !*** (webpack)/~/node-libs-browser/~/buffer/~/ieee754/index.js ***!
+  \*****************************************************************/
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -2315,43 +2319,15 @@
 
 /***/ },
 /* 6 */
-/*!*****************************!*\
-  !*** ./~/is-array/index.js ***!
-  \*****************************/
+/*!*****************************************************************!*\
+  !*** (webpack)/~/node-libs-browser/~/buffer/~/isarray/index.js ***!
+  \*****************************************************************/
 /***/ function(module, exports) {
 
+	var toString = {}.toString;
 	
-	/**
-	 * isArray
-	 */
-	
-	var isArray = Array.isArray;
-	
-	/**
-	 * toString
-	 */
-	
-	var str = Object.prototype.toString;
-	
-	/**
-	 * Whether or not the given `val`
-	 * is an array.
-	 *
-	 * example:
-	 *
-	 *        isArray([]);
-	 *        // > true
-	 *        isArray(arguments);
-	 *        // > false
-	 *        isArray('');
-	 *        // > false
-	 *
-	 * @param {mixed} val
-	 * @return {bool}
-	 */
-	
-	module.exports = isArray || function (val) {
-	  return !! val && '[object Array]' == str.call(val);
+	module.exports = Array.isArray || function (arr) {
+	  return toString.call(arr) == '[object Array]';
 	};
 
 
@@ -2377,7 +2353,7 @@
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -2415,8 +2391,8 @@
 	         * @example
 	         * <pre>
 	         * $wpApiPosts.getList({
-	         *  page: 1,
-	         *  per_page: 10,
+	         *  post: 1,
+	         *  per_post: 10,
 	         *  "filter[orderby]": "date"
 	         *  "filter[orderby]": "asc"
 	         * });
@@ -2449,6 +2425,72 @@
 	                postId: postId
 	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/posts/' + postId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#create
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Create a new post
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'create',
+	        value: function create(data, params, headers) {
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/posts', params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#update
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Update a specific post by its ID
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'update',
+	        value: function update(postId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPosts:update', {
+	                postId: postId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/posts/' + postId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPosts#delete
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPosts
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Delete a specific post by its ID
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'delete',
+	        value: function _delete(postId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPosts:delete', {
+	                postId: postId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'delete', this).call(this, '/posts/' + postId, data, params, headers);
 	        }
 	
 	        /**
@@ -2675,6 +2717,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
 	var _default = (function () {
+	    _default.$inject = ["$injector"];
 	    function _default($injector) {
 	        'ngInject';
 	
@@ -2684,7 +2727,6 @@
 	        this.defaultHttpProperties = $injector.get('WpApi').getDefaultHttpProperties();
 	        this.$http = $injector.get('$http');
 	    }
-	    _default.$inject = ["$injector"];
 	
 	    _createClass(_default, [{
 	        key: 'getList',
@@ -2693,7 +2735,7 @@
 	            var data = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 	            var headers = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
 	
-	            return this.$http(angular.merge({}, this.defaultHttpProperties, {
+	            return this.$http(angular.extend({}, this.defaultHttpProperties, {
 	                method: 'GET',
 	                url: this.baseUrl + suffix,
 	                params: params,
@@ -2708,8 +2750,38 @@
 	            var data = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 	            var headers = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
 	
-	            return this.$http(angular.merge({}, this.defaultHttpProperties, {
+	            return this.$http(angular.extend({}, this.defaultHttpProperties, {
 	                method: 'GET',
+	                url: this.baseUrl + suffix,
+	                params: params,
+	                data: data,
+	                headers: headers
+	            }));
+	        }
+	    }, {
+	        key: 'post',
+	        value: function post(suffix) {
+	            var params = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	            var data = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	            var headers = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	
+	            return this.$http(angular.extend({}, this.defaultHttpProperties, {
+	                method: 'POST',
+	                url: this.baseUrl + suffix,
+	                params: params,
+	                data: data,
+	                headers: headers
+	            }));
+	        }
+	    }, {
+	        key: 'delete',
+	        value: function _delete(suffix) {
+	            var params = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	            var data = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	            var headers = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	
+	            return this.$http(angular.extend({}, this.defaultHttpProperties, {
+	                method: 'DELETE',
 	                url: this.baseUrl + suffix,
 	                params: params,
 	                data: data,
@@ -2754,7 +2826,7 @@
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -2830,6 +2902,72 @@
 	                pageId: pageId
 	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/pages/' + pageId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPages#create
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPages
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Create a page
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'create',
+	        value: function create(data, params, headers) {
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/pages', params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPages#update
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPages
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Update a specific page by its ID
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'update',
+	        value: function update(pageId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPages:update', {
+	                pageId: pageId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/pages/' + pageId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiPages#delete
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiPages
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Delete a specific page by its ID
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'delete',
+	        value: function _delete(pageId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiPages:delete', {
+	                pageId: pageId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'delete', this).call(this, '/pages/' + pageId, data, params, headers);
 	        }
 	
 	        /**
@@ -2961,7 +3099,7 @@
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -3038,6 +3176,72 @@
 	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/media/' + mediaId, params, data, headers);
 	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiMedia#create
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiMedia
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Create a media
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'create',
+	        value: function create(data, params, headers) {
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/media', params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiMedia#update
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiMedia
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Update a specific media by its ID
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'update',
+	        value: function update(mediaId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiMedia:update', {
+	                mediaId: mediaId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/media/' + mediaId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiMedia#delete
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiMedia
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Delete a specific media by its ID
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'delete',
+	        value: function _delete(mediaId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiMedia:delete', {
+	                mediaId: mediaId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'delete', this).call(this, '/media/' + mediaId, data, params, headers);
+	        }
 	    }]);
 	
 	    return _default;
@@ -3068,7 +3272,7 @@
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -3172,7 +3376,7 @@
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -3274,7 +3478,7 @@
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -3378,7 +3582,7 @@
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -3438,7 +3642,7 @@
 	         * @methodOf wp-api-angularjs.$wpApiTerms
 	         *
 	         * @description
-	         * Get a specific tag by its ID
+	         * Get a specific term by its ID
 	         *
 	         * @param {string} taxonomiesType  (category|post_tag|anythingYouWant)
 	         * @param {int} termId  The term id
@@ -3455,6 +3659,84 @@
 	                termId: termId
 	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/' + taxonomiesType + '/' + termId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiTerms#createCustom
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiTerms
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Create a term
+	         *
+	         * @param {string} taxonomiesType  (category|post_tag|anythingYouWant)
+	         * @param {object} data  Required: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'createCustom',
+	        value: function createCustom(taxonomiesType, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiTerms:create', {
+	                taxonomiesType: taxonomiesType
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/' + taxonomiesType, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiTerms#updateCustom
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiTerms
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Update a specific term by its ID
+	         *
+	         * @param {string} taxonomiesType  (category|post_tag|anythingYouWant)
+	         * @param {int} termId  The term id
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'updateCustom',
+	        value: function updateCustom(taxonomiesType, termId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiTerms:update', {
+	                taxonomiesType: taxonomiesType,
+	                termId: termId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/' + taxonomiesType + '/' + termId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiTerms#deleteCustom
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiTerms
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Delete a specific term by its ID
+	         *
+	         * @param {string} taxonomiesType  (category|post_tag|anythingYouWant)
+	         * @param {int} termId  The term id
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'deleteCustom',
+	        value: function deleteCustom(taxonomiesType, termId, data, params, headers) {
+	            if (data === undefined) data = { force: true };
+	
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiTerms:delete', {
+	                taxonomiesType: taxonomiesType,
+	                termId: termId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'delete', this).call(this, '/' + taxonomiesType + '/' + termId, params, data, headers);
 	        }
 	
 	        /**
@@ -3542,6 +3824,76 @@
 	
 	        /**
 	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiTerms#createCategory
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiTerms
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Create a category
+	         *
+	         * @param {object} data  Required: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'createCategory',
+	        value: function createCategory(data, params, headers) {
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/categories', params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiTerms#updateCategory
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiTerms
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Update a specific category by its ID
+	         *
+	         * @param {int} termId  The term id
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'updateCategory',
+	        value: function updateCategory(termId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiTerms:update', {
+	                termId: termId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/categories/' + termId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiTerms#deleteCategory
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiTerms
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Delete a specific category by its ID
+	         *
+	         * @param {int} termId  The term id
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'deleteCategory',
+	        value: function deleteCategory(termId, data, params, headers) {
+	            if (data === undefined) data = { force: true };
+	
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiTerms:delete', {
+	                termId: termId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'delete', this).call(this, '/categories/' + termId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
 	         * @name wp-api-angularjs.$wpApiTerms#getTag
 	         * @access public
 	         * @methodOf wp-api-angularjs.$wpApiTerms
@@ -3562,6 +3914,76 @@
 	                termId: termId
 	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/tags/' + termId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiTerms#createTag
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiTerms
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Create a tag
+	         *
+	         * @param {object} data  Required: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'createTag',
+	        value: function createTag(data, params, headers) {
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/tags', params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiTerms#updateTag
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiTerms
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Update a specific tag by its ID
+	         *
+	         * @param {int} termId  The term id
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'updateTag',
+	        value: function updateTag(termId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiTerms:update', {
+	                termId: termId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/tags/' + termId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiTerms#deleteTag
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiTerms
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Delete a specific tag by its ID
+	         *
+	         * @param {int} termId  The term id
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'deleteTag',
+	        value: function deleteTag(termId, data, params, headers) {
+	            if (data === undefined) data = { force: true };
+	
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiTerms:delete', {
+	                termId: termId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'delete', this).call(this, '/tags/' + termId, params, data, headers);
 	        }
 	    }]);
 	
@@ -3593,7 +4015,7 @@
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -3671,6 +4093,76 @@
 	
 	        /**
 	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiUsers#create
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiUsers
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Create a user
+	         *
+	         * @param {object} data  Required: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'create',
+	        value: function create(data, params, headers) {
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/users', params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiUsers#update
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiUsers
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Update a specific user by its ID
+	         *
+	         * @param {int} userId  The users id
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'update',
+	        value: function update(userId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiUsers:update', {
+	                userId: userId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/users/' + userId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiUsers#delete
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiUsers
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Delete a specific user by its ID
+	         *
+	         * @param {int} userId  The users id
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'delete',
+	        value: function _delete(userId, data, params, headers) {
+	            if (data === undefined) data = { force: true };
+	
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiUsers:delete', {
+	                userId: userId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'delete', this).call(this, '/users/' + userId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
 	         * @name wp-api-angularjs.$wpApiUsers#me
 	         * @access public
 	         * @methodOf wp-api-angularjs.$wpApiUsers
@@ -3718,7 +4210,7 @@
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -3762,12 +4254,12 @@
 	         *  author_email: '',
 	         *  karma: '',
 	         *  parent: 9,
-	         *  post: 5,
-	         *  post_author: '',
-	         *  post_slug: '',
-	         *  post_parent: '',
-	         *  post_status: '',
-	         *  post_type: 'page',
+	         *  comment: 5,
+	         *  comment_author: '',
+	         *  comment_slug: '',
+	         *  comment_parent: '',
+	         *  comment_status: '',
+	         *  comment_type: 'page',
 	         *  status: 'approve',
 	         *  type: 'comment',
 	         *  user: 9
@@ -3806,6 +4298,72 @@
 	            });
 	            return _get(Object.getPrototypeOf(_default.prototype), 'get', this).call(this, '/comments/' + commentId, params, data, headers);
 	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiComments#create
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiComments
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Create a new comment
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'create',
+	        value: function create(data, params, headers) {
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/comments', params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiComments#update
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiComments
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Update a specific comment by its ID
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'update',
+	        value: function update(commentId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiComments:update', {
+	                commentId: commentId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'post', this).call(this, '/comments/' + commentId, params, data, headers);
+	        }
+	
+	        /**
+	         * @ngdoc function
+	         * @name wp-api-angularjs.$wpApiComments#delete
+	         * @access public
+	         * @methodOf wp-api-angularjs.$wpApiComments
+	         *
+	         * @description
+	         * [REQUIRES AUTH] Delete a specific comment by its ID
+	         *
+	         * @param {object} data  Optional: {string|Object} – Data to be sent as the request message data.
+	         * @param {object} params  Optional: {Object.<string|Object>} – Map of strings or objects which will be appended as GET parameters.
+	         * @param {object} headers  Optional: {Object} – Map of strings or functions which return strings representing HTTP headers
+	         * @returns {Object} Promise
+	         */
+	    }, {
+	        key: 'delete',
+	        value: function _delete(commentId, data, params, headers) {
+	            _get(Object.getPrototypeOf(_default.prototype), 'requiredInput', this).call(this, '$wpApiComments:delete', {
+	                commentId: commentId
+	            });
+	            return _get(Object.getPrototypeOf(_default.prototype), 'delete', this).call(this, '/comments/' + commentId, data, params, headers);
+	        }
 	    }]);
 	
 	    return _default;
@@ -3834,7 +4392,7 @@
 	    value: true
 	});
 	
-	var _get = function get(_x5, _x6, _x7) { var _again = true; _function: while (_again) { var object = _x5, property = _x6, receiver = _x7; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x5 = parent; _x6 = property; _x7 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
@@ -3849,6 +4407,7 @@
 	var _parentServiceJs2 = _interopRequireDefault(_parentServiceJs);
 	
 	var _default = (function () {
+	    _default.$inject = ["$injector"];
 	    function _default($injector) {
 	        'ngInject';
 	
@@ -3856,7 +4415,6 @@
 	
 	        this.$injector = $injector;
 	    }
-	    _default.$inject = ["$injector"];
 	
 	    /**
 	     * @ngdoc function
@@ -3894,6 +4452,7 @@
 	exports['default'] = _default;
 	
 	var Custom = (function (_Parent) {
+	    Custom.$inject = ["$injector", "entityName"];
 	    _inherits(Custom, _Parent);
 	
 	    function Custom($injector, entityName) {
@@ -3904,15 +4463,10 @@
 	        _get(Object.getPrototypeOf(Custom.prototype), 'constructor', this).call(this, $injector);
 	        this.entityName = entityName;
 	    }
-	    Custom.$inject = ["$injector", "entityName"];
 	
 	    _createClass(Custom, [{
 	        key: 'getList',
-	        value: function getList() {
-	            var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	            var data = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	            var headers = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-	
+	        value: function getList(params, data, headers) {
 	            return _get(Object.getPrototypeOf(Custom.prototype), 'getList', this).call(this, '/' + this.entityName, params, data, headers);
 	        }
 	    }, {
@@ -3922,6 +4476,27 @@
 	                customId: customId
 	            });
 	            return _get(Object.getPrototypeOf(Custom.prototype), 'get', this).call(this, '/' + this.entityName + '/' + customId, params, data, headers);
+	        }
+	    }, {
+	        key: 'create',
+	        value: function create(data, params, headers) {
+	            return _get(Object.getPrototypeOf(Custom.prototype), 'post', this).call(this, '/' + this.entityName, params, data, headers);
+	        }
+	    }, {
+	        key: 'update',
+	        value: function update(customId, data, params, headers) {
+	            _get(Object.getPrototypeOf(Custom.prototype), 'requiredInput', this).call(this, '$wpApiCustom:update', {
+	                customId: customId
+	            });
+	            return _get(Object.getPrototypeOf(Custom.prototype), 'post', this).call(this, '/' + this.entityName + '/' + customId, params, data, headers);
+	        }
+	    }, {
+	        key: 'delete',
+	        value: function _delete(customId, data, params, headers) {
+	            _get(Object.getPrototypeOf(Custom.prototype), 'requiredInput', this).call(this, '$wpApiCustom:delete', {
+	                customId: customId
+	            });
+	            return _get(Object.getPrototypeOf(Custom.prototype), 'delete', this).call(this, '/' + this.entityName + '/' + customId, data, params, headers);
 	        }
 	    }]);
 	

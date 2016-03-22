@@ -31,6 +31,33 @@ import 'wp-api-angularjs';
 bower install shprink/wp-api-angularjs
 ```
 
+## Setup
+
+To setup wp-api-angularjs in your app:
+
+```
+var app = angular.module('app', ['wp-api-angularjs']);
+
+app.config(function (WpApiProvider) {
+    WpApiProvider.setBaseUrl('http://www.example.com/wp-json/');
+});
+
+app.controller('PostsController', ['$scope', '$wpApiPosts', PostsController]);
+
+function PostsController($scope, $wpApiPosts) {
+    $scope.posts = [];
+
+    $wpApiPosts.getList({
+        page: 1,
+        per_page: 10
+    }).then(function (posts) {
+        $scope.posts = posts.data;
+    });
+}
+
+
+```
+
 ## Authentication
 
 This library only supports basic auth. OAuth1 not being suitable for JS clients (it would mean exposing key and password out of the open)

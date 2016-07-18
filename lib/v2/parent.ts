@@ -1,25 +1,41 @@
-import {Injectable, Inject, Optional} from 'angular2/core';
-import {Http} from 'angular2/http';
-import {isPresent} from 'angular2/src/facade/lang';
-import {CONST_EXPR} from 'angular2/src/facade/lang';
-import {OpaqueToken} from 'angular2/core';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { RequestOptionsArgs } from '@angular/http/src/interfaces.d.ts';
+import { Response } from '@angular/http/src/static_response.d.ts';
+import { WpApiAppConfig } from './interfaces';
 
-export const WP_API_BASE_URL: OpaqueToken = CONST_EXPR(new OpaqueToken('wpApiBaseUrl'));
+interface IParent {
+  httpGet(url: string, options?: RequestOptionsArgs): Promise<Response>;
+  httpHead(url: string, options?: RequestOptionsArgs): Promise<Response>;
+  httpDelete(url: string, options?: RequestOptionsArgs): Promise<Response>;
+  httpPost(url: string, body: any, options?: RequestOptionsArgs): Promise<Response>;
+  httpPut(url: string, body: any, options?: RequestOptionsArgs): Promise<Response>;
+  httpPatch(url: string, body: any, options?: RequestOptionsArgs): Promise<Response>;
+}
 
 @Injectable()
-export class Parent {
-    private _baseUrl: string = '';
-    constructor(private http: Http, @Optional() @Inject(WP_API_BASE_URL) _baseUrl?: string) {
+export class WpApiParent implements IParent {
+  constructor(
+    private config: WpApiAppConfig,
+    private http: Http
+  ) {}
 
-        if (isPresent(_baseUrl)) {
-            this._baseUrl = _baseUrl;
-        }
-        console.log('_baseUrl', _baseUrl)
-    }
-
-    getList(suffix, params = {}, data = {}, headers = {}) { }
-
-    get(suffix, params = {}, data = {}, headers = {}) {}
-
-    requiredInput(functionName, inputs) {}
+  httpGet(url: string, options = {}) {
+    return this.http.get(`${this.config.baseUrl}${this.config.namespace}${url}`, options).toPromise();
+  }
+  httpHead(url: string, options = {}) {
+    return this.http.head(`${this.config.baseUrl}${this.config.namespace}${url}`, options).toPromise();
+  }
+  httpDelete(url: string, options = {}) {
+    return this.http.delete(`${this.config.baseUrl}${this.config.namespace}${url}`, options).toPromise();
+  }
+  httpPost(url: string, body = {}, options = {}) {
+    return this.http.post(`${this.config.baseUrl}${this.config.namespace}${url}`, body, options).toPromise();
+  }
+  httpPut(url: string, body = {}, options = {}) {
+    return this.http.put(`${this.config.baseUrl}${this.config.namespace}${url}`, body, options).toPromise();
+  }
+  httpPatch(url: string, body = {}, options = {}) {
+    return this.http.patch(`${this.config.baseUrl}${this.config.namespace}${url}`, body, options).toPromise();
+  }
 }

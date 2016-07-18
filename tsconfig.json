@@ -11,7 +11,8 @@
   },
   "files": [
     "test/v2/index.ts",
-    "typings/index.d.ts"
+    "typings/index.d.ts",
+    "node_modules/rxjs/add/operator/toPromise.d.ts"
   ],
   "compileOnSave": false,
   "atom": {

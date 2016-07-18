@@ -7,9 +7,13 @@
     "startv1": "webpack-dev-server --port 8090 --json --progress",
     "start": "webpack-dev-server --port 8080 --json --progress --config webpack.config.v2.js",
     "build": "npm run dumpdev && npm run dumpprod",
+    "buildV2": "npm run dumpprodV2",
+    "buildAll": "npm run build && npm run buildV2",
     "dumpdev": "webpack --progress --colors --config webpack.config.dist.js -d",
+    "dumpdevV2": "webpack --progress --colors --config webpack.config.v2.dist.js -d",
     "watch": "webpack --watch --progress --colors --config webpack.config.dist.js -d",
     "dumpprod": "webpack --progress --colors --config webpack.config.dist.min.js -p",
+    "dumpprodV2": "webpack --progress --colors --config webpack.config.v2.dist.min.js -p",
     "postinstall": "typings install",
     "typings": "typings"
   },

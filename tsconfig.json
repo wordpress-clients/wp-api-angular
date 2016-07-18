@@ -2,17 +2,19 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "declaration": false,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "noLib": false,
+    "moduleResolution": "node",
+    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
-    "listFiles": false,
-    "outDir": "dist"
+    "removeComments": false,
+    "noImplicitAny": false
   },
   "files": [
-    "test/v2/bootstrap.ts"
-  ]
+    "test/v2/index.ts",
+    "typings/index.d.ts"
+  ],
+  "compileOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }

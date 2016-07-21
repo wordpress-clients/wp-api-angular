@@ -10,7 +10,8 @@
     "noImplicitAny": false
   },
   "files": [
-    "test/v2/index.ts",
+    "demo/index.ts",
+    "typings/overwrite.d.ts",
     "typings/index.d.ts",
     "node_modules/rxjs/add/operator/toPromise.d.ts"
   ],

@@ -1,82 +1,41 @@
 wp-api-angularjs
 ================
 
-AngularJS services to consume [WP-API v2](http://v2.wp-api.org/)
+Angular2 services to consume [WP-API v2](http://v2.wp-api.org/)
 
-## Documentation
-
-<http://shprink.github.io/wp-api-angularjs/>
+If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https://github.com/shprink/wp-api-angularjs/tree/v2.0.0-rc3)
 
 ## Installation
 
 ### npm
 
 ```
-npm install wp-api-angularjs
+npm install wp-api-angularjs@v3.0.x
 ```
 
-then import the dist file
+## Bootstrap
+
 
 ```
-# ES5
-require('wp-api-angularjs');
+import {
+  WPAPI_PROVIDERS,
+  defaultWpApi
+} from 'wp-api-angularjs';
 
-# or ES6
-import 'wp-api-angularjs';
-```
+import {App} from './app';
 
-### Bower
-
-```
-bower install shprink/wp-api-angularjs
-```
-
-## Setup
-
-To setup wp-api-angularjs in your app:
-
-```
-var app = angular.module('app', ['wp-api-angularjs']);
-
-app.config(function (WpApiProvider) {
-    WpApiProvider.setBaseUrl('http://www.example.com/wp-json/');
-});
-
-app.controller('PostsController', ['$scope', '$wpApiPosts', PostsController]);
-
-function PostsController($scope, $wpApiPosts) {
-    $scope.posts = [];
-
-    $wpApiPosts.getList({
-        page: 1,
-        per_page: 10
-    }).then(function (posts) {
-        $scope.posts = posts.data;
-    });
-}
-
+bootstrap(App, [
+  WPAPI_PROVIDERS,
+  defaultWpApi({
+    baseUrl: "http://YOUR_DOMAIN/wp-json/"
+  })
+]);
 
 ```
 
 ## Authentication
 
-This library only supports basic auth. OAuth1 not being suitable for JS clients (it would mean exposing key and password out of the open)
-
-### Basic auth
-
-Basic auth is only secured to use if used during the app run time and used with a secured connection to your Blog (via SSL).
-
-#### During run time
-
-Make sure your WP-API runs with an SSL certificate (https) otherwise this will expose your credentials at every request.
-
-Display a form for users to connect and use the following code to register credentials:
-
-```
-.controller(function(WpApi){
-    WpApi.setBasicCredentials(<login>, <password>);
-});
-```
+TO BO DEFINED
 
 #### During configuration
 

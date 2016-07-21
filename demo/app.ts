@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {
   WpApiPosts
-} from '../../lib/v2/index.ts'
-let config = require('../../config.json');
+} from '../src/index.ts'
+let config = require('../config.json');
 
 @Component({
   selector: 'app',

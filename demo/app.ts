@@ -44,7 +44,6 @@ export class App {
     for (let i = 0, len = serviceNames.length; i <= len; i++) {
       let serviceName = serviceNames[i];
       let serviceApi = config.api[serviceName];
-      console.log('serviceApi', serviceApi)
       if (!this[serviceName]) {
         continue;
       }

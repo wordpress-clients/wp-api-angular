@@ -9,20 +9,28 @@ let config = require('../config.json');
   selector: 'app',
   styles: [`
     .error {
-        background-color: red;
+        background-color: #e74c3c;
     }
 
     .success {
-        background-color: green;
+        background-color: #00bc8c;
+    }
+    span {
+      color: white;
+      padding: 2px 10px;
+    }
+    b{
+      color: black;
+      width: 100px;
+      display: inline-block;
     }
   `],
   template: `
-    <h2>Posts</h2>
     <div
       *ngFor="let request of requests"
       [ngClass]="{'success': request.success, 'error': !request.success}"
       >
-      <b>{{request.serviceName}}</b>: {{request.method}}
+      <span><b>{{request.serviceName}}</b> {{request.method}}</span>
     </div>
   `
 })
@@ -44,8 +52,8 @@ export class App {
         let service = this[serviceName];
         let parameters = serviceApi[method];
         service[method].apply(service, parameters).toPromise()
-          .then(() => this.requests.push({ serviceName, method, success: true }))
-          .catch(() => this.requests.push({ serviceName, method, success: false }))
+          .then(() => this.requests.push({ serviceName: serviceName.slice(5), method, success: true }))
+          .catch(() => this.requests.push({ serviceName: serviceName.slice(5), method, success: false }))
       });
     }
   }

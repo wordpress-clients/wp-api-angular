@@ -27,7 +27,8 @@ import {App} from './app';
 bootstrap(App, [
   WPAPI_PROVIDERS,
   defaultWpApi({
-    baseUrl: "http://YOUR_DOMAIN/wp-json/"
+    baseUrl: "http://YOUR_DOMAIN/wp-json/",
+    namespace: '/wp/v2' // (optional, default: '/wp/v2')
   })
 ]);
 
@@ -35,17 +36,7 @@ bootstrap(App, [
 
 ## Authentication
 
-TO BO DEFINED
-
-#### During configuration
-
-You can also set basic credentials during the configuration but use this should only be used for testing as it embed credentials in the application code.
-
-```
-.config(function(WpApiProvider){
-    WpApiProvider.setBasicCredentials(<login>, <password>);
-});
-```
+TO BE DEFINED
 
 ## Contribute
 

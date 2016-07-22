@@ -1,4 +1,4 @@
-var path = require('path'),
+let path = require('path'),
   srcPath = path.join(__dirname, 'src'),
   distPath = path.join(__dirname, 'dist'),
   webpack = require("webpack"),
@@ -7,6 +7,9 @@ var path = require('path'),
   copyright = fs.readFileSync('./copyright.txt', 'utf8'),
   HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const isProd = process.env.ENV === 'prod';
+const filename = isProd ? 'wp-api-angularjs.min.js' : 'wp-api-angularjs.js'
+
 copyright = copyright.replace('{pkg.name}', pkg.name)
   .replace('{pkg.description}', pkg.description)
   .replace('{pkg.version}', pkg.version)
@@ -14,15 +17,36 @@ copyright = copyright.replace('{pkg.name}', pkg.name)
   .replace('{pkg.homepage}', pkg.homepage)
   .replace('{pkg.license}', pkg.license);
 
+let plugins = [
+  new webpack.BannerPlugin(copyright)
+];
+
+if (isProd) {
+  plugins = plugins.concat([
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+  ])
+}
+
 module.exports = {
-  entry: path.join(srcPath, 'v2', 'index.ts'),
+  entry: path.join(srcPath, 'index.ts'),
   output: {
     path: distPath,
-    filename: 'wp-api-angularjs.ng2.js'
+    libraryTarget: "umd",
+    filename
   },
   resolve: {
     extensions: ['', '.ts', '.js', '.json']
   },
+  externals: [
+    {
+      'rxjs': 'rxjs',
+      'rxjs/Observable': 'rxjs/Observable',
+      '@angular/core': '@angular/core',
+      '@angular/http': '@angular/http'
+    }
+  ],
   module: {
     loaders: [{
       test: /\.ts$/,
@@ -30,7 +54,5 @@ module.exports = {
       loader: 'ts'
     }]
   },
-  plugins: [
-    new webpack.BannerPlugin(copyright)
-  ]
+  plugins: plugins
 }

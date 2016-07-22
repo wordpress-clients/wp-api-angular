@@ -1,4 +1,5 @@
 var path = require('path'),
+  webpack = require("webpack"),
   demoPath = path.join(__dirname, 'demo'),
   wwwPath = path.join(__dirname, 'www'),
   docsPath = path.join(__dirname, 'docs'),
@@ -7,16 +8,17 @@ var path = require('path'),
 
 module.exports = {
   entry: {
-    polyfills: [
+    aPolyfills: [
       'core-js',
       'reflect-metadata',
       'zone.js'
     ],
-    vendors: [
+    bVendors: [
+      '@angular/core',
       'rxjs',
       'rxjs/add/operator/toPromise'
     ],
-    app: path.join(demoPath, 'index.ts')
+    cApp: path.join(demoPath, 'index.ts')
   },
   output: {
     path: wwwPath,
@@ -36,11 +38,17 @@ module.exports = {
     ]
   },
   resolve: {
+    root: path.resolve(__dirname),
+    alias: {
+      [pkg.name]: pkg.main
+    },
     extensions: ['', '.ts', '.js', '.json']
   },
-  plugins: [new HtmlWebpackPlugin({
-    pkg: pkg,
-    inject: 'body',
-    template: path.join(demoPath, 'index.html')
-  })]
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new HtmlWebpackPlugin({
+      pkg: pkg,
+      inject: 'body',
+      template: path.join(demoPath, 'index.html')
+    })]
 };

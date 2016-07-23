@@ -7,24 +7,24 @@ If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https:
 
 ## Installation
 
-### Prerequisite 
+### Dependencies 
 
-make sure you have those packages installed too:
+make sure you have those packages installed:
 
 - '@angular/core'
-- 'rxjs'
 - '@angular/http'
+- 'rxjs'
 
 ### via npm
 
-```
+```shell
 npm install wp-api-angularjs@v3.0.x
 ```
 
 ## Bootstrap
 
 
-```
+```js
 import {
   WPAPI_PROVIDERS,
   defaultWpApi
@@ -46,7 +46,7 @@ bootstrap(App, [
 
 Every method return an Obervable. If you want to get a Promise you will need to add the rxjs `toPromise` operator:
 
-```
+```js
 import 'rxjs/add/operator/toPromise';
 
 class Test {
@@ -62,7 +62,7 @@ class Test {
 
 ### WpApiPosts
 
-```
+```ts
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(postId, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
@@ -80,7 +80,7 @@ class Test {
 
 ### WpApiPages
 
-```
+```ts
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
@@ -94,7 +94,7 @@ class Test {
 
 ### WpApiComments
 
-```
+```ts
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(commentId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
@@ -104,14 +104,14 @@ class Test {
 
 ### WpApiTypes
 
-```
+```ts
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(postType: string, options?: RequestOptionsArgs): Observable<Response>;
 ```
 
 ### WpApiMedia
 
-```
+```ts
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(mediaId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
@@ -121,7 +121,7 @@ class Test {
 
 ### WpApiUsers
 
-```
+```ts
   getList(options?: RequestOptionsArgs): Observable<Response>;
   me(options?: RequestOptionsArgs): Observable<Response>;
   get(userId: number, options?: RequestOptionsArgs): Observable<Response>;
@@ -132,14 +132,14 @@ class Test {
 
 ### WpApiTaxonomies
 
-```
+```ts
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
 ```
 
 ### WpApiStatuses
 
-```
+```ts
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(statusesName: string, options?: RequestOptionsArgs): Observable<Response>;
 ```
@@ -148,7 +148,7 @@ class Test {
 
 `taxonomiesType` can be `tags`, `categories` and more.
 
-```
+```ts
   getList(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
   get(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(taxonomiesType: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
@@ -158,7 +158,7 @@ class Test {
 
 ### WpApiCustom
 
-```
+```ts
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(customId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
@@ -172,7 +172,7 @@ TO BE DEFINED
 
 ## Contribute
 
-```
+```shell
 npm install
 cp config.dist.json config.json
 

@@ -6,7 +6,6 @@
   "scripts": {
     "start": "webpack-dev-server --port 8080 --json --progress --config webpack.config.js",
     "build": "npm run dumpdev && npm run dumpprod",
-    "publish": "npm run build && npm publish dist",
     "dumpdev": "ENV=dev webpack --progress --colors --config webpack.config.dist.js -d",
     "dumpprod": "ENV=prod webpack --progress --colors --config webpack.config.dist.js -p",
     "watch": "ENV=dev webpack --watch --progress --colors --config webpack.config.dist.js -d",

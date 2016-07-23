@@ -3,7 +3,13 @@ import {
   WpApiPosts,
   WpApiPages,
   WpApiComments,
-  WpApiTypes
+  WpApiTypes,
+  WpApiMedia,
+  WpApiUsers,
+  WpApiTaxonomies,
+  WpApiStatuses,
+  WpApiTerms,
+  WpApiCustom
 } from 'wp-api-angularjs';
 let config = require('../config.json');
 
@@ -42,7 +48,13 @@ export class App {
     private wpApiPosts: WpApiPosts,
     private wpApiPages: WpApiPages,
     private wpApiComments: WpApiComments,
-    private wpApiTypes: WpApiTypes
+    private wpApiTypes: WpApiTypes,
+    private wpApiMedia: WpApiMedia,
+    private wpApiUsers: WpApiUsers,
+    private wpApiTaxonomies: WpApiTaxonomies,
+    private wpApiStatuses: WpApiStatuses,
+    private wpApiTerms: WpApiTerms,
+    private wpApiCustom: WpApiCustom
   ) {
     const serviceNames = Object.keys(config.api);
     for (let i = 0, len = serviceNames.length; i <= len; i++) {
@@ -51,14 +63,29 @@ export class App {
       if (!this[serviceName]) {
         continue;
       }
-      Object.keys(serviceApi).map((method) => {
-        let service = this[serviceName];
-        let parameters = serviceApi[method];
-        service[method].apply(service, parameters).toPromise()
-          .then(() => this.requests.push({ serviceName: serviceName.slice(5), method, success: true }))
-          .catch(() => this.requests.push({ serviceName: serviceName.slice(5), method, success: false }))
-      });
+      if (Array.isArray(serviceApi)) {
+        serviceApi.map(api => {
+          this.request(this[serviceName], api, serviceName)
+        })
+      } else if (serviceName === 'wpApiCustom') {
+        Object.keys(serviceApi).map((customType) => {
+          let serviceApi = config.api[serviceName][customType];
+          this.request(wpApiCustom.getInstance(customType), serviceApi, serviceName);
+        });
+      } else {
+        console.log('serviceName', serviceName)
+        this.request(this[serviceName], serviceApi, serviceName);
+      }
     }
+  }
+
+  request(service, serviceApi, serviceName) {
+    Object.keys(serviceApi).map((method) => {
+      let parameters = serviceApi[method];
+      service[method].apply(service, parameters).toPromise()
+        .then(() => this.requests.push({ serviceName: serviceName.slice(5), method, success: true }))
+        .catch(() => this.requests.push({ serviceName: serviceName.slice(5), method, success: false }))
+    });
   }
 }
 

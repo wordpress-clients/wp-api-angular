@@ -44,6 +44,21 @@ bootstrap(App, [
 
 ## API
 
+Every method return an Obervable. If you want to get a Promise you will need to add the rxjs `toPromise` operator:
+
+```
+import 'rxjs/add/operator/toPromise';
+
+class Test {
+  constructor(private wpApiPosts: WpApiPosts) {
+    this.wpApiPosts.getList()
+      .toPromise()
+      .then((response) => {})
+      .catch((error) => {})
+  }
+}
+
+```
 
 ### WpApiPosts
 
@@ -87,11 +102,68 @@ bootstrap(App, [
   delete(commentId: number, options?: RequestOptionsArgs): Observable<Response>;
 ```
 
-### IWpApiTypes
+### WpApiTypes
 
 ```
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(postType: string, options?: RequestOptionsArgs): Observable<Response>;
+```
+
+### WpApiMedia
+
+```
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(mediaId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(mediaId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(mediaId: number, options?: RequestOptionsArgs): Observable<Response>;
+```
+
+### WpApiUsers
+
+```
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  me(options?: RequestOptionsArgs): Observable<Response>;
+  get(userId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(userId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(userId: number, options?: RequestOptionsArgs): Observable<Response>;
+```
+
+### WpApiTaxonomies
+
+```
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
+```
+
+### WpApiStatuses
+
+```
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(statusesName: string, options?: RequestOptionsArgs): Observable<Response>;
+```
+
+### WpApiTerms
+
+`taxonomiesType` can be `tags`, `categories` and more.
+
+```
+  getList(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
+  get(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(taxonomiesType: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(taxonomiesType: string, termId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
+```
+
+### WpApiCustom
+
+```
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(customId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(customId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(customId: number, options?: RequestOptionsArgs): Observable<Response>;
 ```
 
 ## Authentication

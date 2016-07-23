@@ -6,14 +6,13 @@ import { WpApiAppConfig, IParent } from './interfaces';
 @Injectable()
 export class WpApiParent implements IParent {
   constructor(
-    private config: WpApiAppConfig,
-    private http: Http
+    public config: WpApiAppConfig,
+    public http: Http
   ) { }
 
   getFullUrl(postfix: string): string {
     return `${this.config.baseUrl}${this.config.namespace}${postfix}`;
   }
-
   httpGet(url: string, options = {}) {
     return this.http.get(this.getFullUrl(url), options);
   }

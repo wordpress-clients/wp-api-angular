@@ -2,7 +2,7 @@
  * wp-api-angularjs
  *  ---
  * WordPress WP-API v2 client for Angular2
- * @version: v3.0.0
+ * @version: v3.0.0-alpha1
  * @author: shprink <contact@julienrenaux.fr>
  * @link: https://github.com/shprink/wp-api-angularjs
  * @license: MIT
@@ -80,10 +80,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Pages_1 = __webpack_require__(/*! ./Pages */ 8);
 	var Comments_1 = __webpack_require__(/*! ./Comments */ 9);
 	var Types_1 = __webpack_require__(/*! ./Types */ 10);
+	var Media_1 = __webpack_require__(/*! ./Media */ 11);
+	var Users_1 = __webpack_require__(/*! ./Users */ 12);
+	var Taxonomies_1 = __webpack_require__(/*! ./Taxonomies */ 13);
+	var Statuses_1 = __webpack_require__(/*! ./Statuses */ 14);
+	var Terms_1 = __webpack_require__(/*! ./Terms */ 15);
+	var Custom_1 = __webpack_require__(/*! ./Custom */ 16);
 	__export(__webpack_require__(/*! ./Posts */ 6));
 	__export(__webpack_require__(/*! ./Pages */ 8));
 	__export(__webpack_require__(/*! ./Comments */ 9));
 	__export(__webpack_require__(/*! ./Types */ 10));
+	__export(__webpack_require__(/*! ./Media */ 11));
+	__export(__webpack_require__(/*! ./Users */ 12));
+	__export(__webpack_require__(/*! ./Taxonomies */ 13));
+	__export(__webpack_require__(/*! ./Statuses */ 14));
+	__export(__webpack_require__(/*! ./Terms */ 15));
+	__export(__webpack_require__(/*! ./Custom */ 16));
 	exports.defaultWpApi = function (config) {
 	    // remove a trailing slash
 	    config.baseUrl = utils_1.stripTrailingSlash(config.baseUrl);
@@ -97,7 +109,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    createProvider(Posts_1.WpApiPosts),
 	    createProvider(Pages_1.WpApiPages),
 	    createProvider(Comments_1.WpApiComments),
-	    createProvider(Types_1.WpApiTypes)
+	    createProvider(Types_1.WpApiTypes),
+	    createProvider(Media_1.WpApiMedia),
+	    createProvider(Users_1.WpApiUsers),
+	    createProvider(Taxonomies_1.WpApiTaxonomies),
+	    createProvider(Statuses_1.WpApiStatuses),
+	    createProvider(Terms_1.WpApiTerms),
+	    createProvider(Custom_1.WpApiCustom)
 	];
 	function createProvider(service) {
 	    return {
@@ -503,6 +521,364 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return WpApiTypes;
 	}(parent_ts_1.WpApiParent));
 	exports.WpApiTypes = WpApiTypes;
+
+
+/***/ },
+/* 11 */
+/*!**********************!*\
+  !*** ./src/Media.ts ***!
+  \**********************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 1);
+	var parent_ts_1 = __webpack_require__(/*! ./parent.ts */ 7);
+	var WpApiMedia = (function (_super) {
+	    __extends(WpApiMedia, _super);
+	    function WpApiMedia() {
+	        _super.apply(this, arguments);
+	    }
+	    WpApiMedia.prototype.getList = function (options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/media", options);
+	    };
+	    WpApiMedia.prototype.get = function (mediaId, options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/media/" + mediaId, options);
+	    };
+	    WpApiMedia.prototype.create = function (body, options) {
+	        if (body === void 0) { body = {}; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpPost("/media", body, options);
+	    };
+	    WpApiMedia.prototype.update = function (mediaId, body, options) {
+	        if (body === void 0) { body = {}; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpPost("/media/" + mediaId, body, options);
+	    };
+	    WpApiMedia.prototype.delete = function (mediaId, options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpDelete("/media/" + mediaId, options);
+	    };
+	    WpApiMedia = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], WpApiMedia);
+	    return WpApiMedia;
+	}(parent_ts_1.WpApiParent));
+	exports.WpApiMedia = WpApiMedia;
+
+
+/***/ },
+/* 12 */
+/*!**********************!*\
+  !*** ./src/Users.ts ***!
+  \**********************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 1);
+	var parent_ts_1 = __webpack_require__(/*! ./parent.ts */ 7);
+	var WpApiUsers = (function (_super) {
+	    __extends(WpApiUsers, _super);
+	    function WpApiUsers() {
+	        _super.apply(this, arguments);
+	    }
+	    WpApiUsers.prototype.getList = function (options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/users", options);
+	    };
+	    WpApiUsers.prototype.me = function (options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/users/me", options);
+	    };
+	    WpApiUsers.prototype.get = function (userId, options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/users/" + userId, options);
+	    };
+	    WpApiUsers.prototype.create = function (body, options) {
+	        if (body === void 0) { body = {}; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpPost("/users", body, options);
+	    };
+	    WpApiUsers.prototype.update = function (userId, body, options) {
+	        if (body === void 0) { body = {}; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpPost("/users/" + userId, body, options);
+	    };
+	    WpApiUsers.prototype.delete = function (userId, options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpDelete("/users/" + userId, options);
+	    };
+	    WpApiUsers = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], WpApiUsers);
+	    return WpApiUsers;
+	}(parent_ts_1.WpApiParent));
+	exports.WpApiUsers = WpApiUsers;
+
+
+/***/ },
+/* 13 */
+/*!***************************!*\
+  !*** ./src/Taxonomies.ts ***!
+  \***************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 1);
+	var parent_ts_1 = __webpack_require__(/*! ./parent.ts */ 7);
+	var WpApiTaxonomies = (function (_super) {
+	    __extends(WpApiTaxonomies, _super);
+	    function WpApiTaxonomies() {
+	        _super.apply(this, arguments);
+	    }
+	    WpApiTaxonomies.prototype.getList = function (options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/taxonomies", options);
+	    };
+	    WpApiTaxonomies.prototype.get = function (taxonomiesType, options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/taxonomies/" + taxonomiesType, options);
+	    };
+	    WpApiTaxonomies = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], WpApiTaxonomies);
+	    return WpApiTaxonomies;
+	}(parent_ts_1.WpApiParent));
+	exports.WpApiTaxonomies = WpApiTaxonomies;
+
+
+/***/ },
+/* 14 */
+/*!*************************!*\
+  !*** ./src/Statuses.ts ***!
+  \*************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 1);
+	var parent_ts_1 = __webpack_require__(/*! ./parent.ts */ 7);
+	var WpApiStatuses = (function (_super) {
+	    __extends(WpApiStatuses, _super);
+	    function WpApiStatuses() {
+	        _super.apply(this, arguments);
+	    }
+	    WpApiStatuses.prototype.getList = function (options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/statuses", options);
+	    };
+	    WpApiStatuses.prototype.get = function (statusesName, options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/statuses/" + statusesName, options);
+	    };
+	    WpApiStatuses = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], WpApiStatuses);
+	    return WpApiStatuses;
+	}(parent_ts_1.WpApiParent));
+	exports.WpApiStatuses = WpApiStatuses;
+
+
+/***/ },
+/* 15 */
+/*!**********************!*\
+  !*** ./src/Terms.ts ***!
+  \**********************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 1);
+	var parent_ts_1 = __webpack_require__(/*! ./parent.ts */ 7);
+	var defaultTaxoType = 'categories';
+	var WpApiTerms = (function (_super) {
+	    __extends(WpApiTerms, _super);
+	    function WpApiTerms() {
+	        _super.apply(this, arguments);
+	    }
+	    WpApiTerms.prototype.getList = function (taxonomiesType, options) {
+	        if (taxonomiesType === void 0) { taxonomiesType = defaultTaxoType; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/" + taxonomiesType, options);
+	    };
+	    WpApiTerms.prototype.get = function (taxonomiesType, termId, options) {
+	        if (taxonomiesType === void 0) { taxonomiesType = defaultTaxoType; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/" + taxonomiesType + "/" + termId, options);
+	    };
+	    WpApiTerms.prototype.create = function (taxonomiesType, body, options) {
+	        if (taxonomiesType === void 0) { taxonomiesType = defaultTaxoType; }
+	        if (body === void 0) { body = {}; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpPost("/" + taxonomiesType, body, options);
+	    };
+	    WpApiTerms.prototype.update = function (taxonomiesType, termId, body, options) {
+	        if (taxonomiesType === void 0) { taxonomiesType = defaultTaxoType; }
+	        if (body === void 0) { body = {}; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpPost("/" + taxonomiesType + "/" + termId, body, options);
+	    };
+	    WpApiTerms.prototype.delete = function (taxonomiesType, termId, options) {
+	        if (taxonomiesType === void 0) { taxonomiesType = defaultTaxoType; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpDelete("/" + taxonomiesType + "/" + termId, options);
+	    };
+	    WpApiTerms = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], WpApiTerms);
+	    return WpApiTerms;
+	}(parent_ts_1.WpApiParent));
+	exports.WpApiTerms = WpApiTerms;
+
+
+/***/ },
+/* 16 */
+/*!***********************!*\
+  !*** ./src/Custom.ts ***!
+  \***********************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 1);
+	var parent_ts_1 = __webpack_require__(/*! ./parent.ts */ 7);
+	var WpApiCustom = (function (_super) {
+	    __extends(WpApiCustom, _super);
+	    function WpApiCustom() {
+	        _super.apply(this, arguments);
+	    }
+	    WpApiCustom.prototype.getInstance = function (entityName) {
+	        if (entityName === void 0) { entityName = null; }
+	        if (!entityName) {
+	            throw new Error("getInstance needs an entity name");
+	        }
+	        return new Custom(this.config, this.http, entityName);
+	    };
+	    WpApiCustom = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], WpApiCustom);
+	    return WpApiCustom;
+	}(parent_ts_1.WpApiParent));
+	exports.WpApiCustom = WpApiCustom;
+	var Custom = (function (_super) {
+	    __extends(Custom, _super);
+	    function Custom(config, http, entityName) {
+	        _super.call(this, config, http);
+	        this.entityName = entityName;
+	    }
+	    Custom.prototype.getList = function (options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/" + this.entityName, options);
+	    };
+	    Custom.prototype.get = function (customId, options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/" + this.entityName + "/" + customId, options);
+	    };
+	    Custom.prototype.create = function (body, options) {
+	        if (body === void 0) { body = {}; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpPost("/" + this.entityName, body, options);
+	    };
+	    Custom.prototype.update = function (customId, body, options) {
+	        if (body === void 0) { body = {}; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpPost("/" + this.entityName + "/" + customId, body, options);
+	    };
+	    Custom.prototype.delete = function (customId, options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpDelete("/" + this.entityName + "/" + customId, options);
+	    };
+	    return Custom;
+	}(parent_ts_1.WpApiParent));
+	exports.Custom = Custom;
 
 
 /***/ }

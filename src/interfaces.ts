@@ -56,3 +56,47 @@ export interface IWpApiTypes {
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(postType: string, options?: RequestOptionsArgs): Observable<Response>;
 }
+
+export interface IWpApiMedia {
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(mediaId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(mediaId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(mediaId: number, options?: RequestOptionsArgs): Observable<Response>;
+}
+
+export interface IWpApiUsers {
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  me(options?: RequestOptionsArgs): Observable<Response>;
+  get(userId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(userId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(userId: number, options?: RequestOptionsArgs): Observable<Response>;
+}
+
+export interface IWpApiTaxonomies {
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
+}
+
+export interface IWpApiStatuses {
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(statusesName: string, options?: RequestOptionsArgs): Observable<Response>;
+}
+
+export interface IWpApiTerms {
+  getList(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
+  get(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(taxonomiesType: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(taxonomiesType: string, termId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
+}
+
+
+export interface IWpApiCustom {
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(customId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(customId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(customId: number, options?: RequestOptionsArgs): Observable<Response>;
+}

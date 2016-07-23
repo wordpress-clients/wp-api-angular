@@ -1,104 +1,38 @@
-wp-api-angularjs
-================
+import { Observable } from 'rxjs/Observable';
+import { RequestOptionsArgs } from '@angular/http/src/interfaces.d.ts';
+import { Response } from '@angular/http/src/static_response.d.ts';
 
-Angular2 services to consume [WP-API v2](http://v2.wp-api.org/) (< 2.5kb gziped)
-
-If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https://github.com/shprink/wp-api-angularjs/tree/v2.0.0-rc3)
-
-## Installation
-
-### Dependencies 
-
-make sure you have those packages installed:
-
-- '@angular/core'
-- '@angular/http'
-- 'rxjs'
-
-### via npm
-
-```shell
-npm install wp-api-angularjs@v3.0.x
-```
-
-## Bootstrap
-
-
-```js
-import {
-  WPAPI_PROVIDERS,
-  defaultWpApi
-} from 'wp-api-angularjs';
-
-import {App} from './app';
-
-bootstrap(App, [
-  WPAPI_PROVIDERS,
-  defaultWpApi({
-    baseUrl: "http://YOUR_DOMAIN/wp-json/",
-    namespace: '/wp/v2' // (optional, default: '/wp/v2')
-  })
-]);
-
-```
-
-## API
-
-Every method return an Obervable. If you want to get a Promise you will need to add the rxjs `toPromise` operator:
-
-```js
-import 'rxjs/add/operator/toPromise';
-
-class Test {
-  constructor(private wpApiPosts: WpApiPosts) {
-    this.wpApiPosts.getList()
-      .toPromise()
-      .then(response => response.json())
-      .then(body => {})
-      .catch(error => {})
-  }
+export interface WpApiAppConfig {
+  baseUrl: string;
+  namespace?: string;
 }
 
-```
-
-### RequestOptionsArgs
-
-Every request can have an optional [`RequestOptionsArgs`](https://angular.io/docs/ts/latest/api/http/index/RequestOptionsArgs-interface.html) object.
-
-```js
-class RequestOptionsArgs {
-  url : string
-  method : string|RequestMethod
-  search : string|URLSearchParams
-  headers : Headers
-  body : any
-  withCredentials : boolean
+export interface IParent {
+  httpGet(url: string, options?: RequestOptionsArgs): Observable<Response>;
+  httpHead(url: string, options?: RequestOptionsArgs): Observable<Response>;
+  httpDelete(url: string, options?: RequestOptionsArgs): Observable<Response>;
+  httpPost(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  httpPut(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  httpPatch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
 }
-```
 
-This is where you can add query string to your request or change the headers.
-
-### WpApiPosts
-
-```ts
+export interface IWpApiPosts {
   getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(postId, options?: RequestOptionsArgs): Observable<Response>;
+  get(postId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(postId, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getMetaList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getMeta(postId, metaId, options?: RequestOptionsArgs): Observable<Response>;
-  getRevisionList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getRevision(postId, revisionId, options?: RequestOptionsArgs): Observable<Response>;
-  getCategoryList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getCategory(postId, categoryId, options?: RequestOptionsArgs): Observable<Response>;
-  getTagList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getTag(postId, tagId, options?: RequestOptionsArgs): Observable<Response>;
-```
+  update(postId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getMetaList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getMeta(postId: number, metaId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getRevisionList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getRevision(postId: number, revisionId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getCategoryList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getCategory(postId: number, categoryId, options?: RequestOptionsArgs): Observable<Response>;
+  getTagList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getTag(postId: number, tagId, options?: RequestOptionsArgs): Observable<Response>;
+}
 
-### WpApiPages
-
-```ts
+export interface IWpApiPages {
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
@@ -108,98 +42,60 @@ This is where you can add query string to your request or change the headers.
   getMeta(pageId: number, metaId: number, options?: RequestOptionsArgs): Observable<Response>;
   getRevisionList(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
   getRevision(pageId: number, revisionId: number, options?: RequestOptionsArgs): Observable<Response>;
-```
+}
 
-### WpApiComments
-
-```ts
+export interface IWpApiComments {
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(commentId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
   update(commentId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
   delete(commentId: number, options?: RequestOptionsArgs): Observable<Response>;
-```
+}
 
-### WpApiTypes
-
-```ts
+export interface IWpApiTypes {
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(postType: string, options?: RequestOptionsArgs): Observable<Response>;
-```
+}
 
-### WpApiMedia
-
-```ts
+export interface IWpApiMedia {
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(mediaId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
   update(mediaId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
   delete(mediaId: number, options?: RequestOptionsArgs): Observable<Response>;
-```
+}
 
-### WpApiUsers
-
-```ts
+export interface IWpApiUsers {
   getList(options?: RequestOptionsArgs): Observable<Response>;
   me(options?: RequestOptionsArgs): Observable<Response>;
   get(userId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
   update(userId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
   delete(userId: number, options?: RequestOptionsArgs): Observable<Response>;
-```
+}
 
-### WpApiTaxonomies
-
-```ts
+export interface IWpApiTaxonomies {
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
-```
+}
 
-### WpApiStatuses
-
-```ts
+export interface IWpApiStatuses {
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(statusesName: string, options?: RequestOptionsArgs): Observable<Response>;
-```
+}
 
-### WpApiTerms
-
-`taxonomiesType` can be `tags`, `categories` and more.
-
-```ts
+export interface IWpApiTerms {
   getList(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
   get(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(taxonomiesType: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
   update(taxonomiesType: string, termId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
   delete(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
-```
+}
 
-### WpApiCustom
-
-```ts
+export interface IWpApiCustom {
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(customId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
   update(customId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
   delete(customId: number, options?: RequestOptionsArgs): Observable<Response>;
-```
-
-## Authentication
-
-TO BE DEFINED
-
-## Contribute
-
-```shell
-npm install
-cp config.dist.json config.json
-
-# Open two terminals
-# and run watch to build on the lib files changes
-npm run watch
-
-# in the other terminal run following to build the test page and the doc
-npm run devserver
-```
-
-Open ```http://localhost:8080```
+}

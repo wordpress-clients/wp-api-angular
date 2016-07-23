@@ -7,7 +7,15 @@ If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https:
 
 ## Installation
 
-### npm
+### Prerequisite 
+
+make sure you have those packages installed too:
+
+- '@angular/core'
+- 'rxjs'
+- '@angular/http'
+
+### via npm
 
 ```
 npm install wp-api-angularjs@v3.0.x
@@ -32,6 +40,41 @@ bootstrap(App, [
   })
 ]);
 
+```
+
+## API
+
+
+### IWpApiPosts
+
+```
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(postId, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(postId, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(postId, options?: RequestOptionsArgs): Observable<Response>;
+  getMetaList(postId, options?: RequestOptionsArgs): Observable<Response>;
+  getMeta(postId, metaId, options?: RequestOptionsArgs): Observable<Response>;
+  getRevisionList(postId, options?: RequestOptionsArgs): Observable<Response>;
+  getRevision(postId, revisionId, options?: RequestOptionsArgs): Observable<Response>;
+  getCategoryList(postId, options?: RequestOptionsArgs): Observable<Response>;
+  getCategory(postId, categoryId, options?: RequestOptionsArgs): Observable<Response>;
+  getTagList(postId, options?: RequestOptionsArgs): Observable<Response>;
+  getTag(postId, tagId, options?: RequestOptionsArgs): Observable<Response>;
+```
+
+### IWpApiPages
+
+```
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(postId, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(postId, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(postId, options?: RequestOptionsArgs): Observable<Response>;
+  getMetaList(postId, options?: RequestOptionsArgs): Observable<Response>;
+  getMeta(postId, metaId, options?: RequestOptionsArgs): Observable<Response>;
+  getRevisionList(postId, options?: RequestOptionsArgs): Observable<Response>;
+  getRevision(postId, revisionId, options?: RequestOptionsArgs): Observable<Response>;
 ```
 
 ## Authentication

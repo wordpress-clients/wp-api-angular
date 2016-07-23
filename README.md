@@ -1,7 +1,7 @@
 wp-api-angularjs
 ================
 
-Angular2 services to consume [WP-API v2](http://v2.wp-api.org/)
+Angular2 services to consume [WP-API v2](http://v2.wp-api.org/) (< 2.5kb gziped)
 
 If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https://github.com/shprink/wp-api-angularjs/tree/v2.0.0-rc3)
 
@@ -53,12 +53,30 @@ class Test {
   constructor(private wpApiPosts: WpApiPosts) {
     this.wpApiPosts.getList()
       .toPromise()
-      .then((response) => {})
-      .catch((error) => {})
+      .then(response => response.json())
+      .then(body => {})
+      .catch(error => {})
   }
 }
 
 ```
+
+### RequestOptionsArgs
+
+Every request can have an optional [`RequestOptionsArgs`](https://angular.io/docs/ts/latest/api/http/index/RequestOptionsArgs-interface.html) object.
+
+```js
+class RequestOptionsArgs {
+  url : string
+  method : string|RequestMethod
+  search : string|URLSearchParams
+  headers : Headers
+  body : any
+  withCredentials : boolean
+}
+```
+
+This is where you can add query string to your request or change the headers.
 
 ### WpApiPosts
 

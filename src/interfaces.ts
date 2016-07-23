@@ -92,7 +92,6 @@ export interface IWpApiTerms {
   delete(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
 }
 
-
 export interface IWpApiCustom {
   getList(options?: RequestOptionsArgs): Observable<Response>;
   get(customId: number, options?: RequestOptionsArgs): Observable<Response>;

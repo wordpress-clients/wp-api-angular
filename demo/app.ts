@@ -73,7 +73,6 @@ export class App {
           this.request(wpApiCustom.getInstance(customType), serviceApi, serviceName);
         });
       } else {
-        console.log('serviceName', serviceName)
         this.request(this[serviceName], serviceApi, serviceName);
       }
     }
@@ -83,8 +82,17 @@ export class App {
     Object.keys(serviceApi).map((method) => {
       let parameters = serviceApi[method];
       service[method].apply(service, parameters).toPromise()
-        .then(() => this.requests.push({ serviceName: serviceName.slice(5), method, success: true }))
-        .catch(() => this.requests.push({ serviceName: serviceName.slice(5), method, success: false }))
+        .then(response => response.json())
+        .then(body => {
+          console.groupCollapsed(serviceName, method, JSON.stringify(parameters));
+          console.log(body);
+          console.groupEnd()
+          this.requests.push({ serviceName: serviceName.slice(5), method, success: true })
+        })
+        .catch(error => {
+          console.error(serviceName, method, error.json());
+          this.requests.push({ serviceName: serviceName.slice(5), method, success: false })
+        });
     });
   }
 }

@@ -45,7 +45,7 @@ bootstrap(App, [
 ## API
 
 
-### IWpApiPosts
+### WpApiPosts
 
 ```
   getList(options?: RequestOptionsArgs): Observable<Response>;
@@ -63,18 +63,35 @@ bootstrap(App, [
   getTag(postId, tagId, options?: RequestOptionsArgs): Observable<Response>;
 ```
 
-### IWpApiPages
+### WpApiPages
 
 ```
   getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(postId, options?: RequestOptionsArgs): Observable<Response>;
+  get(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(postId, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getMetaList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getMeta(postId, metaId, options?: RequestOptionsArgs): Observable<Response>;
-  getRevisionList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getRevision(postId, revisionId, options?: RequestOptionsArgs): Observable<Response>;
+  update(pageId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getMetaList(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getMeta(pageId: number, metaId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getRevisionList(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getRevision(pageId: number, revisionId: number, options?: RequestOptionsArgs): Observable<Response>;
+```
+
+### WpApiComments
+
+```
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(commentId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(commentId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(commentId: number, options?: RequestOptionsArgs): Observable<Response>;
+```
+
+### IWpApiTypes
+
+```
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(postType: string, options?: RequestOptionsArgs): Observable<Response>;
 ```
 
 ## Authentication

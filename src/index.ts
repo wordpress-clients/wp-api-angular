@@ -11,9 +11,13 @@ import { WpApiApp, WpApiConfig } from './tokens';
 
 import { WpApiPosts } from './Posts';
 import { WpApiPages } from './Pages';
+import { WpApiComments } from './Comments';
+import { WpApiTypes } from './Types';
 
 export * from './Posts';
 export * from './Pages';
+export * from './Comments';
+export * from './Types';
 
 
 export const defaultWpApi = (config: WpApiAppConfig): Provider => {
@@ -27,15 +31,17 @@ export const defaultWpApi = (config: WpApiAppConfig): Provider => {
 
 export const WPAPI_PROVIDERS: any[] = [
   HTTP_PROVIDERS,
-  {
-    provide: WpApiPosts,
-    useFactory: (config: WpApiAppConfig, http: Http) => new WpApiPosts(config, http),
-    deps: [WpApiConfig, Http]
-  },
-  {
-    provide: WpApiPages,
-    useFactory: (config: WpApiAppConfig, http: Http) => new WpApiPages(config, http),
+  createProvider(WpApiPosts),
+  createProvider(WpApiPages),
+  createProvider(WpApiComments),
+  createProvider(WpApiTypes)
+];
+
+function createProvider(service) {
+  return {
+    provide: service,
+    useFactory: (config: WpApiAppConfig, http: Http) => new service(config, http),
     deps: [WpApiConfig, Http]
   }
-];
+}
 

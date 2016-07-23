@@ -78,8 +78,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	var tokens_1 = __webpack_require__(/*! ./tokens */ 5);
 	var Posts_1 = __webpack_require__(/*! ./Posts */ 6);
 	var Pages_1 = __webpack_require__(/*! ./Pages */ 8);
+	var Comments_1 = __webpack_require__(/*! ./Comments */ 9);
+	var Types_1 = __webpack_require__(/*! ./Types */ 10);
 	__export(__webpack_require__(/*! ./Posts */ 6));
 	__export(__webpack_require__(/*! ./Pages */ 8));
+	__export(__webpack_require__(/*! ./Comments */ 9));
+	__export(__webpack_require__(/*! ./Types */ 10));
 	exports.defaultWpApi = function (config) {
 	    // remove a trailing slash
 	    config.baseUrl = utils_1.stripTrailingSlash(config.baseUrl);
@@ -90,17 +94,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	exports.WPAPI_PROVIDERS = [
 	    http_1.HTTP_PROVIDERS,
-	    {
-	        provide: Posts_1.WpApiPosts,
-	        useFactory: function (config, http) { return new Posts_1.WpApiPosts(config, http); },
-	        deps: [tokens_1.WpApiConfig, http_1.Http]
-	    },
-	    {
-	        provide: Pages_1.WpApiPages,
-	        useFactory: function (config, http) { return new Pages_1.WpApiPages(config, http); },
-	        deps: [tokens_1.WpApiConfig, http_1.Http]
-	    }
+	    createProvider(Posts_1.WpApiPosts),
+	    createProvider(Pages_1.WpApiPages),
+	    createProvider(Comments_1.WpApiComments),
+	    createProvider(Types_1.WpApiTypes)
 	];
+	function createProvider(service) {
+	    return {
+	        provide: service,
+	        useFactory: function (config, http) { return new service(config, http); },
+	        deps: [tokens_1.WpApiConfig, http_1.Http]
+	    };
+	}
 
 
 /***/ },
@@ -392,6 +397,112 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return WpApiPages;
 	}(parent_ts_1.WpApiParent));
 	exports.WpApiPages = WpApiPages;
+
+
+/***/ },
+/* 9 */
+/*!*************************!*\
+  !*** ./src/Comments.ts ***!
+  \*************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 1);
+	var parent_ts_1 = __webpack_require__(/*! ./parent.ts */ 7);
+	var WpApiComments = (function (_super) {
+	    __extends(WpApiComments, _super);
+	    function WpApiComments() {
+	        _super.apply(this, arguments);
+	    }
+	    WpApiComments.prototype.getList = function (options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/comments", options);
+	    };
+	    WpApiComments.prototype.get = function (commentId, options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/comments/" + commentId, options);
+	    };
+	    WpApiComments.prototype.create = function (body, options) {
+	        if (body === void 0) { body = {}; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpPost("/comments", body, options);
+	    };
+	    WpApiComments.prototype.update = function (commentId, body, options) {
+	        if (body === void 0) { body = {}; }
+	        if (options === void 0) { options = {}; }
+	        return this.httpPost("/comments/" + commentId, body, options);
+	    };
+	    WpApiComments.prototype.delete = function (commentId, options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpDelete("/comments/" + commentId, options);
+	    };
+	    WpApiComments = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], WpApiComments);
+	    return WpApiComments;
+	}(parent_ts_1.WpApiParent));
+	exports.WpApiComments = WpApiComments;
+
+
+/***/ },
+/* 10 */
+/*!**********************!*\
+  !*** ./src/Types.ts ***!
+  \**********************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(/*! @angular/core */ 1);
+	var parent_ts_1 = __webpack_require__(/*! ./parent.ts */ 7);
+	var WpApiTypes = (function (_super) {
+	    __extends(WpApiTypes, _super);
+	    function WpApiTypes() {
+	        _super.apply(this, arguments);
+	    }
+	    WpApiTypes.prototype.getList = function (options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/types", options);
+	    };
+	    WpApiTypes.prototype.get = function (postType, options) {
+	        if (options === void 0) { options = {}; }
+	        return this.httpGet("/types/" + postType, options);
+	    };
+	    WpApiTypes = __decorate([
+	        core_1.Injectable(), 
+	        __metadata('design:paramtypes', [])
+	    ], WpApiTypes);
+	    return WpApiTypes;
+	}(parent_ts_1.WpApiParent));
+	exports.WpApiTypes = WpApiTypes;
 
 
 /***/ }

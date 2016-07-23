@@ -18,28 +18,41 @@ export interface IParent {
 
 export interface IWpApiPosts {
   getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(postId, options?: RequestOptionsArgs): Observable<Response>;
+  get(postId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(postId, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getMetaList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getMeta(postId, metaId, options?: RequestOptionsArgs): Observable<Response>;
-  getRevisionList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getRevision(postId, revisionId, options?: RequestOptionsArgs): Observable<Response>;
-  getCategoryList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getCategory(postId, categoryId, options?: RequestOptionsArgs): Observable<Response>;
-  getTagList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getTag(postId, tagId, options?: RequestOptionsArgs): Observable<Response>;
+  update(postId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getMetaList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getMeta(postId: number, metaId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getRevisionList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getRevision(postId: number, revisionId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getCategoryList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getCategory(postId: number, categoryId, options?: RequestOptionsArgs): Observable<Response>;
+  getTagList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getTag(postId: number, tagId, options?: RequestOptionsArgs): Observable<Response>;
 }
 
 export interface IWpApiPages {
   getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(postId, options?: RequestOptionsArgs): Observable<Response>;
+  get(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
   create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(postId, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getMetaList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getMeta(postId, metaId, options?: RequestOptionsArgs): Observable<Response>;
-  getRevisionList(postId, options?: RequestOptionsArgs): Observable<Response>;
-  getRevision(postId, revisionId, options?: RequestOptionsArgs): Observable<Response>;
+  update(pageId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getMetaList(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getMeta(pageId: number, metaId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getRevisionList(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getRevision(pageId: number, revisionId: number, options?: RequestOptionsArgs): Observable<Response>;
+}
+
+export interface IWpApiComments {
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(commentId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(commentId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(commentId: number, options?: RequestOptionsArgs): Observable<Response>;
+}
+
+export interface IWpApiTypes {
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(postType: string, options?: RequestOptionsArgs): Observable<Response>;
 }

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import {
   WpApiPosts,
-  WpApiPages
+  WpApiPages,
+  WpApiComments,
+  WpApiTypes
 } from 'wp-api-angularjs';
 let config = require('../config.json');
 
@@ -38,7 +40,9 @@ export class App {
   requests = [];
   constructor(
     private wpApiPosts: WpApiPosts,
-    private wpApiPages: WpApiPages
+    private wpApiPages: WpApiPages,
+    private wpApiComments: WpApiComments,
+    private wpApiTypes: WpApiTypes
   ) {
     const serviceNames = Object.keys(config.api);
     for (let i = 0, len = serviceNames.length; i <= len; i++) {

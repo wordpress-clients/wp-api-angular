@@ -1,43 +1,54 @@
 var path = require('path'),
-    testPath = path.join(__dirname, 'test'),
-    wwwPath = path.join(__dirname, 'www'),
-    docsPath = path.join(__dirname, 'docs'),
-    JSdoc = require('./webpack/jsdoc.js'),
-    pkg = require('./package.json'),
-    HtmlWebpackPlugin = require('html-webpack-plugin');
+  webpack = require("webpack"),
+  demoPath = path.join(__dirname, 'demo'),
+  wwwPath = path.join(__dirname, 'www'),
+  docsPath = path.join(__dirname, 'docs'),
+  pkg = require('./package.json'),
+  HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: path.join(testPath, 'index.js'),
-    output: {
-        path: wwwPath,
-        filename: 'test.js'
+  entry: {
+    aPolyfills: [
+      'core-js',
+      'reflect-metadata',
+      'zone.js'
+    ],
+    bVendors: [
+      '@angular/core',
+      'rxjs',
+      'rxjs/add/operator/toPromise'
+    ],
+    cApp: path.join(demoPath, 'index.ts')
+  },
+  output: {
+    path: wwwPath,
+    filename: '[name]-[hash:6].js'
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.json$/,
+        loader: "json"
+      },
+      {
+        test: /\.ts$/,
+        exclude: /(node_modules)/,
+        loader: 'ts'
+      }
+    ]
+  },
+  resolve: {
+    root: path.resolve(__dirname),
+    alias: {
+      [pkg.name]: pkg.main
     },
-    module: {
-        loaders: [{
-            test: /[\/]angular\.js$/,
-            loader: 'expose?angular!exports?window.angular'
-        }, {
-            test: /\.json$/,
-            loader: "json"
-        }, {
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            loader: "ng-annotate?add=true!babel"
-        }]
-    },
-    plugins: [new HtmlWebpackPlugin({
-        filename: 'index.html',
-        pkg: pkg,
-        template: path.join(testPath, 'index.html')
-    }), new JSdoc({
-        glob: [
-            './lib/**/*.js'
-        ],
-        output: docsPath,
-        ngdocs: {
-            html5Mode: false,
-            title: pkg.name,
-            titleLink: '/wp-api-angularjs'
-        }
+    extensions: ['', '.ts', '.js', '.json']
+  },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new HtmlWebpackPlugin({
+      pkg: pkg,
+      inject: 'body',
+      template: path.join(demoPath, 'index.html')
     })]
 };

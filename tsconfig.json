@@ -2,17 +2,21 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "declaration": false,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "noLib": false,
+    "moduleResolution": "node",
+    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
-    "listFiles": false,
-    "outDir": "dist"
+    "removeComments": false,
+    "noImplicitAny": false
   },
   "files": [
-    "test/v2/bootstrap.ts"
-  ]
+    "demo/index.ts",
+    "typings/overwrite.d.ts",
+    "typings/index.d.ts",
+    "node_modules/rxjs/add/operator/toPromise.d.ts"
+  ],
+  "compileOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }

@@ -1,6 +1,8 @@
 wp-api-angularjs
 ================
 
+[![Join the chat at https://gitter.im/shprink/wp-api-angularjs](https://badges.gitter.im/shprink/wp-api-angularjs.svg)](https://gitter.im/shprink/wp-api-angularjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Angular2 services to consume [WP-API v2](http://v2.wp-api.org/) (< 2.5kb gziped)
 
 If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https://github.com/shprink/wp-api-angularjs/tree/v2.0.0-rc3)

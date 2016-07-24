@@ -3,7 +3,7 @@
     "api" : {
       "wpApiPosts": {
         "getList": [{
-            "per_page": 1
+          "search": "_embed=true&per_page=1"
         }],
         "get": [2016],
         "getMetaList": [2016],
@@ -18,20 +18,14 @@
       "wpApiCustom": {
         "movie": {
             "getList": [{
-                "per_page": 1
+              "search": "_embed=true&per_page=1"
             }],
-            "get": [295]
-        },
-        "plane": {
-            "getList": [{
-                "per_page": 1
-            }],
-            "get": [295]
+            "get": [2595]
         }
       },
       "wpApiPages": {
           "getList": [{
-              "per_page": 1
+            "search": "_embed=true&per_page=1"
           }],
           "get": [535],
           "getMetaList": [535],
@@ -41,13 +35,13 @@
       },
       "wpApiMedia": {
           "getList": [{
-              "per_page": 1
+            "search": "_embed=true&per_page=1"
           }],
-          "get": [2032]
+          "get": [2499]
       },
       "wpApiTypes": {
           "getList": [{
-              "per_page": 1
+            "search": "_embed=true&per_page=1"
           }],
           "get": ["attachment"]
       },
@@ -59,14 +53,13 @@
           "getList": [],
           "get": ["category"]
       },
-      "wpApiTerms": {
-          "getCategoryList": [],
-          "getCategory": [2],
-          "getTagList": [],
-          "getTag": [11],
-          "getCustomList": ["audience"],
-          "getCustom": ["audience", 6]
-      },
+      "wpApiTerms": [{
+          "getList": ["tags"],
+          "get": ["tags", 11]
+      },{
+          "getList": ["categories"],
+          "get": ["categories", 2]
+      }],
       "wpApiUsers": {
           "getList": [],
           "get": [1],

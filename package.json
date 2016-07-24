@@ -1,12 +1,11 @@
 {
   "name": "wp-api-angularjs",
-  "version": "3.0.0-alpha1",
+  "version": "3.0.0-alpha2",
   "description": "WordPress WP-API v2 client for Angular2",
   "main": "dist/wp-api-angularjs.js",
   "scripts": {
     "start": "webpack-dev-server --port 8080 --json --progress --config webpack.config.js",
     "build": "npm run dumpdev && npm run dumpprod",
-    "publish": "npm run build && npm publish dist",
     "dumpdev": "ENV=dev webpack --progress --colors --config webpack.config.dist.js -d",
     "dumpprod": "ENV=prod webpack --progress --colors --config webpack.config.dist.js -p",
     "watch": "ENV=dev webpack --watch --progress --colors --config webpack.config.dist.js -d",
@@ -53,7 +52,9 @@
     "webpack-dev-server": "~1.14.1",
     "zone.js": "^0.6.12"
   },
-  "dependencies": {
-    "js-base64": "^2.1.9"
+  "peerDependencies": {
+    "@angular/core": "2.0.0-rc.2 || 2.0.0-rc.3 || 2.0.0-rc.4 || 2.0.0-rc.5 || 2.0.0-rc.6 || 2.0.0-rc.7 || 2.0.0-rc.8 || 2.0.0-rc.9",
+    "@angular/http": "2.0.0-rc.2 || 2.0.0-rc.3 || 2.0.0-rc.4 || 2.0.0-rc.5 || 2.0.0-rc.6 || 2.0.0-rc.7 || 2.0.0-rc.8 || 2.0.0-rc.9",
+    "rxjs": "5.0.0-beta.6"
   }
 }

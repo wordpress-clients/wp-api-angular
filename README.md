@@ -5,6 +5,8 @@ wp-api-angularjs
 
 Angular2 services to consume [WP-API v2](http://v2.wp-api.org/) (< 2.5kb gziped)
 
+[Live Demo](https://plnkr.co/edit/hqE4bvbM6HXql5Insjx8?p=preview)
+
 If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https://github.com/shprink/wp-api-angularjs/tree/v2.0.0-rc3)
 
 ## Installation
@@ -68,7 +70,21 @@ class RequestOptionsArgs {
 }
 ```
 
-This is where you can add query string to your request or change the headers.
+This is where you can add query string to your request or change the headers (see below).
+
+```
+import { Headers } from '@angular/http';
+
+const headers = new Headers({
+  'Content-Type': 'application/json;charset=UTF-8',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Max-Age': '1728000',
+  'Access-Control-Allow-Headers': 'Content-Type, Content-Range, Content-Disposition, Content-Description'
+  'Access-Control-Allow-Methods': 'DELETE, HEAD, GET, OPTIONS, POST, PUT'
+});
+
+wpApiPosts.getList({ headers });
+```
 
 ### WpApiPosts
 

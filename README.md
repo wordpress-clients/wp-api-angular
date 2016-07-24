@@ -7,18 +7,8 @@ If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https:
 
 ## Installation
 
-### Dependencies 
-
-make sure you have those packages installed:
-
-- '@angular/core'
-- '@angular/http'
-- 'rxjs'
-
-### via npm
-
 ```shell
-npm install wp-api-angularjs@v3.0.x
+npm install wp-api-angularjs
 ```
 
 ## Bootstrap

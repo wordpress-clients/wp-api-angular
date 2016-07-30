@@ -10,7 +10,7 @@ import {
   WpApiStatuses,
   WpApiTerms,
   WpApiCustom
-} from 'wp-api-angularjs';
+} from '../dist/wp-api-angular';
 let config = require('../config.json');
 
 @Component({

@@ -2,18 +2,23 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "rootDir": "src",
+    "outDir": "dist",
+    "sourceMap": true,
+    "inlineSources": true,
+    "declaration": true,
+    "removeComments": true
   },
   "files": [
-    "demo/index.ts",
-    "typings/overwrite.d.ts",
-    "typings/index.d.ts",
-    "node_modules/rxjs/add/operator/toPromise.d.ts"
+    "./src/wp-api-angular.ts",
+    "./typings/overwrite.d.ts",
+    "./typings/index.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ],
   "compileOnSave": false,
   "atom": {

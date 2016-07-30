@@ -8,7 +8,7 @@ let path = require('path'),
   HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProd = process.env.ENV === 'prod';
-const filename = isProd ? 'wp-api-angularjs.min.js' : 'wp-api-angularjs.js'
+const filename = isProd ? 'wp-api-angular.umd.min.js' : 'wp-api-angular.umd.js'
 
 copyright = copyright.replace('{pkg.name}', pkg.name)
   .replace('{pkg.description}', pkg.description)
@@ -30,7 +30,7 @@ if (isProd) {
 }
 
 module.exports = {
-  entry: path.join(srcPath, 'index.ts'),
+  entry: path.join(srcPath, 'wp-api-angular.ts'),
   output: {
     path: distPath,
     libraryTarget: "umd",
@@ -43,6 +43,7 @@ module.exports = {
     {
       'rxjs': 'rxjs',
       'rxjs/Observable': 'rxjs/Observable',
+      'rxjs/Observable.d.ts': 'rxjs/Observable.d.ts',
       '@angular/core': '@angular/core',
       '@angular/http': '@angular/http'
     }
@@ -53,6 +54,12 @@ module.exports = {
       exclude: /(node_modules)/,
       loader: 'ts'
     }]
+  },
+  ts: {
+    compilerOptions: {
+      outDir: '.',
+      declaration: false
+    }
   },
   plugins: plugins
 }

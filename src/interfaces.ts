@@ -1,11 +1,7 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable.d.ts';
 import { RequestOptionsArgs } from '@angular/http/src/interfaces.d.ts';
 import { Response } from '@angular/http/src/static_response.d.ts';
 
-export interface WpApiAppConfig {
-  baseUrl: string;
-  namespace?: string;
-}
 
 export interface IParent {
   httpGet(url: string, options?: RequestOptionsArgs): Observable<Response>;

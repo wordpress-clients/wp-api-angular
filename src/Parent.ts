@@ -1,7 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { WpApiAppConfig, IParent } from './interfaces';
+// Need to import interfaces dependencies
+// Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
+import { Observable } from 'rxjs/Observable.d.ts';
+import { RequestOptionsArgs } from '@angular/http/src/interfaces.d.ts';
+import { Response } from '@angular/http/src/static_response.d.ts';
+
+import { WpApiAppConfig } from './wp-api-angular';
+
+export interface IParent {
+  httpGet(url: string, options?: RequestOptionsArgs): Observable<Response>;
+  httpHead(url: string, options?: RequestOptionsArgs): Observable<Response>;
+  httpDelete(url: string, options?: RequestOptionsArgs): Observable<Response>;
+  httpPost(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  httpPut(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  httpPatch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
+}
 
 @Injectable()
 export class WpApiParent implements IParent {

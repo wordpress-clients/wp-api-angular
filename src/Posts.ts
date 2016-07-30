@@ -1,6 +1,28 @@
 import { Injectable } from '@angular/core';
-import { WpApiParent } from './parent.ts';
-import { IWpApiPosts } from './interfaces';
+
+// Need to import interfaces dependencies
+// Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
+import { Observable } from 'rxjs/Observable.d.ts';
+import { RequestOptionsArgs } from '@angular/http/src/interfaces.d.ts';
+import { Response } from '@angular/http/src/static_response.d.ts';
+
+import { WpApiParent } from './Parent';
+
+export interface IWpApiPosts {
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  get(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(postId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getMetaList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getMeta(postId: number, metaId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getRevisionList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getRevision(postId: number, revisionId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getCategoryList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getCategory(postId: number, categoryId, options?: RequestOptionsArgs): Observable<Response>;
+  getTagList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
+  getTag(postId: number, tagId, options?: RequestOptionsArgs): Observable<Response>;
+}
 
 @Injectable()
 export class WpApiPosts extends WpApiParent implements IWpApiPosts {

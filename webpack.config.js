@@ -39,10 +39,10 @@ module.exports = {
   },
   resolve: {
     root: path.resolve(__dirname),
-    alias: {
-      [pkg.name]: pkg.main
-    },
     extensions: ['', '.ts', '.js', '.json']
+  },
+  ts: {
+    configFileName: './tsconfig.demo.json'
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),

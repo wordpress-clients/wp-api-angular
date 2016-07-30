@@ -1,6 +1,20 @@
 import { Injectable } from '@angular/core';
-import { WpApiParent } from './parent.ts';
-import { IWpApiTerms } from './interfaces';
+
+// Need to import interfaces dependencies
+// Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
+import { Observable } from 'rxjs/Observable.d.ts';
+import { RequestOptionsArgs } from '@angular/http/src/interfaces.d.ts';
+import { Response } from '@angular/http/src/static_response.d.ts';
+
+import { WpApiParent } from './Parent';
+
+export interface IWpApiTerms {
+  getList(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
+  get(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(taxonomiesType: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(taxonomiesType: string, termId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
+}
 
 const defaultTaxoType = 'categories';
 

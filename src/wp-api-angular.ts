@@ -6,7 +6,6 @@ import 'rxjs';
 import { Http, HTTP_PROVIDERS } from '@angular/http';
 
 import { stripTrailingSlash } from './utils';
-import { WpApiAppConfig } from './interfaces';
 import { WpApiApp, WpApiConfig } from './tokens';
 
 import { WpApiPosts } from './Posts';
@@ -31,6 +30,10 @@ export * from './Statuses';
 export * from './Terms';
 export * from './Custom';
 
+export interface WpApiAppConfig {
+  baseUrl: string;
+  namespace?: string;
+}
 
 export const defaultWpApi = (config: WpApiAppConfig): Provider => {
   // remove a trailing slash

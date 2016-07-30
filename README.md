@@ -1,19 +1,27 @@
-wp-api-angularjs
+wp-api-angular
 ================
 
-[![Join the chat at https://gitter.im/shprink/wp-api-angularjs](https://badges.gitter.im/shprink/wp-api-angularjs.svg)](https://gitter.im/shprink/wp-api-angularjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/shprink/wp-api-angular](https://badges.gitter.im/shprink/wp-api-angular.svg)](https://gitter.im/shprink/wp-api-angular?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Angular2 services to consume [WP-API v2](http://v2.wp-api.org/) (< 2.5kb gziped)
+Angular2 services to consume [WP-API v2](http://v2.wp-api.org/)
 
 [Live Demo](https://plnkr.co/edit/hqE4bvbM6HXql5Insjx8?p=preview)
 
-If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https://github.com/shprink/wp-api-angularjs/tree/v2.0.0-rc3)
+If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https://github.com/shprink/wp-api-angular/tree/v2.0.0-rc3)
 
 ## Installation
 
 ```shell
-npm install wp-api-angularjs
+npm install wp-api-angular
 ```
+
+### TypeScript
+
+Nothing special if you use TS
+
+### UMD
+
+UMD files are available `wp-api-angular.umd.js` and `wp-api-angular.umd.min.js`, the [Live Demo](https://plnkr.co/edit/hqE4bvbM6HXql5Insjx8?p=preview) uses them with systemJS
 
 ## Bootstrap
 
@@ -22,7 +30,7 @@ npm install wp-api-angularjs
 import {
   WPAPI_PROVIDERS,
   defaultWpApi
-} from 'wp-api-angularjs';
+} from 'wp-api-angular';
 
 import {App} from './app';
 

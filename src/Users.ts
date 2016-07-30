@@ -1,6 +1,21 @@
 import { Injectable } from '@angular/core';
-import { WpApiParent } from './parent.ts';
-import { IWpApiUsers } from './interfaces';
+
+// Need to import interfaces dependencies
+// Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
+import { Observable } from 'rxjs/Observable.d.ts';
+import { RequestOptionsArgs } from '@angular/http/src/interfaces.d.ts';
+import { Response } from '@angular/http/src/static_response.d.ts';
+
+import { WpApiParent } from './Parent';
+
+export interface IWpApiUsers {
+  getList(options?: RequestOptionsArgs): Observable<Response>;
+  me(options?: RequestOptionsArgs): Observable<Response>;
+  get(userId: number, options?: RequestOptionsArgs): Observable<Response>;
+  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
+  update(userId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
+  delete(userId: number, options?: RequestOptionsArgs): Observable<Response>;
+}
 
 @Injectable()
 export class WpApiUsers extends WpApiParent implements IWpApiUsers {

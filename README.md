@@ -7,7 +7,7 @@ Angular2 services to consume [WP-API v2](http://v2.wp-api.org/)
 
 [Live Demo](https://plnkr.co/edit/hqE4bvbM6HXql5Insjx8?p=preview)
 
-If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https://github.com/shprink/wp-api-angular/tree/v2.0.0-rc3)
+If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https://www.npmjs.com/package/wp-api-angularjs). `npm i wp-api-angularjs@v2.0.0-rc3`
 
 ## Installation
 

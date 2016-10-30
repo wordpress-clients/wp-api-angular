@@ -7,7 +7,7 @@ Angular2 services to consume [WP-API v2](http://v2.wp-api.org/)
 
 [Live Demo](https://plnkr.co/edit/hqE4bvbM6HXql5Insjx8?p=preview)
 
-If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https://github.com/shprink/wp-api-angular/tree/v2.0.0-rc3)
+If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https://www.npmjs.com/package/wp-api-angularjs). `npm i wp-api-angularjs@v2.0.0-rc3`
 
 ## Installation
 
@@ -27,21 +27,23 @@ UMD files are available `wp-api-angular.umd.js` and `wp-api-angular.umd.min.js`,
 
 
 ```js
-import {
-  WPAPI_PROVIDERS,
-  defaultWpApi
-} from 'wp-api-angular';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { WpApiModule } from 'wp-api-angular'
+import { App } from './app';
 
-import {App} from './app';
-
-bootstrap(App, [
-  WPAPI_PROVIDERS,
-  defaultWpApi({
-    baseUrl: "http://YOUR_DOMAIN/wp-json/",
-    namespace: '/wp/v2' // (optional, default: '/wp/v2')
-  })
-]);
-
+@NgModule({
+  imports: [
+    BrowserModule,
+    WpApiModule.initializeApp({
+      baseUrl: "http://YOUR_DOMAIN/wp-json/",
+      namespace: '/wp/v2' // (optional, default: '/wp/v2')
+    })
+  ],
+  declarations: [App],
+  bootstrap: [App]
+})
+export class AppModule { }
 ```
 
 ## API

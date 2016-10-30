@@ -10,7 +10,7 @@ module.exports = {
   entry: {
     aPolyfills: [
       'core-js',
-      'reflect-metadata',
+      'reflect-metadata/Reflect.js',
       'zone.js'
     ],
     bVendors: [

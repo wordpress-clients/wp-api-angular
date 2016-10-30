@@ -84,9 +84,9 @@ export class App {
       service[method].apply(service, parameters).toPromise()
         .then(response => response.json())
         .then(body => {
-          console.groupCollapsed(serviceName, method, JSON.stringify(parameters));
-          console.log(body);
-          console.groupEnd()
+          // console.groupCollapsed(serviceName, method, JSON.stringify(parameters));
+          // console.log(body);
+          // console.groupEnd()
           this.requests.push({ serviceName: serviceName.slice(5), method, success: true })
         })
         .catch(error => {

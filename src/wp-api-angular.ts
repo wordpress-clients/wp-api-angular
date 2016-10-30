@@ -1,9 +1,10 @@
 import {
-  provide,
-  Provider
+  Provider,
+  NgModule,
+  ModuleWithProviders
 } from '@angular/core';
 import 'rxjs';
-import { Http, HTTP_PROVIDERS } from '@angular/http';
+import { Http, HttpModule } from '@angular/http';
 
 import { stripTrailingSlash } from './utils';
 import { WpApiApp, WpApiConfig } from './tokens';
@@ -35,28 +36,34 @@ export interface WpApiAppConfig {
   namespace?: string;
 }
 
-export const defaultWpApi = (config: WpApiAppConfig): Provider => {
-  // remove a trailing slash
-  config.baseUrl = stripTrailingSlash(config.baseUrl);
-  config.namespace = config.namespace || '/wp/v2';
-  return provide(WpApiConfig, {
-    useValue: config
-  });
-};
+@NgModule({
+  imports: [
+    HttpModule
+  ]
+})
+export class WpApiModule {
+  static initializeApp(config: WpApiAppConfig): ModuleWithProviders {
+    config.baseUrl = stripTrailingSlash(config.baseUrl);
+    config.namespace = config.namespace || '/wp/v2';
 
-export const WPAPI_PROVIDERS: any[] = [
-  HTTP_PROVIDERS,
-  createProvider(WpApiPosts),
-  createProvider(WpApiPages),
-  createProvider(WpApiComments),
-  createProvider(WpApiTypes),
-  createProvider(WpApiMedia),
-  createProvider(WpApiUsers),
-  createProvider(WpApiTaxonomies),
-  createProvider(WpApiStatuses),
-  createProvider(WpApiTerms),
-  createProvider(WpApiCustom)
-];
+    return {
+      ngModule: WpApiModule,
+      providers: [
+        { provide: WpApiConfig, useValue: config },
+        createProvider(WpApiPosts),
+        createProvider(WpApiPages),
+        createProvider(WpApiComments),
+        createProvider(WpApiTypes),
+        createProvider(WpApiMedia),
+        createProvider(WpApiUsers),
+        createProvider(WpApiTaxonomies),
+        createProvider(WpApiStatuses),
+        createProvider(WpApiTerms),
+        createProvider(WpApiCustom)
+      ]
+    };
+  }
+}
 
 function createProvider(service) {
   return {

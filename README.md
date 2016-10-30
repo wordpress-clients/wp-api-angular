@@ -27,21 +27,23 @@ UMD files are available `wp-api-angular.umd.js` and `wp-api-angular.umd.min.js`,
 
 
 ```js
-import {
-  WPAPI_PROVIDERS,
-  defaultWpApi
-} from 'wp-api-angular';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { WpApiModule } from 'wp-api-angular'
+import { App } from './app';
 
-import {App} from './app';
-
-bootstrap(App, [
-  WPAPI_PROVIDERS,
-  defaultWpApi({
-    baseUrl: "http://YOUR_DOMAIN/wp-json/",
-    namespace: '/wp/v2' // (optional, default: '/wp/v2')
-  })
-]);
-
+@NgModule({
+  imports: [
+    BrowserModule,
+    WpApiModule.initializeApp({
+      baseUrl: "http://YOUR_DOMAIN/wp-json/",
+      namespace: '/wp/v2' // (optional, default: '/wp/v2')
+    })
+  ],
+  declarations: [App],
+  bootstrap: [App]
+})
+export class AppModule { }
 ```
 
 ## API

@@ -3,9 +3,9 @@ import { Http } from '@angular/http';
 
 // Need to import interfaces dependencies
 // Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
-import { Observable } from 'rxjs/Observable.d.ts';
-import { RequestOptionsArgs } from '@angular/http/src/interfaces.d.ts';
-import { Response } from '@angular/http/src/static_response.d.ts';
+import { Observable } from 'rxjs/Observable';
+import { RequestOptionsArgs } from '@angular/http/src/interfaces';
+import { Response } from '@angular/http/src/static_response';
 
 import { WpApiAppConfig } from './wp-api-angular';
 

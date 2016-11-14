@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs/Observable.d.ts';
-import { RequestOptionsArgs } from '@angular/http/src/interfaces.d.ts';
-import { Response } from '@angular/http/src/static_response.d.ts';
+import { Observable } from 'rxjs/Observable';
+import { RequestOptionsArgs } from '@angular/http/src/interfaces';
+import { Response } from '@angular/http/src/static_response';
 
 
 export interface IParent {

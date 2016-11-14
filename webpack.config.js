@@ -8,17 +8,15 @@ var path = require('path'),
 
 module.exports = {
   entry: {
-    aPolyfills: [
+    bundle: [
       'core-js',
       'reflect-metadata/Reflect.js',
-      'zone.js'
-    ],
-    bVendors: [
+      'zone.js',
       '@angular/core',
       'rxjs',
-      'rxjs/add/operator/toPromise'
-    ],
-    cApp: path.join(demoPath, 'index.ts')
+      'rxjs/add/operator/toPromise',
+      path.join(demoPath, 'index.ts')
+    ]
   },
   output: {
     path: wwwPath,

@@ -1,3 +1,8 @@
+<a name="3.0.0-beta1"></a>
+### 3.0.0-beta1 (2016-11-14)
+
+Remove `d.ts` extensions <https://github.com/shprink/wp-api-angular/issues/15>
+
 <a name="3.0.0-alpha8"></a>
 ### 3.0.0-alpha8 (2016-10-30)
 

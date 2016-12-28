@@ -12,6 +12,7 @@ If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https:
 ## Installation
 
 ```shell
+npm install -g typings
 npm install wp-api-angular
 ```
 

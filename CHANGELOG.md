@@ -1,3 +1,8 @@
+<a name="3.0.0-beta3"></a>
+### 3.0.0-beta3 (2017-01-22)
+
+Add AOT support <https://github.com/shprink/wp-api-angular/issues/19>
+
 <a name="3.0.0-beta2"></a>
 ### 3.0.0-beta2 (2016-11-14)
 

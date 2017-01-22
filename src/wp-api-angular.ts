@@ -39,6 +39,9 @@ export interface WpApiAppConfig {
 @NgModule({
   imports: [
     HttpModule
+  ],
+  exports: [
+    HttpModule
   ]
 })
 export class WpApiModule {

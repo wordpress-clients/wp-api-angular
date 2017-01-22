@@ -1,4 +1,8 @@
-wp-api-angular
+<p align="center">
+  <h1 align="center">wp-api-angular</h1>
+  <p align="center">Angular >=2 services for WordPress >= 4.7 Rest API</p>
+</p>
+
 ================
 
 [![Join the chat at https://gitter.im/shprink/wp-api-angular](https://badges.gitter.im/shprink/wp-api-angular.svg)](https://gitter.im/shprink/wp-api-angular?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -12,6 +16,7 @@ If you want to use AngularJS v1, here is the latest version: [v2.0.0-rc3](https:
 ## Installation
 
 ```shell
+npm install -g typings
 npm install wp-api-angular
 ```
 
@@ -216,8 +221,8 @@ cp config.dist.json config.json
 # and run watch to build on the lib files changes
 npm run watch
 
-# in the other terminal run following to build the test page and the doc
-npm run devserver
+# in the other terminal run following to build the test page
+npm start
 ```
 
 Open ```http://localhost:8080```

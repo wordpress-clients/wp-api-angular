@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
 // Need to import interfaces dependencies
 // Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
@@ -7,6 +8,7 @@ import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { Response } from '@angular/http/src/static_response';
 
 import { WpApiParent } from './Parent';
+import { WpApiAppConfig } from './wp-api-angular';
 
 export interface IWpApiCustom {
   getList(options?: RequestOptionsArgs): Observable<Response>;
@@ -16,18 +18,11 @@ export interface IWpApiCustom {
   delete(customId: number, options?: RequestOptionsArgs): Observable<Response>;
 }
 
-@Injectable()
-export class WpApiCustom extends WpApiParent {
-  getInstance(entityName = null) {
-    if (!entityName) {
-      throw new Error(`getInstance needs an entity name`);
-    }
-    return new Custom(this.config, this.http, entityName);
-  }
-}
-
 export class Custom extends WpApiParent implements IWpApiCustom {
-  constructor(config, http, private entityName: string) {
+  constructor(
+    public config: WpApiAppConfig,
+    public http: Http,
+    public entityName: string) {
     super(config, http);
   }
   getList(options = {}) {
@@ -44,5 +39,16 @@ export class Custom extends WpApiParent implements IWpApiCustom {
   }
   delete(customId: number, options = {}) {
     return this.httpDelete(`/${this.entityName}/${customId}`, options)
+  }
+}
+
+
+@Injectable()
+export class WpApiCustom extends WpApiParent {
+  getInstance(entityName = '') {
+    if (typeof entityName !== 'string') {
+      throw new Error(`getInstance needs an entity name`);
+    }
+    return new Custom(this.config, this.http, entityName);
   }
 }

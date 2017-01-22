@@ -1,27 +1,25 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "target": "es5",
     "noImplicitAny": false,
-    "rootDir": "src",
     "outDir": "dist",
+    "rootDir": "src",
     "sourceMap": true,
     "inlineSources": true,
     "declaration": true,
-    "removeComments": true
+    "removeComments": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node"
   },
   "files": [
-    "./src/wp-api-angular.ts",
-    "./typings/overwrite.d.ts",
-    "./typings/index.d.ts"
+    "./src/wp-api-angular.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ],
-  "compileOnSave": false,
-  "atom": {
-    "rewriteTsconfig": false
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "debug": true
   }
 }

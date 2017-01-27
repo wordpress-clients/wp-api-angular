@@ -6,7 +6,6 @@ import {
 import 'rxjs';
 import { Http, HttpModule } from '@angular/http';
 
-import { stripTrailingSlash } from './utils';
 import { WpApiApp, WpApiConfig } from './tokens';
 
 import { WpApiPosts } from './Posts';
@@ -20,16 +19,16 @@ import { WpApiStatuses } from './Statuses';
 import { WpApiTerms } from './Terms';
 import { WpApiCustom } from './Custom';
 
-export * from './Posts';
-export * from './Pages';
-export * from './Comments';
-export * from './Types';
-export * from './Media';
-export * from './Users';
-export * from './Taxonomies';
-export * from './Statuses';
-export * from './Terms';
-export * from './Custom';
+export { WpApiPosts } from './Posts';
+export { WpApiPages } from './Pages';
+export { WpApiComments } from './Comments';
+export { WpApiTypes } from './Types';
+export { WpApiMedia } from './Media';
+export { WpApiUsers } from './Users';
+export { WpApiTaxonomies } from './Taxonomies';
+export { WpApiStatuses } from './Statuses';
+export { WpApiTerms } from './Terms';
+export { WpApiCustom } from './Custom';
 
 export interface WpApiAppConfig {
   baseUrl: string;
@@ -42,37 +41,27 @@ export interface WpApiAppConfig {
   ],
   exports: [
     HttpModule
+  ],
+  providers: [
+    WpApiPosts,
+    WpApiPages,
+    WpApiComments,
+    WpApiTypes,
+    WpApiMedia,
+    WpApiUsers,
+    WpApiTaxonomies,
+    WpApiStatuses,
+    WpApiTerms,
+    WpApiCustom
   ]
 })
 export class WpApiModule {
   static initializeApp(config: WpApiAppConfig): ModuleWithProviders {
-    config.baseUrl = stripTrailingSlash(config.baseUrl);
-    config.namespace = config.namespace || '/wp/v2';
-
     return {
       ngModule: WpApiModule,
       providers: [
-        { provide: WpApiConfig, useValue: config },
-        createProvider(WpApiPosts),
-        createProvider(WpApiPages),
-        createProvider(WpApiComments),
-        createProvider(WpApiTypes),
-        createProvider(WpApiMedia),
-        createProvider(WpApiUsers),
-        createProvider(WpApiTaxonomies),
-        createProvider(WpApiStatuses),
-        createProvider(WpApiTerms),
-        createProvider(WpApiCustom)
+        { provide: WpApiConfig, useValue: config }
       ]
     };
   }
 }
-
-function createProvider(service) {
-  return {
-    provide: service,
-    useFactory: (config: WpApiAppConfig, http: Http) => new service(config, http),
-    deps: [WpApiConfig, Http]
-  }
-}
-

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 
 // Need to import interfaces dependencies
@@ -8,6 +8,8 @@ import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { Response } from '@angular/http/src/static_response';
 
 import { WpApiAppConfig } from './wp-api-angular';
+import { stripTrailingSlash } from './utils';
+import { WpApiConfig } from './tokens';
 
 export interface IParent {
   httpGet(url: string, options?: RequestOptionsArgs): Observable<Response>;
@@ -21,12 +23,12 @@ export interface IParent {
 @Injectable()
 export class WpApiParent implements IParent {
   constructor(
-    public config: WpApiAppConfig,
+    @Inject(WpApiConfig) public config: WpApiAppConfig,
     public http: Http
   ) { }
 
   getFullUrl(postfix: string): string {
-    return `${this.config.baseUrl}${this.config.namespace}${postfix}`;
+    return `${stripTrailingSlash(this.config.baseUrl)}${this.config.namespace || '/wp/v2'}${postfix}`;
   }
   httpGet(url: string, options = {}) {
     return this.http.get(this.getFullUrl(url), options);

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 
 // Need to import interfaces dependencies
@@ -8,6 +8,7 @@ import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { Response } from '@angular/http/src/static_response';
 
 import { WpApiParent } from './Parent';
+import { WpApiConfig } from './tokens';
 import { WpApiAppConfig } from './wp-api-angular';
 
 export interface IWpApiCustom {
@@ -20,9 +21,10 @@ export interface IWpApiCustom {
 
 export class Custom extends WpApiParent implements IWpApiCustom {
   constructor(
-    public config: WpApiAppConfig,
+    @Inject(WpApiConfig) public config: WpApiAppConfig,
     public http: Http,
-    public entityName: string) {
+    public entityName: string
+  ) {
     super(config, http);
   }
   getList(options = {}) {
@@ -45,6 +47,13 @@ export class Custom extends WpApiParent implements IWpApiCustom {
 
 @Injectable()
 export class WpApiCustom extends WpApiParent {
+  constructor(
+    @Inject(WpApiConfig) public config: WpApiAppConfig,
+    public http: Http
+  ) {
+    super(config, http);
+  }
+
   getInstance(entityName = '') {
     if (typeof entityName !== 'string') {
       throw new Error(`getInstance needs an entity name`);

@@ -1,3 +1,8 @@
+<a name="3.0.0-beta5"></a>
+### 3.0.0-beta5 (2017-02-01)
+
+Fix config and http injection <https://github.com/shprink/wp-api-angular/issues/20>
+
 <a name="3.0.0-beta4"></a>
 ### 3.0.0-beta4 (2017-01-27)
 

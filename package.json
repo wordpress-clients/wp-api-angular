@@ -1,6 +1,6 @@
 {
   "name": "wp-api-angular",
-  "version": "3.0.0-beta4",
+  "version": "3.0.0-beta5",
   "description": "WordPress WP-API v2 client for Angular2",
   "main": "wp-api-angular.js",
   "typings": "wp-api-angular.d.ts",
@@ -39,10 +39,10 @@
     "@angular/compiler": "^2.0.0",
     "@angular/compiler-cli": "^2.4.4",
     "@angular/core": "^2.0.0",
-    "@angular/http": "^2.1.2",
+    "@angular/http": "^2.0.0",
     "@angular/platform-browser": "^2.0.0",
     "@angular/platform-browser-dynamic": "^2.0.0",
-    "rxjs": "^5.0.1"
+    "rxjs": "^5.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",

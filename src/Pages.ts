@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { Http } from '@angular/http';
 
 // Need to import interfaces dependencies
 // Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
@@ -7,6 +8,8 @@ import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { Response } from '@angular/http/src/static_response';
 
 import { WpApiParent } from './Parent';
+import { WpApiConfig } from './tokens';
+import { WpApiAppConfig } from './wp-api-angular';
 
 export interface IWpApiPages {
   getList(options?: RequestOptionsArgs): Observable<Response>;
@@ -22,6 +25,13 @@ export interface IWpApiPages {
 
 @Injectable()
 export class WpApiPages extends WpApiParent implements IWpApiPages {
+  constructor(
+    @Inject(WpApiConfig) public config: WpApiAppConfig,
+    public http: Http
+  ) {
+    super(config, http);
+  }
+
   getList(options = {}) {
     return this.httpGet(`/pages`, options)
   }

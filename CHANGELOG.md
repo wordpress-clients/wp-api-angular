@@ -1,3 +1,8 @@
+<a name="3.0.0-beta56></a>
+### 3.0.0-beta6 (2017-02-01)
+
+export missing tokens to fix aot in ionic cli
+
 <a name="3.0.0-beta5"></a>
 ### 3.0.0-beta5 (2017-02-01)
 

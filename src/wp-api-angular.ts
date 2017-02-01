@@ -30,6 +30,8 @@ export { WpApiStatuses } from './Statuses';
 export { WpApiTerms } from './Terms';
 export { WpApiCustom } from './Custom';
 
+export { WpApiApp, WpApiConfig } from './tokens';
+
 export interface WpApiAppConfig {
   baseUrl: string;
   namespace?: string;

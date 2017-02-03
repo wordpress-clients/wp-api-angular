@@ -8,8 +8,8 @@ import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { Response } from '@angular/http/src/static_response';
 
 import { WpApiParent } from './Parent';
-import { WpApiConfig } from './tokens';
-import { WpApiAppConfig } from './wp-api-angular';
+
+import { WpApiLoader } from './Loaders';
 
 export interface IWpApiPosts {
   getList(options?: RequestOptionsArgs): Observable<Response>;
@@ -30,10 +30,10 @@ export interface IWpApiPosts {
 @Injectable()
 export class WpApiPosts extends WpApiParent implements IWpApiPosts {
   constructor(
-    @Inject(WpApiConfig) public config: WpApiAppConfig,
+    public wpApiLoader: WpApiLoader,
     public http: Http
   ) {
-    super(config, http);
+    super(wpApiLoader, http);
   }
   getList(options = {}) {
     return this.httpGet(`/posts`, options)

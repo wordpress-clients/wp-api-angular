@@ -30,22 +30,30 @@ UMD files are available `wp-api-angular.umd.js` and `wp-api-angular.umd.min.js`,
 
 ## Bootstrap
 
+An exported function instead `WpApiLoaderFactory` is mandatory to be used with [AoT compilation](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html) or [Ionic 2](http://ionic.io/).
+
 
 ```js
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { WpApiModule } from 'wp-api-angular'
-import { App } from './app';
+import { Http } from '@angular/http';
+import { 
+  WpApiModule,
+  WpApiLoader,
+  WpApiStaticLoader
+} from 'wp-api-angular'
+
+export function WpApiLoaderFactory(http: Http) {
+  return new WpApiStaticLoader(http, 'http://YOUR_DOMAIN/wp-json/', /* namespace is optional, default: '/wp/v2' */);
+}
 
 @NgModule({
   imports: [
     BrowserModule,
-    WpApiModule.initializeApp({
-      baseUrl: "http://YOUR_DOMAIN/wp-json/",
-      namespace: '/wp/v2' // (optional, default: '/wp/v2')
+    WpApiModule.forRoot({
+      provide: WpApiLoader,
+      useFactory: (WpApiLoaderFactory),
+      deps: [Http]
     })
   ],
-  declarations: [App],
   bootstrap: [App]
 })
 export class AppModule { }

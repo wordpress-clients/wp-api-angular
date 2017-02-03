@@ -1,4 +1,40 @@
-<a name="3.0.0-beta56></a>
+<a name="3.0.0-beta7></a>
+### 3.0.0-beta7 (2017-02-04)
+
+* BREAKING CHANGE: `WpApiModule.initializeApp` is now `WpApiModule.forRoot`
+
+Follow the following docs to migrate to the new way to bootstrap your module:
+
+An exported function instead `WpApiLoaderFactory` is mandatory to be used with [AoT compilation](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html) or [Ionic 2](http://ionic.io/).
+
+
+```js
+import { Http } from '@angular/http';
+import { 
+  WpApiModule
+  WpApiLoader,
+  WpApiStaticLoader
+} from 'wp-api-angular'
+
+export function WpApiLoaderFactory(http: Http) {
+  return new WpApiStaticLoader(http, 'http://YOUR_DOMAIN/wp-json/', /* namespace is optional, default: '/wp/v2' */);
+}
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    WpApiModule.forRoot({
+      provide: WpApiLoader,
+      useFactory: (WpApiLoaderFactory),
+      deps: [Http]
+    })
+  ],
+  bootstrap: [App]
+})
+export class AppModule { }
+```
+
+<a name="3.0.0-beta6></a>
 ### 3.0.0-beta6 (2017-02-01)
 
 export missing tokens to fix aot in ionic cli

@@ -7,8 +7,8 @@ import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { Response } from '@angular/http/src/static_response';
 
 import { WpApiParent } from './Parent';
-import { WpApiConfig } from './tokens';
-import { WpApiAppConfig } from './wp-api-angular';
+
+import { WpApiLoader } from './Loaders';
 
 export interface IWpApiComments {
   getList(options?: RequestOptionsArgs): Observable<Response>;
@@ -21,10 +21,10 @@ export interface IWpApiComments {
 @Injectable()
 export class WpApiComments extends WpApiParent implements IWpApiComments {
   constructor(
-    @Inject(WpApiConfig) public config: WpApiAppConfig,
+    public wpApiLoader: WpApiLoader,
     public http: Http
   ) {
-    super(config, http);
+    super(wpApiLoader, http);
   }
   getList(options = {}) {
     return this.httpGet(`/comments`, options)

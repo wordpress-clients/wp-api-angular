@@ -36,7 +36,7 @@ An exported function instead `WpApiLoaderFactory` is mandatory to be used with [
 ```js
 import { Http } from '@angular/http';
 import { 
-  WpApiModule
+  WpApiModule,
   WpApiLoader,
   WpApiStaticLoader
 } from 'wp-api-angular'

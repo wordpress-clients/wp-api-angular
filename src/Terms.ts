@@ -8,8 +8,8 @@ import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { Response } from '@angular/http/src/static_response';
 
 import { WpApiParent } from './Parent';
-import { WpApiConfig } from './tokens';
-import { WpApiAppConfig } from './wp-api-angular';
+
+import { WpApiLoader } from './Loaders';
 
 export interface IWpApiTerms {
   getList(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
@@ -24,10 +24,10 @@ const defaultTaxoType = 'categories';
 @Injectable()
 export class WpApiTerms extends WpApiParent implements IWpApiTerms {
   constructor(
-    @Inject(WpApiConfig) public config: WpApiAppConfig,
+    public wpApiLoader: WpApiLoader,
     public http: Http
   ) {
-    super(config, http);
+    super(wpApiLoader, http);
   }
   getList(taxonomiesType = defaultTaxoType , options = {}) {
     return this.httpGet(`/${taxonomiesType}`, options)

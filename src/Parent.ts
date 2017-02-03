@@ -7,9 +7,9 @@ import { Observable } from 'rxjs/Observable';
 import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { Response } from '@angular/http/src/static_response';
 
-import { WpApiAppConfig } from './wp-api-angular';
+import { WpApiLoader } from './Loaders';
 import { stripTrailingSlash } from './utils';
-import { WpApiConfig } from './tokens';
+
 
 export interface IParent {
   httpGet(url: string, options?: RequestOptionsArgs): Observable<Response>;
@@ -23,29 +23,26 @@ export interface IParent {
 @Injectable()
 export class WpApiParent implements IParent {
   constructor(
-    @Inject(WpApiConfig) public config: WpApiAppConfig,
+    public wpApiLoader: WpApiLoader,
     public http: Http
   ) { }
 
-  getFullUrl(postfix: string): string {
-    return `${stripTrailingSlash(this.config.baseUrl)}${this.config.namespace || '/wp/v2'}${postfix}`;
-  }
   httpGet(url: string, options = {}) {
-    return this.http.get(this.getFullUrl(url), options);
+    return this.http.get(this.wpApiLoader.getWebServiceUrl(url), options);
   }
   httpHead(url: string, options = {}) {
-    return this.http.head(this.getFullUrl(url), options);
+    return this.http.head(this.wpApiLoader.getWebServiceUrl(url), options);
   }
   httpDelete(url: string, options = {}) {
-    return this.http.delete(this.getFullUrl(url), options);
+    return this.http.delete(this.wpApiLoader.getWebServiceUrl(url), options);
   }
   httpPost(url: string, body = {}, options = {}) {
-    return this.http.post(this.getFullUrl(url), body, options);
+    return this.http.post(this.wpApiLoader.getWebServiceUrl(url), body, options);
   }
   httpPut(url: string, body = {}, options = {}) {
-    return this.http.put(this.getFullUrl(url), body, options);
+    return this.http.put(this.wpApiLoader.getWebServiceUrl(url), body, options);
   }
   httpPatch(url: string, body = {}, options = {}) {
-    return this.http.patch(this.getFullUrl(url), body, options);
+    return this.http.patch(this.wpApiLoader.getWebServiceUrl(url), body, options);
   }
 }

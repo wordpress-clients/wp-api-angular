@@ -6,7 +6,7 @@ import {
 import 'rxjs';
 import { Http, HttpModule } from '@angular/http';
 
-import { WpApiApp, WpApiConfig } from './tokens';
+import { WpApiApp } from './tokens';
 
 import { WpApiPosts } from './Posts';
 import { WpApiPages } from './Pages';
@@ -18,6 +18,7 @@ import { WpApiTaxonomies } from './Taxonomies';
 import { WpApiStatuses } from './Statuses';
 import { WpApiTerms } from './Terms';
 import { WpApiCustom } from './Custom';
+import { WpApiLoader, WpApiStaticLoader } from './Loaders';
 
 export { WpApiPosts } from './Posts';
 export { WpApiPages } from './Pages';
@@ -29,12 +30,12 @@ export { WpApiTaxonomies } from './Taxonomies';
 export { WpApiStatuses } from './Statuses';
 export { WpApiTerms } from './Terms';
 export { WpApiCustom } from './Custom';
+export { WpApiLoader, WpApiStaticLoader } from './Loaders';
 
-export { WpApiApp, WpApiConfig } from './tokens';
+export { WpApiApp } from './tokens';
 
-export interface WpApiAppConfig {
-  baseUrl: string;
-  namespace?: string;
+export function WpApiLoaderFactory(http: Http) {
+  return new WpApiStaticLoader(http);
 }
 
 @NgModule({
@@ -58,11 +59,15 @@ export interface WpApiAppConfig {
   ]
 })
 export class WpApiModule {
-  static initializeApp(config: WpApiAppConfig): ModuleWithProviders {
+  static forRoot(providedLoader: any = {
+    provide: WpApiLoader,
+    useFactory: WpApiLoaderFactory,
+    deps: [Http]
+  }): ModuleWithProviders {
     return {
       ngModule: WpApiModule,
       providers: [
-        { provide: WpApiConfig, useValue: config }
+        providedLoader
       ]
     };
   }

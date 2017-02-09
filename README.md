@@ -30,7 +30,7 @@ UMD files are available `wp-api-angular.umd.js` and `wp-api-angular.umd.min.js`,
 
 ## Bootstrap
 
-An exported function instead `WpApiLoaderFactory` is mandatory to be used with [AoT compilation](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html) or [Ionic 2](http://ionic.io/).
+An exported function `WpApiLoaderFactory` is mandatory to be used with [AoT compilation](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html) or [Ionic 2](http://ionic.io/).
 
 
 ```js

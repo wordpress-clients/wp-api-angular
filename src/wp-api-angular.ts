@@ -6,8 +6,6 @@ import {
 import 'rxjs';
 import { Http, HttpModule } from '@angular/http';
 
-import { WpApiApp } from './tokens';
-
 import { WpApiPosts } from './Posts';
 import { WpApiPages } from './Pages';
 import { WpApiComments } from './Comments';
@@ -31,8 +29,6 @@ export { WpApiStatuses } from './Statuses';
 export { WpApiTerms } from './Terms';
 export { WpApiCustom } from './Custom';
 export { WpApiLoader, WpApiStaticLoader } from './Loaders';
-
-export { WpApiApp } from './tokens';
 
 export function WpApiLoaderFactory(http: Http) {
   return new WpApiStaticLoader(http);

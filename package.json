@@ -1,6 +1,6 @@
 {
   "name": "wp-api-angular",
-  "version": "3.0.0-beta7",
+  "version": "3.0.0-beta8",
   "description": "WordPress WP-API v2 client for Angular2",
   "main": "wp-api-angular.js",
   "typings": "wp-api-angular.d.ts",
@@ -12,9 +12,7 @@
     "watch": "rm -rf dist && node ./node_modules/@angular/compiler-cli/src/main.js",
     "publish": "npm run build && npm publish dist",
     "dumpdev": "ENV=dev webpack --progress --colors --config webpack.config.dist.js -d",
-    "dumpprod": "ENV=prod webpack --progress --colors --config webpack.config.dist.js -p",
-    "postinstall": "typings install",
-    "typings": "typings"
+    "dumpprod": "ENV=prod webpack --progress --colors --config webpack.config.dist.js -p"
   },
   "repository": {
     "type": "git",
@@ -34,17 +32,19 @@
     "url": "https://github.com/shprink/wp-api-angular/issues"
   },
   "homepage": "https://github.com/shprink/wp-api-angular",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "@angular/http": "^4.0.0"
+  },
   "dependencies": {
-    "@angular/common": "^2.0.0",
-    "@angular/compiler": "^2.0.0",
-    "@angular/compiler-cli": "^2.4.4",
-    "@angular/core": "^2.0.0",
-    "@angular/http": "^2.0.0",
-    "@angular/platform-browser": "^2.0.0",
-    "@angular/platform-browser-dynamic": "^2.0.0",
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
     "rxjs": "^5.0.0"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "^4.0.0",
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "core-js": "^2.4.0",

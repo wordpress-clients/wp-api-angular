@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, VERSION } from '@angular/core';
 import {
   WpApiPosts,
   WpApiPages,
@@ -56,6 +56,7 @@ export class App {
     private wpApiTerms: WpApiTerms,
     private wpApiCustom: WpApiCustom
   ) {
+    console.log('VERSION', VERSION.full);
     const serviceNames = Object.keys(config.api);
     for (let i = 0, len = serviceNames.length; i <= len; i++) {
       let serviceName = serviceNames[i];

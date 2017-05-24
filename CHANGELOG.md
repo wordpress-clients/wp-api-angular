@@ -1,3 +1,8 @@
+<a name="3.0.0-beta8></a>
+### 3.0.0-beta8 (2017-05-24)
+
+Angular 4.x support for AOT
+
 <a name="3.0.0-beta7></a>
 ### 3.0.0-beta7 (2017-02-04)
 

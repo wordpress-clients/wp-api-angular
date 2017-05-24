@@ -31,5 +31,6 @@ www/
 config.json
 dist/
 aot/
+aot2/
 angular2-webpack-starter/
 testionic/

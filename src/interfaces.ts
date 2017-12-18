@@ -95,3 +95,18 @@ export interface IWpApiCustom {
   update(customId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
   delete(customId: number, options?: RequestOptionsArgs): Observable<Response>;
 }
+
+export interface ICredentials {
+  token?: string;
+  email?: string;
+}
+
+export interface IAuthCredentials {
+  username: string;
+  password: string;
+}
+
+export interface IWpApiAuth {
+  auth(authCredentials: IAuthCredentials, options?: RequestOptionsArgs): Observable<Response>;
+  credentials(options?: RequestOptionsArgs): Observable<Response>;
+}

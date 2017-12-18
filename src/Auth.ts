@@ -11,20 +11,7 @@ import { WpApiParent } from './Parent';
 
 import { WpApiLoader } from './Loaders';
 
-export interface IWpApiAuth {
-  auth(authCredentials: IAuthCredentials, options?: RequestOptionsArgs): Observable<Response>;
-  credentials(options?: RequestOptionsArgs): Observable<Response>;
-}
-
-export interface ICredentials {
-  token?: string;
-  email?: string;
-}
-
-export interface IAuthCredentials {
-  username: string;
-  password: string;
-}
+import { IWpApiAuth, ICredentials, IAuthCredentials } from './interfaces';
 
 @Injectable()
 export class WpApiAuth extends WpApiParent implements IWpApiAuth {

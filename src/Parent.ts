@@ -10,15 +10,8 @@ import { Response } from '@angular/http/src/static_response';
 import { WpApiLoader } from './Loaders';
 import { stripTrailingSlash } from './utils';
 
+import { IParent } from './interfaces';
 
-export interface IParent {
-  httpGet(url: string, options?: RequestOptionsArgs): Observable<Response>;
-  httpHead(url: string, options?: RequestOptionsArgs): Observable<Response>;
-  httpDelete(url: string, options?: RequestOptionsArgs): Observable<Response>;
-  httpPost(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  httpPut(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  httpPatch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
-}
 
 @Injectable()
 export class WpApiParent implements IParent {

@@ -11,13 +11,7 @@ import { WpApiParent } from './Parent';
 
 import { WpApiLoader } from './Loaders';
 
-export interface IWpApiMedia {
-  getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(mediaId: number, options?: RequestOptionsArgs): Observable<Response>;
-  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(mediaId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(mediaId: number, options?: RequestOptionsArgs): Observable<Response>;
-}
+import { IWpApiMedia } from './interfaces';
 
 @Injectable()
 export class WpApiMedia extends WpApiParent implements IWpApiMedia {

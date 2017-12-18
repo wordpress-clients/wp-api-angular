@@ -11,13 +11,7 @@ import { WpApiParent } from './Parent';
 
 import { WpApiLoader } from './Loaders';
 
-export interface IWpApiCustom {
-  getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(customId: number, options?: RequestOptionsArgs): Observable<Response>;
-  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(customId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(customId: number, options?: RequestOptionsArgs): Observable<Response>;
-}
+import { IWpApiCustom } from './interfaces';
 
 export class Custom extends WpApiParent implements IWpApiCustom {
   constructor(

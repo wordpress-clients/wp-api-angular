@@ -11,21 +11,7 @@ import { WpApiParent } from './Parent';
 
 import { WpApiLoader } from './Loaders';
 
-export interface IWpApiPosts {
-  getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(postId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getMetaList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getMeta(postId: number, metaId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getRevisionList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getRevision(postId: number, revisionId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getCategoryList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getCategory(postId: number, categoryId, options?: RequestOptionsArgs): Observable<Response>;
-  getTagList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getTag(postId: number, tagId, options?: RequestOptionsArgs): Observable<Response>;
-}
+import { IWpApiPosts } from './interfaces';
 
 @Injectable()
 export class WpApiPosts extends WpApiParent implements IWpApiPosts {

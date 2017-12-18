@@ -1,6 +1,6 @@
 {
   "name": "wp-api-angular",
-  "version": "3.0.0-beta8",
+  "version": "3.1.0-alpha.1",
   "description": "WordPress WP-API v2 client for Angular2",
   "main": "wp-api-angular.js",
   "typings": "wp-api-angular.d.ts",

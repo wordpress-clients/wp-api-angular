@@ -17,10 +17,10 @@ export class WpApiStaticLoader implements WpApiLoader {
     this.completeUrl = `${stripTrailingSlash(this.baseUrl)}${this.namespace}`;
   }
 
-  set baseUrl(val: string): void { }
+  set baseUrl(val: string) { }
   get baseUrl(): string { return this._baseUrl; }
 
-  set namespace(val: string): void {}
+  set namespace(val: string) {}
   get namespace(): string { return this._namespace; }
 
   public getWebServiceUrl(postfix: string): string {

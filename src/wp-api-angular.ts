@@ -16,6 +16,7 @@ import { WpApiTaxonomies } from './Taxonomies';
 import { WpApiStatuses } from './Statuses';
 import { WpApiTerms } from './Terms';
 import { WpApiCustom } from './Custom';
+import { WpApiAuth } from './Auth';
 import { WpApiLoader, WpApiStaticLoader } from './Loaders';
 
 export { WpApiPosts } from './Posts';
@@ -28,6 +29,7 @@ export { WpApiTaxonomies } from './Taxonomies';
 export { WpApiStatuses } from './Statuses';
 export { WpApiTerms } from './Terms';
 export { WpApiCustom } from './Custom';
+export { WpApiAuth } from './Auth';
 export { WpApiLoader, WpApiStaticLoader } from './Loaders';
 
 export function WpApiLoaderFactory(http: Http) {
@@ -51,7 +53,8 @@ export function WpApiLoaderFactory(http: Http) {
     WpApiTaxonomies,
     WpApiStatuses,
     WpApiTerms,
-    WpApiCustom
+    WpApiCustom,
+    WpApiAuth
   ]
 })
 export class WpApiModule {

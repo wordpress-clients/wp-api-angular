@@ -21,7 +21,7 @@ export class WpApiParent implements IParent {
   ) { }
 
   protected getWebServiceUrl(postfix: string): string {
-    return this.wpApiLoader.getWebServiceUrl(url);
+    return this.wpApiLoader.getWebServiceUrl(postfix);
   }
 
   httpGet(url: string, options = {}) {

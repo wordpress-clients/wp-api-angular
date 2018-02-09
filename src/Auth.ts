@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { Headers, Http } from '@angular/http';
 
 // Need to import interfaces dependencies
 // Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
@@ -15,9 +15,10 @@ import { IWpApiAuth, ICredentials, IAuthCredentials } from './interfaces';
 
 @Injectable()
 export class WpApiAuth extends WpApiParent implements IWpApiAuth {
+
   constructor(
     public wpApiLoader: WpApiLoader,
-    public http: Http
+    public http: Http,
   ) {
     super(wpApiLoader, http);
   }
@@ -26,11 +27,24 @@ export class WpApiAuth extends WpApiParent implements IWpApiAuth {
     return super.getWebServiceUrl(postfix).replace(this.wpApiLoader.namespace, '/jwt-auth/v1');
   }
 
-  auth(authCredentials: IAuthCredentials, options = {}): Observable<Response> {
+  saveSession(credentials: ICredentials) {
+    localStorage.setItem('credentials', JSON.stringify(credentials));
+    this.sessionCredentials = credentials;
+  }
+  removeSession() {
+    localStorage.removeItem('credentials');
+  }
+
+  auth(authCredentials: IAuthCredentials, options = { headers: new Headers() }): Observable<Response> {
+    if (!options.headers) {
+      options.headers = new Headers();
+    }
+    options.headers.append('Authorization', '');
     return this.httpPost(`/token`, authCredentials, options);
   }
-  credentials(options?: RequestOptionsArgs): Observable<Response> {
+  credentials(options = {}): Observable<Response> {
     return this.httpPost(`/token/validate`, {}, options);
   }
+
 }
 

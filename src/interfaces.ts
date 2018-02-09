@@ -109,4 +109,6 @@ export interface IAuthCredentials {
 export interface IWpApiAuth {
   auth(authCredentials: IAuthCredentials, options?: RequestOptionsArgs): Observable<Response>;
   credentials(options?: RequestOptionsArgs): Observable<Response>;
+  saveSession(credentials: ICredentials);
+  removeSession();
 }

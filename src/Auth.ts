@@ -42,7 +42,7 @@ export class WpApiAuth extends WpApiParent implements IWpApiAuth {
     options.headers.append('Authorization', '');
     return this.httpPost(`/token`, authCredentials, options);
   }
-  credentials(options = {}): Observable<Response> {
+  validate(options = {}): Observable<Response> {
     return this.httpPost(`/token/validate`, {}, options);
   }
 

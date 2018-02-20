@@ -10,30 +10,21 @@ import { Response } from '@angular/http/src/static_response';
 import { WpApiLoader } from './Loaders';
 import { stripTrailingSlash } from './utils';
 
-import { ICredentials, IParent } from './interfaces';
+import { AuthSession } from './Auth';
+import { IParent } from './interfaces';
 
 
 @Injectable()
 export class WpApiParent implements IParent {
-  private _sessionCredentials: ICredentials;
 
   constructor(
     public wpApiLoader: WpApiLoader,
     public http: Http
   ) { }
 
-  set sessionCredentials(credentials) {
-    this._sessionCredentials = credentials;
-  }
-  get sessionCredentials() {
-    if (!this._sessionCredentials) {
-      this._sessionCredentials = JSON.parse(localStorage.getItem('credentials'));
-    }
-    return this._sessionCredentials;
-  }
-
   protected getToken(): string {
-    return this.sessionCredentials ? this.sessionCredentials.token : null;
+    let sessionCredentials = AuthSession.getSession();
+    return sessionCredentials ? sessionCredentials.token : null;
   }
 
   protected hasToken(): boolean {

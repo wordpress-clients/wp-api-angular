@@ -13,6 +13,18 @@ import { WpApiLoader } from './Loaders';
 
 import { IWpApiAuth, ICredentials, IAuthCredentials } from './interfaces';
 
+export class AuthSession {
+  static saveSession(credentials: ICredentials) {
+    localStorage.setItem('credentials', JSON.stringify(credentials));
+  }
+  static getSession(): ICredentials {
+    return JSON.parse(localStorage.getItem('credentials'));
+  }
+  static removeSession() {
+    localStorage.removeItem('credentials');
+  }
+}
+
 @Injectable()
 export class WpApiAuth extends WpApiParent implements IWpApiAuth {
 
@@ -28,11 +40,13 @@ export class WpApiAuth extends WpApiParent implements IWpApiAuth {
   }
 
   saveSession(credentials: ICredentials) {
-    localStorage.setItem('credentials', JSON.stringify(credentials));
-    this.sessionCredentials = credentials;
+    AuthSession.saveSession(credentials);
+  }
+  getSession(): ICredentials {
+    return AuthSession.getSession();
   }
   removeSession() {
-    localStorage.removeItem('credentials');
+    AuthSession.removeSession();
   }
 
   auth(authCredentials: IAuthCredentials, options = { headers: new Headers() }): Observable<Response> {

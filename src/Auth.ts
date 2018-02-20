@@ -8,23 +8,18 @@ import { RequestOptionsArgs } from '@angular/http/src/interfaces';
 import { Response } from '@angular/http/src/static_response';
 
 import { WpApiParent } from './Parent';
+import { AuthSession } from './AuthSession';
 
 import { WpApiLoader } from './Loaders';
 
 import { IWpApiAuth, ICredentials, IAuthCredentials } from './interfaces';
 
-export class AuthSession {
-  static saveSession(credentials: ICredentials) {
-    localStorage.setItem('credentials', JSON.stringify(credentials));
-  }
-  static getSession(): ICredentials {
-    return JSON.parse(localStorage.getItem('credentials'));
-  }
-  static removeSession() {
-    localStorage.removeItem('credentials');
-  }
-}
-
+/**
+ * Authentication implementation of WordPress authentication.
+ * Uses AuthSession for storing authentication credentials.
+ * @see AuthSession
+ * @author karrirasinmaki
+ */
 @Injectable()
 export class WpApiAuth extends WpApiParent implements IWpApiAuth {
 

@@ -10,7 +10,7 @@ import { Response } from '@angular/http/src/static_response';
 import { WpApiLoader } from './Loaders';
 import { stripTrailingSlash } from './utils';
 
-import { AuthSession } from './Auth';
+import { AuthSession } from './AuthSession';
 import { IParent } from './interfaces';
 
 

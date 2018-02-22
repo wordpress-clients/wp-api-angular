@@ -11,14 +11,7 @@ import { WpApiParent } from './Parent';
 
 import { WpApiLoader } from './Loaders';
 
-export interface IWpApiUsers {
-  getList(options?: RequestOptionsArgs): Observable<Response>;
-  me(options?: RequestOptionsArgs): Observable<Response>;
-  get(userId: number, options?: RequestOptionsArgs): Observable<Response>;
-  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(userId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(userId: number, options?: RequestOptionsArgs): Observable<Response>;
-}
+import { IWpApiUsers } from './interfaces';
 
 @Injectable()
 export class WpApiUsers extends WpApiParent implements IWpApiUsers {

@@ -11,17 +11,7 @@ import { WpApiParent } from './Parent';
 
 import { WpApiLoader } from './Loaders';
 
-export interface IWpApiPages {
-  getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
-  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(pageId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getMetaList(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getMeta(pageId: number, metaId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getRevisionList(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getRevision(pageId: number, revisionId: number, options?: RequestOptionsArgs): Observable<Response>;
-}
+import { IWpApiPages } from './interfaces';
 
 @Injectable()
 export class WpApiPages extends WpApiParent implements IWpApiPages {

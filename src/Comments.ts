@@ -10,13 +10,7 @@ import { WpApiParent } from './Parent';
 
 import { WpApiLoader } from './Loaders';
 
-export interface IWpApiComments {
-  getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(commentId: number, options?: RequestOptionsArgs): Observable<Response>;
-  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(commentId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(commentId: number, options?: RequestOptionsArgs): Observable<Response>;
-}
+import { IWpApiComments } from './interfaces';
 
 @Injectable()
 export class WpApiComments extends WpApiParent implements IWpApiComments {

@@ -11,10 +11,7 @@ import { WpApiParent } from './Parent';
 
 import { WpApiLoader } from './Loaders';
 
-export interface IWpApiTaxonomies {
-  getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
-}
+import { IWpApiTaxonomies } from './interfaces';
 
 @Injectable()
 export class WpApiTaxonomies extends WpApiParent implements IWpApiTaxonomies {

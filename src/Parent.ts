@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { Headers, Http } from '@angular/http';
 
 // Need to import interfaces dependencies
 // Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
@@ -10,39 +10,65 @@ import { Response } from '@angular/http/src/static_response';
 import { WpApiLoader } from './Loaders';
 import { stripTrailingSlash } from './utils';
 
+import { AuthSession } from './AuthSession';
+import { IParent } from './interfaces';
 
-export interface IParent {
-  httpGet(url: string, options?: RequestOptionsArgs): Observable<Response>;
-  httpHead(url: string, options?: RequestOptionsArgs): Observable<Response>;
-  httpDelete(url: string, options?: RequestOptionsArgs): Observable<Response>;
-  httpPost(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  httpPut(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  httpPatch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
-}
 
 @Injectable()
 export class WpApiParent implements IParent {
+
   constructor(
     public wpApiLoader: WpApiLoader,
     public http: Http
   ) { }
 
+  protected getToken(): string {
+    let sessionCredentials = AuthSession.getSession();
+    return sessionCredentials ? sessionCredentials.token : null;
+  }
+
+  protected hasToken(): boolean {
+    return this.getToken() ? true : false;
+  }
+
+  protected getWebServiceUrl(postfix: string): string {
+    return this.wpApiLoader.getWebServiceUrl(postfix);
+  }
+
+  protected getDefaultOptions(
+    options: RequestOptionsArgs = { headers: new Headers() }
+  ): RequestOptionsArgs {
+    if (!options.headers) {
+      options.headers = new Headers();
+    }
+    if (!options.headers.has('Authorization') && this.hasToken()) {
+      options.headers.append('Authorization', `Bearer ${this.getToken()}`);
+    }
+    return options;
+  }
+
   httpGet(url: string, options = {}) {
-    return this.http.get(this.wpApiLoader.getWebServiceUrl(url), options);
+    options = this.getDefaultOptions(options);
+    return this.http.get(this.getWebServiceUrl(url), options);
   }
   httpHead(url: string, options = {}) {
-    return this.http.head(this.wpApiLoader.getWebServiceUrl(url), options);
+    options = this.getDefaultOptions(options);
+    return this.http.head(this.getWebServiceUrl(url), options);
   }
   httpDelete(url: string, options = {}) {
-    return this.http.delete(this.wpApiLoader.getWebServiceUrl(url), options);
+    options = this.getDefaultOptions(options);
+    return this.http.delete(this.getWebServiceUrl(url), options);
   }
   httpPost(url: string, body = {}, options = {}) {
-    return this.http.post(this.wpApiLoader.getWebServiceUrl(url), body, options);
+    options = this.getDefaultOptions(options);
+    return this.http.post(this.getWebServiceUrl(url), body, options);
   }
   httpPut(url: string, body = {}, options = {}) {
-    return this.http.put(this.wpApiLoader.getWebServiceUrl(url), body, options);
+    options = this.getDefaultOptions(options);
+    return this.http.put(this.getWebServiceUrl(url), body, options);
   }
   httpPatch(url: string, body = {}, options = {}) {
-    return this.http.patch(this.wpApiLoader.getWebServiceUrl(url), body, options);
+    options = this.getDefaultOptions(options);
+    return this.http.patch(this.getWebServiceUrl(url), body, options);
   }
 }

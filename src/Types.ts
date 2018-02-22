@@ -11,10 +11,7 @@ import { WpApiParent } from './Parent';
 
 import { WpApiLoader } from './Loaders';
 
-export interface IWpApiTypes {
-  getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(postType: string, options?: RequestOptionsArgs): Observable<Response>;
-}
+import { IWpApiTypes } from './interfaces';
 
 @Injectable()
 export class WpApiTypes extends WpApiParent implements IWpApiTypes {

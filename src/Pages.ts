@@ -1,33 +1,15 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
-
-// Need to import interfaces dependencies
-// Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
-import { Observable } from 'rxjs/Observable';
-import { RequestOptionsArgs } from '@angular/http/src/interfaces';
-import { Response } from '@angular/http/src/static_response';
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IWpApiPages } from './interfaces';
+import { WpApiLoader } from './Loaders';
 import { WpApiParent } from './Parent';
 
-import { WpApiLoader } from './Loaders';
-
-export interface IWpApiPages {
-  getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
-  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(pageId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getMetaList(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getMeta(pageId: number, metaId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getRevisionList(pageId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getRevision(pageId: number, revisionId: number, options?: RequestOptionsArgs): Observable<Response>;
-}
 
 @Injectable()
 export class WpApiPages extends WpApiParent implements IWpApiPages {
   constructor(
     public wpApiLoader: WpApiLoader,
-    public http: Http
+    public http: HttpClient
   ) {
     super(wpApiLoader, http);
   }

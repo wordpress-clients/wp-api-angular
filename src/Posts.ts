@@ -1,37 +1,15 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
-
-// Need to import interfaces dependencies
-// Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
-import { Observable } from 'rxjs/Observable';
-import { RequestOptionsArgs } from '@angular/http/src/interfaces';
-import { Response } from '@angular/http/src/static_response';
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IWpApiPosts } from './interfaces';
+import { WpApiLoader } from './Loaders';
 import { WpApiParent } from './Parent';
 
-import { WpApiLoader } from './Loaders';
-
-export interface IWpApiPosts {
-  getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  create(body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(postId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getMetaList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getMeta(postId: number, metaId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getRevisionList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getRevision(postId: number, revisionId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getCategoryList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getCategory(postId: number, categoryId, options?: RequestOptionsArgs): Observable<Response>;
-  getTagList(postId: number, options?: RequestOptionsArgs): Observable<Response>;
-  getTag(postId: number, tagId, options?: RequestOptionsArgs): Observable<Response>;
-}
 
 @Injectable()
 export class WpApiPosts extends WpApiParent implements IWpApiPosts {
   constructor(
     public wpApiLoader: WpApiLoader,
-    public http: Http
+    public http: HttpClient
   ) {
     super(wpApiLoader, http);
   }

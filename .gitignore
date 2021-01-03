@@ -34,3 +34,6 @@ aot/
 aot2/
 angular2-webpack-starter/
 testionic/
+
+# VS code
+.vscode

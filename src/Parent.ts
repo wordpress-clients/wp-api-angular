@@ -1,30 +1,18 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
-
-// Need to import interfaces dependencies
-// Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
-import { Observable } from 'rxjs/Observable';
-import { RequestOptionsArgs } from '@angular/http/src/interfaces';
-import { Response } from '@angular/http/src/static_response';
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IParent } from './interfaces';
 import { WpApiLoader } from './Loaders';
-import { stripTrailingSlash } from './utils';
 
 
-export interface IParent {
-  httpGet(url: string, options?: RequestOptionsArgs): Observable<Response>;
-  httpHead(url: string, options?: RequestOptionsArgs): Observable<Response>;
-  httpDelete(url: string, options?: RequestOptionsArgs): Observable<Response>;
-  httpPost(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  httpPut(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  httpPatch(url: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
-}
-
+/******************************************************************************
+* Service: WpApiParent
+******************************************************************************/
 @Injectable()
 export class WpApiParent implements IParent {
+
   constructor(
     public wpApiLoader: WpApiLoader,
-    public http: Http
+    public http: HttpClient
   ) { }
 
   httpGet(url: string, options = {}) {

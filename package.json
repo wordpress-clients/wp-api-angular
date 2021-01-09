@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/s4m0r4m4/wp-api-angular"
+    "url": "https://github.com/shprink/wp-api-angular"
   },
   "keywords": [
     "wp-api",
@@ -28,12 +28,12 @@
     "wordpress",
     "json"
   ],
-  "author": "s4m0r4m4",
+  "author": "shprink <contact@julienrenaux.fr>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/s4m0r4m4/wp-api-angular/issues"
+    "url": "https://github.com/shprink/wp-api-angular/issues"
   },
-  "homepage": "https://github.com/s4m0r4m4/wp-api-angular",
+  "homepage": "https://github.com/shprink/wp-api-angular",
   "dependencies": {
     "@angular/common": "^11.0.0",
     "@angular/compiler": "^11.0.0",

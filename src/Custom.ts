@@ -42,7 +42,7 @@ export class WpApiCustom extends WpApiParent {
     super(wpApiLoader, http);
   }
 
-  getInstance(entityName = '') {
+  getInstance(entityName: string = '') {
     if (typeof entityName !== 'string') {
       throw new Error(`getInstance needs an entity name`);
     }

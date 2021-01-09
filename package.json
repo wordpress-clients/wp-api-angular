@@ -1,5 +1,5 @@
 {
-  "name": "wp-api-angular2",
+  "name": "wp-api-angular",
   "version": "4.0.0",
   "description": "WordPress WP-API v2 client for Angular2+",
   "main": "wp-api-angular.js",

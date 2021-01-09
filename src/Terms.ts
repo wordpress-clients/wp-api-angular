@@ -1,23 +1,9 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
-
-// Need to import interfaces dependencies
-// Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
-import { Observable } from 'rxjs/Observable';
-import { RequestOptionsArgs } from '@angular/http/src/interfaces';
-import { Response } from '@angular/http/src/static_response';
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IWpApiTerms } from './interfaces';
+import { WpApiLoader } from './Loaders';
 import { WpApiParent } from './Parent';
 
-import { WpApiLoader } from './Loaders';
-
-export interface IWpApiTerms {
-  getList(taxonomiesType: string, options?: RequestOptionsArgs): Observable<Response>;
-  get(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
-  create(taxonomiesType: string, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  update(taxonomiesType: string, termId: number, body: any, options?: RequestOptionsArgs): Observable<Response>;
-  delete(taxonomiesType: string, termId: number, options?: RequestOptionsArgs): Observable<Response>;
-}
 
 const defaultTaxoType = 'categories';
 
@@ -25,7 +11,7 @@ const defaultTaxoType = 'categories';
 export class WpApiTerms extends WpApiParent implements IWpApiTerms {
   constructor(
     public wpApiLoader: WpApiLoader,
-    public http: Http
+    public http: HttpClient
   ) {
     super(wpApiLoader, http);
   }

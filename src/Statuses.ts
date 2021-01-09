@@ -1,26 +1,14 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
-
-// Need to import interfaces dependencies
-// Bug TypeScript https://github.com/Microsoft/TypeScript/issues/5938
-import { Observable } from 'rxjs/Observable';
-import { RequestOptionsArgs } from '@angular/http/src/interfaces';
-import { Response } from '@angular/http/src/static_response';
-
-import { WpApiParent } from './Parent';
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IWpApiStatuses } from './interfaces';
 import { WpApiLoader } from './Loaders';
-
-export interface IWpApiStatuses {
-  getList(options?: RequestOptionsArgs): Observable<Response>;
-  get(statusesName: string, options?: RequestOptionsArgs): Observable<Response>;
-}
+import { WpApiParent } from './Parent';
 
 @Injectable()
 export class WpApiStatuses extends WpApiParent implements IWpApiStatuses {
   constructor(
     public wpApiLoader: WpApiLoader,
-    public http: Http
+    public http: HttpClient
   ) {
     super(wpApiLoader, http);
   }

@@ -1,14 +1,20 @@
-import { Http, HttpModule } from '@angular/http';
+
+import { HttpClient } from '@angular/common/http';
 import { stripTrailingSlash } from './utils';
 
 export abstract class WpApiLoader {
   abstract getWebServiceUrl(postfix: string): string;
 }
 
+/******************************************************************************
+* Class: WpApiStaticLoader
+******************************************************************************/
 export class WpApiStaticLoader implements WpApiLoader {
+
   completeUrl: string;
+
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private baseUrl: string = 'http://changeYourDomainHere.com/wp-json',
     private namespace: string = '/wp/v2'
   ) {
@@ -18,4 +24,5 @@ export class WpApiStaticLoader implements WpApiLoader {
   public getWebServiceUrl(postfix: string): string {
     return `${this.completeUrl}${postfix}`
   }
+
 }

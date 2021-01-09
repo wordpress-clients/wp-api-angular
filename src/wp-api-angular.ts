@@ -1,46 +1,41 @@
-import {
-  Provider,
-  NgModule,
-  ModuleWithProviders
-} from '@angular/core';
-import 'rxjs';
-import { Http, HttpModule } from '@angular/http';
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { ModuleWithProviders, NgModule } from "@angular/core";
+import "rxjs";
+import { WpApiComments } from "./Comments";
+import { WpApiCustom } from "./Custom";
+import { WpApiLoader, WpApiStaticLoader } from "./Loaders";
+import { WpApiMedia } from "./Media";
+import { WpApiPages } from "./Pages";
+import { WpApiPosts } from "./Posts";
+import { WpApiStatuses } from "./Statuses";
+import { WpApiTaxonomies } from "./Taxonomies";
+import { WpApiTerms } from "./Terms";
+import { WpApiTypes } from "./Types";
+import { WpApiUsers } from "./Users";
 
-import { WpApiPosts } from './Posts';
-import { WpApiPages } from './Pages';
-import { WpApiComments } from './Comments';
-import { WpApiTypes } from './Types';
-import { WpApiMedia } from './Media';
-import { WpApiUsers } from './Users';
-import { WpApiTaxonomies } from './Taxonomies';
-import { WpApiStatuses } from './Statuses';
-import { WpApiTerms } from './Terms';
-import { WpApiCustom } from './Custom';
-import { WpApiLoader, WpApiStaticLoader } from './Loaders';
 
-export { WpApiPosts } from './Posts';
-export { WpApiPages } from './Pages';
-export { WpApiComments } from './Comments';
-export { WpApiTypes } from './Types';
-export { WpApiMedia } from './Media';
-export { WpApiUsers } from './Users';
-export { WpApiTaxonomies } from './Taxonomies';
-export { WpApiStatuses } from './Statuses';
-export { WpApiTerms } from './Terms';
-export { WpApiCustom } from './Custom';
-export { WpApiLoader, WpApiStaticLoader } from './Loaders';
+export { WpApiComments } from "./Comments";
+export { WpApiCustom } from "./Custom";
+export { WpApiLoader, WpApiStaticLoader } from "./Loaders";
+export { WpApiMedia } from "./Media";
+export { WpApiPages } from "./Pages";
+export { WpApiPosts } from "./Posts";
+export { WpApiStatuses } from "./Statuses";
+export { WpApiTaxonomies } from "./Taxonomies";
+export { WpApiTerms } from "./Terms";
+export { WpApiTypes } from "./Types";
+export { WpApiUsers } from "./Users";
 
-export function WpApiLoaderFactory(http: Http) {
+export function WpApiLoaderFactory(http: HttpClient) {
   return new WpApiStaticLoader(http);
 }
 
+/******************************************************************************
+* Module: WpApiModule
+******************************************************************************/
 @NgModule({
-  imports: [
-    HttpModule
-  ],
-  exports: [
-    HttpModule
-  ],
+  imports: [HttpClientModule],
+  exports: [HttpClientModule],
   providers: [
     WpApiPosts,
     WpApiPages,
@@ -51,20 +46,23 @@ export function WpApiLoaderFactory(http: Http) {
     WpApiTaxonomies,
     WpApiStatuses,
     WpApiTerms,
-    WpApiCustom
-  ]
+    WpApiCustom,
+  ],
 })
 export class WpApiModule {
-  static forRoot(providedLoader: any = {
-    provide: WpApiLoader,
-    useFactory: WpApiLoaderFactory,
-    deps: [Http]
-  }): ModuleWithProviders {
+
+  public static forRoot(
+    providedLoader: any = {
+      provide: WpApiLoader,
+      useFactory: WpApiLoaderFactory,
+      deps: [HttpClient],
+    }
+  ): ModuleWithProviders<WpApiModule> {
+
     return {
       ngModule: WpApiModule,
-      providers: [
-        providedLoader
-      ]
+      providers: [providedLoader],
     };
+
   }
 }
